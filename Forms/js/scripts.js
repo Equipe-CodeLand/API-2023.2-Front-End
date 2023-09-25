@@ -3,6 +3,7 @@ const nameInput = document.querySelector("#name")
 const sobrenomeInput = document.querySelector("#sobrenome")
 const emailInput = document.querySelector("#email")
 //const recorrenteSelect = document.querySelector("#recorrente")
+const temaSelect = document.querySelector("#tema")
 const messageTextarea = document.querySelector("#message")
 const telefoneInput = document.querySelector("#telefone")
 
@@ -11,28 +12,33 @@ form.addEventListener("submit", (event)=>{
 
     //verifica se o nome ta vazio
     if(nameInput.value === ""){
-        alert(`Por favor, preencha o seu nome`)
+        alert(`Por favor, preencha o seu nome.`)
         return;
     }
 
     if(sobrenomeInput.value === ""){
-        alert(`Por favor, preencha o seu sobrenome`)
+        alert(`Por favor, preencha o seu sobrenome.`)
         return;
     }
 
     if(telefoneInput.value === ""){
-        alert(`Por favor, preencha o seu sobrenome`)
+        alert(`Por favor, preencha o seu telefone.`)
         return;
     }
 
     //verica se o e-mail está preenchido e se é valido
     if(emailInput.value === "" || !isEmailValid(emailInput.value)){
-        alert(`Por favor, preencha o seu e-mail`);
+        alert(`Por favor, preencha o seu e-mail.`);
+        return;
+    }
+
+    if (temaSelect.value === "" || temaSelect.value === "Selecione um tema"){
+        alert(`Por favor, selecione um tema`);
         return;
     }
 
     if(messageTextarea.value === ""){
-        alert(`Por favor, preencha o seu sobrenome`)
+        alert(`Por favor, preencha a sua mensagem.`)
         return;
     }
 
