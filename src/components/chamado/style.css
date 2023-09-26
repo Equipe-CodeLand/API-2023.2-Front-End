@@ -1,0 +1,22 @@
+.chamado {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 10vh;
+    width: 80vw;
+    border: 2px solid black;
+    border-radius: 30px;
+    margin: 2em auto;
+}
+
+.status {
+    border: 2px solid #F0AF09;
+    background-color: #FFF4E0;
+    padding: 1em;
+    border-radius: 30px;
+}
+
+.icon {
+    width: 2em;
+    height: 2em;
+}
