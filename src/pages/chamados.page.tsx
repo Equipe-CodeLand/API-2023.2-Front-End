@@ -3,9 +3,22 @@ import Chamado from "../components/chamado/chamado.interface"
 
 function Chamados() {
     let chamados: Array<Chamado> = [
-        {nome: 'Henrique Andrade', tema: 'Velocidade da Internet', status: 'Em andamento', hora: '26/09/2023 00:59'},
-        {nome: 'Alice Nunes', tema: 'Problemas de Conexão', status: 'Em andamento', hora: '26/09/2023 00:59'},
-        {nome: 'Luís Oliveira', tema: 'Problemas com fatura', status: 'Em andamento', hora: '26/09/2023 00:59'},
+        {nome: 'Henrique Andrade', tema: 'Velocidade da Internet', status: { id: '1', texto: 'Encerrado'}, hora: '26/09/2023 00:59',
+        conversa: [
+            {remetente: 'Maria Silva', texto: `Nas últimas duas semanas, tenho notado ruídos estranhos durante minhas chamadas telefônicas. Esses ruídos tornaram difícil manter conversas claras e consistentes com meus amigos e familiares. Além disso, houve ocasiões em que as chamadas simplesmente caíram de forma inesperada, o que tem sido bastante frustrante.`, role: 'Cliente'},
+            {remetente: 'Henrique Andrade', texto: `Olá Maria Silva, lamentamos sinceramente por qualquer inconveniente que isso possa ter causado a você e entendemos a importância de uma conexão telefônica confiável em sua vida cotidiana.
+            Quero assegurar a você que estamos dedicados a resolver esse problema o mais rápido possível. Após revisar seu relato, tomamos as seguintes providências:
+            Agendamos uma visita técnica para verificar a qualidade da linha em sua residência. O técnico responsável estará programado para comparecer em 27 de agosto de 2023, conforme discutido.
+            Estaremos monitorando de perto o progresso da visita técnica para garantir que o problema seja tratado de maneira adequada e eficaz.
+            Em reconhecimento aos problemas que você enfrentou, creditaremos sua próxima fatura com um valor correspondente aos inconvenientes causados pela má qualidade da linha.`, role: 'Atendente'}
+        ]
+        },
+            {nome: 'Alice Nunes', tema: 'Problemas de Conexão', status: { id: '2', texto: 'Em andamento'}, hora: '26/09/2023 00:59',
+            conversa: []
+        },
+            {nome: 'Luís Oliveira', tema: 'Problemas com fatura', status: { id: '3', texto: 'Não iniciado'}, hora: '26/09/2023 00:59',
+            conversa: []
+        },
     ]
     let list = chamados.map(chamado => {
             return <ChamadoComponent
@@ -13,6 +26,7 @@ function Chamados() {
                 tema={chamado.tema}
                 status={chamado.status}
                 hora={chamado.hora}
+                conversa={chamado.conversa}
             ></ChamadoComponent>
     })
     return(

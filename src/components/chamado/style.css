@@ -1,19 +1,66 @@
 .chamado {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    height: 10vh;
+    height: 6.5em;
     width: 80vw;
     border: 2px solid black;
     border-radius: 30px;
     margin: 2em auto;
 }
 
+.chamado-dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vw;
+    border: 2px solid black;
+    border-radius: 0 0 30px 30px;
+    border-top: none;
+    margin: -4em auto 2em;
+    padding: 2em 0;
+}
+
+.conteudo {
+    margin: 0;
+    padding: 0 2em;
+}
+
+.texto {
+    padding: 0 1.5em;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-grow: 1;
+}
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 55%;
+}
+
 .status {
-    border: 2px solid #F0AF09;
-    background-color: #FFF4E0;
+    text-align: center;
+    width: 120px;
     padding: 1em;
     border-radius: 30px;
+}
+
+.status-cor1 {
+    border: 2px solid #5BC74A;
+    background-color: #DCFFD7;    
+
+}
+.status-cor2 {
+    border: 2px solid #F0AF09;
+    background-color: #FFF4E0;    
+}
+.status-cor3 {
+    border: 2px solid #ED6B4F;
+    background-color: #FBEDED;   
 }
 
 .icon {
