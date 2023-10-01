@@ -9,6 +9,7 @@ import {
 import Chamados from './pages/chamados.page';
 import App from './App';
 import ChamadosAdm from './pages/chamadosAdm.page';
+import CadastroUser from './pages/cadastro.page';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,11 @@ const router = createBrowserRouter([
   {
     path: "/chamadosAdm",
     element: <ChamadosAdm />
-    }
+    },
+    {
+      path: "/cadastroUser",
+      element: <CadastroUser />
+      }
 ]);
 
 const root = ReactDOM.createRoot(

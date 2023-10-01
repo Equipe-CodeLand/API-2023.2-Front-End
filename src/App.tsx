@@ -5,17 +5,9 @@ function App() {
   return (
     <div className="App">
         <h1>Home</h1>
-        <ul>
-
-        <li>
-          <Link to={'/chamados'}>Chamados</Link>
-        </li>
-
-        <li>
-          <Link to={'/chamadosAdm'}>Chamados Adm</Link>
-        </li>
-        
-        </ul>
+          <Link to={'/chamados'}>Chamados</Link> <br />
+          <Link to={'/chamadosAdm'}>Chamados Adm</Link> <br />
+          <Link to={'/cadastroUser'}>Cadastrar Usuário (ADM)</Link> <br />
     </div>
   );
 }
