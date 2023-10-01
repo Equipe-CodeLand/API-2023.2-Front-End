@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Chamados from './pages/chamados.page';
 import App from './App';
+import ChamadosAdm from './pages/chamadosAdm.page';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
     path: "/chamados",
     element: <Chamados></Chamados>,
   },
+  {
+    path: "/chamadosAdm",
+    element: <ChamadosAdm />
+    }
 ]);
 
 const root = ReactDOM.createRoot(
