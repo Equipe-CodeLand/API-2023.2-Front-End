@@ -138,6 +138,13 @@ export default function CadUser(props: CadaUser) {
         } else {
             setTelefoneError('');
         }
+
+        if (email === "" || !validateEmail(email)) {
+            setEmailError('Por favor, preencha um email válido.');
+            formIsValid = false;
+        } else {
+            setEmailError('');
+        }
     
         if (formIsValid) {
             showSuccess();
