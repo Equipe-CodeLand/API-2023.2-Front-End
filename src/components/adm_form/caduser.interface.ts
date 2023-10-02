@@ -3,4 +3,5 @@ export default interface CadaUser{
     cpf: string,
     tipo: string,
     telefone: string
+    turno: string
 }

@@ -8,6 +8,7 @@ export default function CadUser(props: CadaUser) {
     const [cpf, setCpf] = useState(props.cpf || '');
     const [tipo, setTipo] = useState(props.tipo || '');
     const [telefone, setTelefone] = useState(props.telefone || '');
+    const [turno, setTurno] = useState(props.turno || '');
     const [email, setEmail] = useState('');
     const [isValid, setIsValid] = useState(true);
     const [emailError, setEmailError] = useState('');
@@ -15,20 +16,20 @@ export default function CadUser(props: CadaUser) {
     const [cpfError, setCpfError] = useState('');
     const [tipoError, setTipoError] = useState('');
     const [telefoneError, setTelefoneError] = useState('');
+    const [turnoError, setTurnoError] = useState('');
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = e.target.value;
-
-        if (!newEmail.includes('@') || newEmail === '') {
+        setEmail(newEmail);
+    
+        if (!validateEmail(newEmail)) {
             setEmailError('Por favor, preencha um e-mail válido.');
-            setEmail('');
             setIsValid(false);
         } else {
-            setEmail(newEmail);
-            setIsValid(validateEmail(newEmail));
             setEmailError(''); 
+            setIsValid(true);
         }
-    };    
+    };     
 
     const handleNomeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newNome = e.target.value;
@@ -45,7 +46,7 @@ export default function CadUser(props: CadaUser) {
     };  
 
     const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newCpf = e.target.value;
+        const newCpf = formatCPF(e.target.value);
 
         if (!newCpf) {
             setCpfError('Por favor, preencha o seu CPF.');
@@ -70,21 +71,20 @@ export default function CadUser(props: CadaUser) {
             setIsValid(true); 
             setTipoError(''); 
         }
-    };  
-
-    const handleTelefoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newTelefone = e.target.value;
-
-        if (!newTelefone) {
-            setTelefoneError('Por favor, preencha o seu telefone.');
-            setTelefone('');
-            setIsValid(false);
-        } else {
-            setTelefone(newTelefone);
-            setIsValid(validateTelefone(newTelefone));
-            setTelefoneError(''); 
+        if (newTipo === 'Atendente') {
+            setTurno('');
         }
     };  
+
+    const handleTurnoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newTurno = e.target.value;
+        setTurno(newTurno);
+    };
+
+    const handleTelefoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newTelefone = formatTelefone(e.target.value);
+        setTelefone(newTelefone);
+    }; 
 
     const validateEmail = (email: string): boolean => {
         const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -92,19 +92,32 @@ export default function CadUser(props: CadaUser) {
     };
 
     const validateNome = (nome: string): boolean => {
-        const nomeRegex = /^\w+$/i;
+        const nomeRegex = /^[a-zA-Z\s]*$/i;
         return nomeRegex.test(nome);
-    }
+    };    
+
+    const formatCPF = (cpf: string): string => {
+        const cleaned = cpf.replace(/\D/g, ''); // Remove todos os não-dígitos do número do cpf
+        let formatted = cleaned.replace(/(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4');
+        return formatted;
+    };
+    
 
     const validateCpf = (cpf: string): boolean => {
         const cpfRegex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
         return cpfRegex.test(cpf);
     }
 
+    const formatTelefone = (telefone: string): string => {
+        const cleaned = telefone.replace(/\D/g, ''); // Remove todos os não-dígitos do número de telefone
+        const formatted = cleaned.replace(/(\d{2})(\d{4,5})(\d{4}).*/, '($1) $2-$3'); // Adiciona hífens
+        return formatted;
+    };
+    
     const validateTelefone = (telefone: string): boolean => {
         const telefoneRegex = /^\(\d{2}\) \d{4,5}-\d{4}$/;
-        return telefoneRegex.test(telefone);
-    }
+        return telefoneRegex.test(telefone); // Testa o formato do telefone
+    };    
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -130,6 +143,13 @@ export default function CadUser(props: CadaUser) {
             formIsValid = false;
         } else {
             setTipoError('');
+        }
+
+        if (turno === "") {
+            setTurnoError('Por favor, selecione o turno do atendente.');
+            formIsValid = false;
+        } else {
+            setTurnoError('');
         }
     
         if (telefone === "" || !validateTelefone(telefone)) {
@@ -170,12 +190,6 @@ export default function CadUser(props: CadaUser) {
             confirmButtonText: "OK",
             showCancelButton: true,
             cancelButtonText: "Cancelar",
-        }).then((result: SweetAlertResult) => {
-            if (result.isConfirmed) {
-                alert('Usuário cadastrado com sucesso!');
-            } else if (result.isDismissed) {
-                alert('Cadastro cancelado pelo usuário');
-            }
         });
     };
 
@@ -204,10 +218,24 @@ export default function CadUser(props: CadaUser) {
                 <select value={tipo} onChange={handleTipoChange}>
                     <option value="">Tipo</option>
                     <option value="Cliente">Cliente</option>
+                    <option value="Atendente">Atendente</option>
                     <option value="Administrador">Administrador</option>
                 </select>
                 <span style={{ color: 'red' }}>{tipoError}</span>
             </label>
+            <br />
+            {tipo === 'Atendente' && (
+                <label>
+                    Selecione o turno do atendente:
+                    <select value={turno} onChange={handleTurnoChange}>
+                        <option value="">Turno</option>
+                        <option value="Matutino">Matutino</option>
+                        <option value="Vespertino">Vespertino</option>
+                        <option value="Noturno">Noturno</option>
+                    </select>
+                    <span style={{ color: 'red' }}>{turnoError}</span>
+                </label>
+            )}
             <br />
             <label>
                 Telefone:
