@@ -9,7 +9,8 @@ import {
 import Chamados from './pages/chamados.page';
 import App from './App';
 import ChamadosAdm from './pages/chamadosAdm.page';
-import CadastroUser from './pages/cadastro.page';
+import CadastroUser from './pages/cad_user.page';
+import CadastroCli from './pages/cad_cli.page';
 
 const router = createBrowserRouter([
   {
@@ -21,13 +22,17 @@ const router = createBrowserRouter([
     element: <Chamados></Chamados>,
   },
   {
-    path: "/chamadosAdm",
+    path: "/chamados/Adm",
     element: <ChamadosAdm />
     },
     {
       path: "/cadastroUser",
       element: <CadastroUser />
-      }
+      },
+      {
+        path: "/cadastroCliente",
+        element: <CadastroCli />
+        }
 ]);
 
 const root = ReactDOM.createRoot(

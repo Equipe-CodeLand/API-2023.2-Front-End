@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import CadaUser from './caduser.interface';
-import './caduser.css';
+import { useState } from "react";
+import CadaCli from "./cad_cli.interface";
 import Swal, { SweetAlertResult } from 'sweetalert2';
+import './cad_cli.css';
 
-export default function CadUser(props: CadaUser) {
+export default function CadCli(props:CadaCli){
     const [nome, setNome] = useState(props.nome || '');
     const [sobrenome, setSobrenome] = useState(props.sobrenome || '');
     const [cpf, setCpf] = useState(props.cpf || '');
-    const [tipo, setTipo] = useState(props.tipo || '');
+    const [tema, setTema] = useState(props.tema || '');
     const [telefone, setTelefone] = useState(props.telefone || '');
-    const [turno, setTurno] = useState(props.turno || '');
     const [email, setEmail] = useState('');
+    const [mensagem, setMensagem] = useState(props.mensagem || '');
     const [isValid, setIsValid] = useState(true);
     const [emailError, setEmailError] = useState('');
     const [nomeError, setNomeError] = useState('');
     const [sobrenomeError, setSobrenomeError] = useState('');
     const [cpfError, setCpfError] = useState('');
-    const [tipoError, setTipoError] = useState('');
     const [telefoneError, setTelefoneError] = useState('');
-    const [turnoError, setTurnoError] = useState('');
+    const [temaError, setTemaError] = useState('');
+    const [mensagemError, setMensagemError] = useState('');
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = e.target.value;
@@ -51,13 +51,13 @@ export default function CadUser(props: CadaUser) {
         const newSobrenome = e.target.value;
 
         if (!newSobrenome) {
-            setNomeError('Por favor, preencha o seu nome.');
-            setNome('');
+            setSobrenomeError('Por favor, preencha o seu nome.');
+            setSobrenome('');
             setIsValid(false);
         } else {
-            setNome(newSobrenome);
-            setIsValid(validateNome(newSobrenome));
-            setNomeError(''); 
+            setSobrenome(newSobrenome);
+            setIsValid(validateSobrenome(newSobrenome));
+            setSobrenomeError(''); 
         }
     };  
 
@@ -75,27 +75,15 @@ export default function CadUser(props: CadaUser) {
         }
     };  
 
-    const handleTipoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newTipo = e.target.value;
-
-        if (!newTipo) {
-            setTipoError('Por favor, selecione o tipo de usuário.');
-            setTipo('');
-            setIsValid(false);
-        } else {
-            setTipo(newTipo);
-            setIsValid(true); 
-            setTipoError(''); 
-        }
-        if (newTipo === 'Atendente') {
-            setTurno('');
-        }
-    };  
-
-    const handleTurnoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newTurno = e.target.value;
-        setTurno(newTurno);
+    const handleTemaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newTema = e.target.value;
+        setTema(newTema);
     };
+
+    const handleMensagemChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newMensagem = e.target.value;
+        setMensagem(newMensagem);
+    };    
 
     const handleTelefoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newTelefone = formatTelefone(e.target.value);
@@ -110,12 +98,12 @@ export default function CadUser(props: CadaUser) {
     const validateNome = (nome: string): boolean => {
         const nomeRegex = /^[a-zA-Z\s]*$/i;
         return nomeRegex.test(nome);
-    };  
+    }; 
     
     const validateSobrenome = (sobrenome: string): boolean => {
         const sobrenomeRegex = /^[a-zA-Z\s]*$/i;
         return sobrenomeRegex.test(sobrenome);
-    };  
+    };    
 
     const formatCPF = (cpf: string): string => {
         const cleaned = cpf.replace(/\D/g, ''); // Remove todos os não-dígitos do número do cpf
@@ -138,7 +126,12 @@ export default function CadUser(props: CadaUser) {
     const validateTelefone = (telefone: string): boolean => {
         const telefoneRegex = /^\(\d{2}\) \d{4,5}-\d{4}$/;
         return telefoneRegex.test(telefone); // Testa o formato do telefone
-    };    
+    }; 
+    
+    const validateMensagem = (mensagem: string): boolean => {
+        const mensagemRegex = /^[a-zA-Z\s]*$/i;
+        return mensagemRegex.test(mensagem);
+    };  
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -152,7 +145,7 @@ export default function CadUser(props: CadaUser) {
             setNomeError('');
         }
 
-        if (sobrenome === "" || !validateSobrenome(sobrenome)) {
+        if (sobrenome === "" || !validateNome(sobrenome)) {
             setSobrenomeError('Por favor, preencha o seu sobrenome.');
             formIsValid = false;
         } else {
@@ -166,20 +159,13 @@ export default function CadUser(props: CadaUser) {
             setCpfError('');
         }
     
-        if (tipo === "") {
-            setTipoError('Por favor, selecione o tipo de usuário.');
+        if (tema === "") {
+            setTemaError('Por favor, selecione o tipo de usuário.');
             formIsValid = false;
         } else {
-            setTipoError('');
+            setTemaError('');
         }
 
-        if (turno === "") {
-            setTurnoError('Por favor, selecione o turno do atendente.');
-            formIsValid = false;
-        } else {
-            setTurnoError('');
-        }
-    
         if (telefone === "" || !validateTelefone(telefone)) {
             setTelefoneError('Por favor, preencha um telefone válido.');
             formIsValid = false;
@@ -192,6 +178,13 @@ export default function CadUser(props: CadaUser) {
             formIsValid = false;
         } else {
             setEmailError('');
+        }
+
+        if (mensagem === "" || !validateMensagem(mensagem)) {
+            setMensagemError('Por favor, pdescreva o problema.');
+            formIsValid = false;
+        } else {
+            setMensagemError('');
         }
     
         if (formIsValid) {
@@ -221,63 +214,65 @@ export default function CadUser(props: CadaUser) {
         });
     };
 
-    return (
+    return(
         <form onSubmit={handleSubmit}>
             <label>
                 Nome:
                 <input type="text" value={nome} onChange={handleNomeChange} />
                 <span style={{ color: 'red' }}>{nomeError}</span>
             </label>
-            <br/>
+            <br />
+
             <label>
                 Sobrenome:
                 <input type="text" value={sobrenome} onChange={handleSobrenomeChange} />
                 <span style={{ color: 'red' }}>{sobrenomeError}</span>
             </label>
             <br />
+
             <label>
                 CPF:
                 <input type="text" value={cpf} onChange={handleCpfChange} />
                 <span style={{ color: 'red' }}>{cpfError}</span>
             </label>
             <br />
+
             <label>
-                E-mail:
+                Email:
                 <input type="text" value={email} onChange={handleEmailChange} />
                 <span style={{ color: 'red' }}>{emailError}</span>
             </label>
             <br />
+
             <label>
-                Selecione o tipo de usuário a ser cadastrado:
-                <select value={tipo} onChange={handleTipoChange}>
-                    <option value="">Tipo</option>
-                    <option value="Cliente">Cliente</option>
-                    <option value="Atendente">Atendente</option>
-                    <option value="Administrador">Administrador</option>
-                </select>
-                <span style={{ color: 'red' }}>{tipoError}</span>
-            </label>
-            <br />
-            {tipo === 'Atendente' && (
-                <label>
-                    Selecione o turno do atendente:
-                    <select value={turno} onChange={handleTurnoChange}>
-                        <option value="">Turno</option>
-                        <option value="Matutino">Matutino</option>
-                        <option value="Vespertino">Vespertino</option>
-                        <option value="Noturno">Noturno</option>
-                    </select>
-                    <span style={{ color: 'red' }}>{turnoError}</span>
-                </label>
-            )}
-            <br />
-            <label>
-                Telefone:
+                Telefone para contato:
                 <input type="text" value={telefone} onChange={handleTelefoneChange} />
                 <span style={{ color: 'red' }}>{telefoneError}</span>
             </label>
             <br />
+
+            <label id="tema">
+                Tema:
+                <select value={tema} onChange={handleTemaChange}>
+                    <option value="">Selecione um tema</option>
+                    <option value="velocidade">Velocidade da Internet</option>
+                    <option value="modem">Modem</option>
+                    <option value="conexao">Problemas com conexão</option>
+                    <option value="outros">Outros</option>
+                </select>
+                <span style={{ color: 'red' }}>{temaError}</span>
+            </label>
+            <br />
+
+            <label>
+                Mensagem:
+                <input type="text" value={mensagem} onChange={handleMensagemChange} />
+                <span style={{ color: 'red' }}>{mensagemError}</span>
+            </label>
+            <br />
+
             <input type="submit" value="Enviar" />
         </form>
-    );
+    )
+
 }
