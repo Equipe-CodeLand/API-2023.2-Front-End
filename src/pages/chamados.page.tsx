@@ -1,5 +1,6 @@
 import ChamadoComponent from "../components/chamado/chamadoComponent"
 import Chamado from "../components/chamado/chamado.interface"
+import Header from "../components/header/headerComponent"
 
 function Chamados() {
     let chamados: Array<Chamado> = [
@@ -31,6 +32,7 @@ function Chamados() {
     })
     return(
         <div>
+            <Header />
             {list}
         </div>
     )

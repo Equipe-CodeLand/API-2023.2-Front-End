@@ -1,5 +1,6 @@
 import ChamadoAdmComponent from "../components/chamado/chamadoAdmComponent"
 import {ChamadoAdm} from "../components/chamado/chamadoAdm.interface"
+import Header from "../components/header/headerComponent"
 
 export default function ChamadosAdm() {
     let chamados: Array<ChamadoAdm> = [
@@ -27,6 +28,7 @@ export default function ChamadosAdm() {
     })
     return (
         <div>
+            <Header />
             {list}
         </div>
     )

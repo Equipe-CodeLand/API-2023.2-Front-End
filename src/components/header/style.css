@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kadwa&display=swap');
+
+:root {
+    --Inter: 'Inter', sans-serif;
+    --Kadwa: 'Kadwa', serif;
+    --azul_claro: #AFC8E9;
+    --azul: #93B6E4;
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+header {
+    background-color: var(--azul_claro);
+    height: 60px;
+    display: grid;
+    align-items: center;
+}
+
+header div.menu {
+    background-color: var(--azul);
+    width: 0;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    overflow-x: hidden;
+    font-family: var(--Inter);
+    transition: all 0.5s;
+}
+
+header div.menu .close-menu {
+    height: 40px;
+    width: 40px;
+    cursor: pointer
+}
+
+header div.menu ul {
+    padding: 20px;
+    height: 73%;
+    list-style-type: none;
+    margin-top: 10px;
+    transition: all 0.2s;
+    opacity: 0;
+}
+
+header div.menu ul li {
+    margin-bottom: 10px;
+}
+
+header div.menu a {
+    text-decoration: none;
+    color: black;
+}
+
+header div.menu div.exit {
+    padding: 20px;
+    text-align: right;
+}
+
+
+header div.logotype {
+    margin-left: 20px;
+    width: 80px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+}
+
+header div.logotype .hamburguer {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
+header div.logotype a {
+    font-family: var(--Kadwa);
+    color: black;
+    text-decoration: none;
+}
