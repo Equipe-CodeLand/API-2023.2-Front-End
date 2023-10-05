@@ -27,55 +27,118 @@ header div.menu {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 9;
+    z-index: 4;
     overflow-x: hidden;
     font-family: var(--Inter);
     transition: all 0.5s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-header div.menu .close-menu {
-    height: 40px;
-    width: 40px;
-    cursor: pointer
+header div.menu.menuOpen {
+    width: 250px;
 }
 
 header div.menu ul {
     padding: 20px;
-    height: 73%;
+    height: 80%;
     list-style-type: none;
-    margin-top: 10px;
+    margin-top: 40px;
     transition: all 0.2s;
-    opacity: 0;
+}
+
+header div.menu ul hr {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--azul_claro);
 }
 
 header div.menu ul li {
-    margin-bottom: 10px;
+    margin-top: 40px;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+header div.menu.menuOpen ul li {
+    opacity: 100;
 }
 
 header div.menu a {
+    font-size: 1.2em;
     text-decoration: none;
     color: black;
 }
 
 header div.menu div.exit {
+    margin-right: 20px;
     padding: 20px;
     text-align: right;
+    font-weight: bold;
 }
 
-
 header div.logotype {
+    position: absolute;
     margin-left: 20px;
-    width: 80px;
+    width: auto;
     display: grid;
     grid-template-columns: 50% 50%;
+    align-content: center;
     align-items: center;
 }
 
-header div.logotype .hamburguer {
-    height: 20px;
-    width: 20px;
+
+.hamburguer {
+    position: relative;
+    top: calc(50% - 2px);
+    height: 4px;
+    width: 30px;
     cursor: pointer;
+    background-color: black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: 0.5s;
+    z-index: 9;
 }
+
+.hamburguer::before {
+    top: -11px;
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 4px;
+    background-color: black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: 0.5s;
+}
+
+.hamburguer::after {
+    top: 11px;
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 4px;
+    background-color: black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: 0.5s;
+}
+
+.icon.iconActive .hamburguer {
+    background-color: transparent;
+    box-shadow: 0 2px 5px transparent;
+}
+
+.icon.iconActive .hamburguer::after {
+    top: 0;
+    transform: rotate(225deg);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.icon.iconActive .hamburguer::before {
+    top: 0;
+    transform: rotate(135deg);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
 
 header div.logotype a {
     font-family: var(--Kadwa);
