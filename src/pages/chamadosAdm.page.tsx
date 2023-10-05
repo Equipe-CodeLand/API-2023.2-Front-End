@@ -26,9 +26,20 @@ export default function ChamadosAdm() {
             conversa={chamado.conversa}
         ></ChamadoAdmComponent>
     })
+
+    const link = ["/", "/", "/cadastroUser"] // Link para as páginas
+    const link_title = ["Relatórios", "Chamadas em Aberto", "Cadastrar Usuário"] // titulo para as paginas
+
     return (
         <div>
-            <Header />
+            <Header
+                link_0 = {link[0]} // Link para as páginas
+                link_1 = {link[1]}
+                link_2 = {link[2]}
+                link_title_0 = {link_title[0]} // titulo para as paginas
+                link_title_1 = {link_title[1]}
+                link_title_2 = {link_title[2]}
+            />
             {list}
         </div>
     )

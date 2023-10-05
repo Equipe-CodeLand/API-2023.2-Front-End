@@ -21,6 +21,7 @@ function Chamados() {
             conversa: []
         },
     ]
+
     let list = chamados.map(chamado => {
             return <ChamadoComponent
                 nome={chamado.nome}
@@ -30,9 +31,20 @@ function Chamados() {
                 conversa={chamado.conversa}
             ></ChamadoComponent>
     })
+
+    const link = ["/", "/", "/chamados"] // Link para as páginas
+    const link_title = ["Iniciar Chamado", "Problemas Comuns", "Meus Chamados"] // titulo para as paginas
+
     return(
         <div>
-            <Header />
+            <Header 
+                link_0 = {link[0]} // Link para as páginas
+                link_1 = {link[1]}
+                link_2 = {link[2]}
+                link_title_0 = {link_title[0]} // titulo para as paginas
+                link_title_1 = {link_title[1]}
+                link_title_2 = {link_title[2]}
+            />
             {list}
         </div>
     )

@@ -3,6 +3,9 @@ import CadUser from '../components/adm_form/caduserComponent';
 import Header from '../components/header/headerComponent';
 
 const CadastroAdmin: React.FC = () => {
+
+    const link_title = []
+
     return (
         <div>
             <Header />

@@ -3,6 +3,9 @@ import CadCli from '../components/cad_form/cad_cliComponent'
 import Header from '../components/header/headerComponent'
 
 const CadastroCli: React.FC = () => {
+
+    const link_title = []
+
     return (
         <div>
             <Header />
