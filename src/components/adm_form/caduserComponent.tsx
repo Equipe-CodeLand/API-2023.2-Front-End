@@ -18,7 +18,6 @@ export default function CadUser(props: CadaUser) {
     const [cpfError, setCpfError] = useState('');
     const [tipoError, setTipoError] = useState('');
     const [telefoneError, setTelefoneError] = useState('');
-    const [turnoError, setTurnoError] = useState('');
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = e.target.value;
@@ -51,13 +50,13 @@ export default function CadUser(props: CadaUser) {
         const newSobrenome = e.target.value;
 
         if (!newSobrenome) {
-            setNomeError('Por favor, preencha o seu nome.');
-            setNome('');
+            setSobrenomeError('Por favor, preencha o seu nome.');
+            setSobrenome('');
             setIsValid(false);
         } else {
-            setNome(newSobrenome);
-            setIsValid(validateNome(newSobrenome));
-            setNomeError(''); 
+            setSobrenome(newSobrenome);
+            setIsValid(validateSobrenome(newSobrenome));
+            setSobrenomeError(''); 
         }
     };  
 
@@ -108,7 +107,7 @@ export default function CadUser(props: CadaUser) {
     };
 
     const validateNome = (nome: string): boolean => {
-        const nomeRegex = /^[a-zA-Z\s]*$/i;
+        const nomeRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s]*$/i;
         return nomeRegex.test(nome);
     };  
     
@@ -171,13 +170,6 @@ export default function CadUser(props: CadaUser) {
             formIsValid = false;
         } else {
             setTipoError('');
-        }
-
-        if (turno === "") {
-            setTurnoError('Por favor, selecione o turno do atendente.');
-            formIsValid = false;
-        } else {
-            setTurnoError('');
         }
     
         if (telefone === "" || !validateTelefone(telefone)) {
@@ -248,26 +240,25 @@ export default function CadUser(props: CadaUser) {
             </label>
             <br />
             <label>
-                Selecione o tipo de usuário a ser cadastrado:
-                <select value={tipo} onChange={handleTipoChange}>
-                    <option value="">Tipo</option>
-                    <option value="Cliente">Cliente</option>
-                    <option value="Atendente">Atendente</option>
-                    <option value="Administrador">Administrador</option>
-                </select>
-                <span style={{ color: 'red' }}>{tipoError}</span>
-            </label>
+            Selecione o tipo de usuário a ser cadastrado:
+            <select className="browser-default" value={tipo} onChange={handleTipoChange}>
+                <option value="">Tipo</option>
+                <option value="Cliente">Cliente</option>
+                <option value="Atendente">Atendente</option>
+                <option value="Administrador">Administrador</option>
+            </select>
+            <span style={{ color: 'red' }}>{tipoError}</span>
+        </label>
             <br />
             {tipo === 'Atendente' && (
                 <label>
                     Selecione o turno do atendente:
-                    <select value={turno} onChange={handleTurnoChange}>
+                    <select className="browser-default" value={turno} onChange={handleTurnoChange}>
                         <option value="">Turno</option>
                         <option value="Matutino">Matutino</option>
                         <option value="Vespertino">Vespertino</option>
                         <option value="Noturno">Noturno</option>
                     </select>
-                    <span style={{ color: 'red' }}>{turnoError}</span>
                 </label>
             )}
             <br />
@@ -277,6 +268,7 @@ export default function CadUser(props: CadaUser) {
                 <span style={{ color: 'red' }}>{telefoneError}</span>
             </label>
             <br />
+            
             <input type="submit" value="Enviar" />
         </form>
     );

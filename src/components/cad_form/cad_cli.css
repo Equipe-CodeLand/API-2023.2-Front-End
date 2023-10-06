@@ -1,35 +1,44 @@
 *{
-    font-family: Helvetica;
+    font-family: Arial;
     box-sizing: border-box;
+}
+
+h1{
+    margin: 2%;
+    font-size: 35px !important;
+    text-align: center;
+    margin-bottom: 2% !important;
 }
 
 form{
     display: flex;
     flex-direction: column;
-    gap: .5rem;
-    width: 500px;
-    margin: 0 auto;
+    gap: 1rem;
+    width: 660px !important;
+    margin: 3% auto;
 }
 
 label{
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 1.0rem !important;
 }
 
 input, select, textarea{
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1.1rem;
+    padding: 15px;
+    border: 2px solid #ddd !important;
+    border-radius: 10px !important;
+    font-size: 1.2rem !important;
 }
 
 button{
-    padding: 10px;
+    padding: 15px;
     border: none;
-    border-radius: 5px;
-    background-color: #333;
+    border-radius: 10px;
+    background-color: #444;
     color: #fff;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     cursor: pointer;
+    margin-bottom: 2%;
 }

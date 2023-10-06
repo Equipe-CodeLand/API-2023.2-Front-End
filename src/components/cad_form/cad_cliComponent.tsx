@@ -96,7 +96,7 @@ export default function CadCli(props:CadaCli){
     };
 
     const validateNome = (nome: string): boolean => {
-        const nomeRegex = /^[a-zA-Z\s]*$/i;
+        const nomeRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s]*$/i;
         return nomeRegex.test(nome);
     }; 
     
@@ -129,9 +129,9 @@ export default function CadCli(props:CadaCli){
     }; 
     
     const validateMensagem = (mensagem: string): boolean => {
-        const mensagemRegex = /^[a-zA-Z\s]*$/i;
+        const mensagemRegex = /^.*$/i;
         return mensagemRegex.test(mensagem);
-    };  
+    };    
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -253,7 +253,7 @@ export default function CadCli(props:CadaCli){
 
             <label id="tema">
                 Tema:
-                <select value={tema} onChange={handleTemaChange}>
+                <select className="browser-default" value={tema} onChange={handleTemaChange}>
                     <option value="">Selecione um tema</option>
                     <option value="velocidade">Velocidade da Internet</option>
                     <option value="modem">Modem</option>

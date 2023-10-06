@@ -11,11 +11,12 @@ import App from './App';
 import ChamadosAdm from './pages/chamadosAdm.page';
 import CadastroUser from './pages/cad_user.page';
 import CadastroCli from './pages/cad_cli.page';
+import Home from './pages/home.page';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: <Home></Home>,
   },
   {
     path: "/chamados",

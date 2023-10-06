@@ -1,6 +1,7 @@
 import './App.css';
 import { Link } from 'react-router-dom';
 import Header from './components/header/headerComponent';
+import Home from './pages/home.page';
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
         link_title_3 = {link_title[3]}
       />
       <main>
-        <h1>Home</h1>
+        <Home />
       </main>
     </div>
   );

@@ -1,3 +1,7 @@
+h2{
+    font-size: 30px !important;
+}
+
 .chamado {
     display: flex;
     align-items: center;
