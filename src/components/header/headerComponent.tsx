@@ -11,7 +11,7 @@ export default function Header(props: any) {
     const link = [props.link_0, props.link_1, props.link_2, props.link_3]
 
     return (
-        <header>
+        <header id="navbar">
             <div className={active ? "menu menuOpen" : "menu menuClose"}>
                 <ul id="navText">
                     <hr />

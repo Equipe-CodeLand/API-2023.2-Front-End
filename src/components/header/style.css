@@ -13,7 +13,7 @@
     margin: 0px;
 }
 
-header {
+header#navbar {
     background-color: var(--azul_claro);
     height: 80px;
     display: grid;
