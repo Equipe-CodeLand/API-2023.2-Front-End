@@ -17,7 +17,7 @@ import ChamadoCli from './pages/chamadoCli.page';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home></Home>,
+    element: <App></App>,
   },
   {
     path: "/chamados",

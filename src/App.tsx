@@ -2,8 +2,18 @@ import './App.css';
 import { Link } from 'react-router-dom';
 import Header from './components/header/headerComponent';
 import Home from './pages/home.page';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // Aqui você busca os dados da API e depois os define no estado.
+    fetch('http://localhost:5000/chamados')
+      .then(res => res.json())
+      .then(data => setData(data))
+      .catch(err => console.log(err));
+  }, []);
 
   const link = ["/chamados", "/chamados/Adm", "/cadastroUser", "/cadastroCliente"] // Link para as páginas
   const link_title = ["Chamados", "Chamados Adm", "Cadastrar Usuário (ADM)", "Forms Cadastro de Cliente (ADM)"] // titulo para as paginas
@@ -21,7 +31,7 @@ function App() {
         link_title_3 = {link_title[3]}
       />
       <main>
-        <Home />
+        <Home data={data} />
       </main>
     </div>
   );
