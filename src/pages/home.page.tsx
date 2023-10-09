@@ -8,8 +8,8 @@ const Home: React.FC = () => {
     useEffect(() => {
         document.title="Home"
     }, []);
-    const link = ["/chamados", "/chamados/Adm", "/cadastroUser", "/cadastroCliente"] // Link para as páginas
-    const link_title = ["Chamados", "Chamados ADM", "Cadastrar Usuário", "Forms Cadastro de Cliente"] // titulo para as paginas
+    const link = ["/chamados", "/chamados/Adm", "/cadastroUser", "/cadastroCliente", "chamadoCli"] // Link para as páginas
+    const link_title = ["Chamados", "Chamados ADM", "Cadastrar Usuário", "Forms Cadastro de Cliente", "Chamados Cli"] // titulo para as paginas
     return(
         <div>
             <Header 
@@ -17,10 +17,12 @@ const Home: React.FC = () => {
                 link_1 = {link[1]}
                 link_2 = {link[2]}
                 link_3 = {link[3]}
+                link_4 = {link[4]}
                 link_title_0 = {link_title[0]} // titulo para as paginas
                 link_title_1 = {link_title[1]}
                 link_title_2 = {link_title[2]}
                 link_title_3 = {link_title[3]}
+                link_title_4 = {link_title[4]}
             />
             <h1 className="text-tiny">Seja Bem-vindo(a) ao CallNet!</h1>
             <div>
@@ -31,6 +33,7 @@ const Home: React.FC = () => {
                 <Link to={'/chamados/Adm'}>Chamados Adm</Link> <br />
                 <Link to={'/cadastroUser'}>Cadastrar Usuário (ADM)</Link> <br />
                 <Link to={'/cadastroCliente'}>Forms Cadastro de Cliente</Link> <br />
+                <Link to={'/chamadoCli'}>Chamados Cli</Link><br />
             </div>
             <div className="sobre">
                 <h3>Sobre</h3>

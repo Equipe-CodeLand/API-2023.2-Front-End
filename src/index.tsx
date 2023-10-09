@@ -12,6 +12,7 @@ import ChamadosAdm from './pages/chamadosAdm.page';
 import CadastroUser from './pages/cad_user.page';
 import CadastroCli from './pages/cad_cli.page';
 import Home from './pages/home.page';
+import ChamadoCli from './pages/chamadoCli.page';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/cadastroCliente",
         element: <CadastroCli />
+        },
+        {
+          path: "/chamadoCli",
+          element: <ChamadoCli />
         }
 ]);
 
