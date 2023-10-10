@@ -37,3 +37,4 @@ function ChamadoCliComponent(props: ChamadoCli) {
 }
 
 export default ChamadoCliComponent
+
