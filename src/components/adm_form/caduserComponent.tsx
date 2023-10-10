@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CadaUser from './caduser.interface';
 import './caduser.css';
 import Swal, { SweetAlertResult } from 'sweetalert2';
+import axios from 'axios';
 
 export default function CadUser(props: CadaUser) {
     const [nome, setNome] = useState(props.nome || '');
@@ -191,6 +192,8 @@ export default function CadUser(props: CadaUser) {
         } else {
             showWarning('Por favor, corrija os campos indicados.');
         }
+
+        axios.post('http://localhost:5000/cadastroUser',{'nome': nome,'sobrenome':sobrenome,'email':email,'telefone':telefone,'cpf':cpf,'tipo':tipo})
     };
     
 

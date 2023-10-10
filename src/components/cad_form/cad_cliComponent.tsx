@@ -2,6 +2,7 @@ import { useState } from "react";
 import CadaCli from "./cad_cli.interface";
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import './cad_cli.css';
+import axios from "axios";
 
 export default function CadCli(props:CadaCli){
     const [nome, setNome] = useState(props.nome || '');
@@ -192,6 +193,8 @@ export default function CadCli(props:CadaCli){
         } else {
             showWarning('Por favor, corrija os campos indicados.');
         }
+
+        axios.post('http://localhost:5000/cadastro/cliente',{'nome': nome,'sobrenome':sobrenome,'email':email,'telefone':telefone,'cpf':cpf,'tema':tema,'mensagem':mensagem})
     };
     
 
