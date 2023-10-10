@@ -19,7 +19,7 @@ function ChamadoAdmDropdown(props: any) {
             return (
                 <>
                     <div className='conteudo-adm'>
-                        <p>{msg.email}</p>
+                        <p className='email-cliente'>{'Contato: ' + msg.email}</p>
                         <h2>{msg.nome + ' - Cliente'}</h2>
                         <p className='texto-adm'>{msg.msg}</p>
 

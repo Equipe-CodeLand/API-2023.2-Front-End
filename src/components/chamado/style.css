@@ -1,6 +1,3 @@
-h2{
-    font-size: 30px !important;
-}
 
 .chamado {
     display: flex;
@@ -86,12 +83,20 @@ h2{
 
 .conteudo-adm h2 {
     margin: 0;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    font-size: 25px !important;
+}
+
+.email-cliente {
+    padding-top: 20px;
 }
 
 .texto-adm {
     border-left: 2px solid grey;
     padding-left: 20px;
     margin-left: 15px;
+    padding-right: 25px;
 }
 
 .btn-adm {
@@ -110,6 +115,7 @@ h2{
     font-size: 1em;
     transition: 0.5s;
     font-weight: bolder;
+    margin-top: 15px;
 }
 
 .btn-adm:hover {
