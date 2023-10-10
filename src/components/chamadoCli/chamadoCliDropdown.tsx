@@ -16,7 +16,9 @@ function ChamadoCliDropdown(props: any) {
             return (
                 <div className="chamado-cli-dropdown">
                     {conversa}
-                    <button className='btn-cli'>Cancelar chamado</button>
+                    <br />
+                    <button 
+                    className='btn-cli'>Cancelar chamado</button>
                 </div>
             )
         } 

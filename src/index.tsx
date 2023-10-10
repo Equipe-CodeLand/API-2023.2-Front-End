@@ -13,6 +13,7 @@ import CadastroUser from './pages/cad_user.page';
 import CadastroCli from './pages/cad_cli.page';
 import Home from './pages/home.page';
 import ChamadoCli from './pages/chamadoCli.page';
+import ChamadosAte from './pages/chamadoAte.page';
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,13 @@ const router = createBrowserRouter([
         {
           path: "/chamadoCli",
           element: <ChamadoCli />
+        },
+        {
+          path:"/chamado/Ate",
+          element:<ChamadosAte />
         }
+
+
 ]);
 
 const root = ReactDOM.createRoot(

@@ -1,3 +1,6 @@
+h2{
+    font-size: 30px !important;
+}
 
 .chamado {
     display: flex;
@@ -72,7 +75,7 @@
     height: 2em;
 }
 
-.conteudo-adm {
+.conteudo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -81,25 +84,29 @@
     margin-left: 30px;
 }
 
-.conteudo-adm h2 {
+.chamado-dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vw;
+    border: 2px solid black;
+    border-radius: 0 0 30px 30px;
+    border-top: none;
+    margin: -4em auto 2em;
+    padding: 2em 0;
+}
+
+.conteudo h2 {
     margin: 0;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    font-size: 25px !important;
 }
 
-.email-cliente {
-    padding-top: 20px;
-}
-
-.texto-adm {
+.texto {
     border-left: 2px solid grey;
     padding-left: 20px;
     margin-left: 15px;
-    padding-right: 25px;
 }
 
-.btn-adm {
+.btn {
     display: flex;
     align-items: center;
     align-self: center;
@@ -115,10 +122,9 @@
     font-size: 1em;
     transition: 0.5s;
     font-weight: bolder;
-    margin-top: 15px;
 }
 
-.btn-adm:hover {
+.btn:hover {
     background-color: #2fbf76;
     transition: 0.5s;
 }
