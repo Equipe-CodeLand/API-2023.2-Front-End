@@ -12,8 +12,8 @@ const Home: React.FC<HomeProps> = ({ data }) => {
     useEffect(() => {
         document.title="Home"
     }, []);
-    const link = ["/chamados", "/chamados/Adm", "/cadastroUser", "/cadastroCliente"] // Link para as páginas
-    const link_title = ["Chamados", "Chamados ADM", "Cadastrar Usuário", "Forms Cadastro de Cliente"] // titulo para as paginas
+    const link = ["/chamados", "/chamados/Adm", "/cadastroUser", "/cadastroCliente", '/meusChamados'] // Link para as páginas
+    const link_title = ["Chamados", "Chamados ADM", "Cadastrar Usuário", "Forms Cadastro de Cliente", 'Meus Chamados'] // titulo para as paginas
     return(
         <div>
             <h1 className="text-tiny">Seja Bem-vindo(a) ao CallNet!</h1>
@@ -27,6 +27,7 @@ const Home: React.FC<HomeProps> = ({ data }) => {
                 <Link to={'/cadastroCliente'}>Forms Cadastro de Cliente</Link> <br />
                 <Link to={'/chamadoCli'}>Chamados Cli</Link><br />
                 <Link to={'/chamado/Ate'}>Chamados Atendente</Link><br />
+                <Link to={'/meusChamados'}>Meus Chamados(atendente)</Link><br />
             </div>
             <div className="sobre">
                 <h3>Sobre</h3>

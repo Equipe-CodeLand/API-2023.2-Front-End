@@ -6,14 +6,16 @@ function ChamadoDropdown(props: any) {
         let conversa = props.conversa.map((msg: { remetente: string; role: string; texto: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined }) => {
             return (
                 <div className='conteudo'>
+                    
                     <h2>{msg.remetente + ' - ' + msg.role}</h2>
                     <p className='texto'>{msg.texto}</p>
                 </div>
             )
         })
-        if(conversa.length > 0) {
+        if(conversa.length > 0 || props.descricao.length > 0) {
             return(
                 <div className="chamado-dropdown">
+                    <p className='desc'>{props.descricao}</p>
                     {conversa}
                 </div>
             )

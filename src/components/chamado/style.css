@@ -1,3 +1,6 @@
+h2{
+    font-size: 30px !important;
+}
 
 .chamado {
     display: flex;
@@ -19,6 +22,10 @@
     border-top: none;
     margin: -4em auto 2em;
     padding: 2em 0;
+}
+
+.desc {
+    padding: 1em;
 }
 
 .conteudo {
@@ -50,21 +57,17 @@
     border-radius: 30px;
 }
 
-.status-cor1, 
-.prioridade-cor3 {
-    border: 2px solid #5BC74A;
-    background-color: #DCFFD7;    
-
+.status-1, .status-3, .prioridade-cor1 {
+    border: 2px solid #ED6B4F;
+    background-color: #FBEDED;   
 }
-.status-cor2, 
-.prioridade-cor2 {
+.status-2, .prioridade-cor2 {
     border: 2px solid #F0AF09;
     background-color: #FFF4E0;    
 }
-.status-cor3, 
-.prioridade-cor1 {
-    border: 2px solid #ED6B4F;
-    background-color: #FBEDED;   
+.status-4, .prioridade-cor3 {
+    border: 2px solid #5BC74A;
+    background-color: #DCFFD7;
 }
 
 .icon {
@@ -83,20 +86,12 @@
 
 .conteudo-adm h2 {
     margin: 0;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    font-size: 25px !important;
-}
-
-.email-cliente {
-    padding-top: 20px;
 }
 
 .texto-adm {
     border-left: 2px solid grey;
     padding-left: 20px;
     margin-left: 15px;
-    padding-right: 25px;
 }
 
 .btn-adm {
@@ -115,7 +110,6 @@
     font-size: 1em;
     transition: 0.5s;
     font-weight: bolder;
-    margin-top: 15px;
 }
 
 .btn-adm:hover {

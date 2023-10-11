@@ -17,7 +17,7 @@ function ChamadoComponent(props: Chamado) {
                     <div>{props.tema}</div>
                 </div>
                 <div className='right'>
-                    <div className={'status status-cor'+props.status.id}>{props.status.texto}</div>
+                    <div className={`status status-${props.status.id}`}>{props.status.texto}</div>
                     <div>{props.hora}</div>
                     <BsChevronDown className='icon' onClick={toggleDropdown}
                     ></BsChevronDown>
@@ -26,6 +26,7 @@ function ChamadoComponent(props: Chamado) {
             <ChamadoDropdown 
             open={open}
             conversa={props.conversa}
+            descricao={props.descricao}
             ></ChamadoDropdown>
         </div>
     )

@@ -14,6 +14,7 @@ import CadastroCli from './pages/cad_cli.page';
 import Home from './pages/home.page';
 import ChamadoCli from './pages/chamadoCli.page';
 import ChamadosAte from './pages/chamadoAte.page';
+import MeusChamados from './pages/meusChamados.page';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/chamados",
     element: <Chamados></Chamados>,
+  },
+  {
+    path: "/meusChamados",
+    element: <MeusChamados></MeusChamados>,
   },
   {
     path: "/chamados/Adm",
