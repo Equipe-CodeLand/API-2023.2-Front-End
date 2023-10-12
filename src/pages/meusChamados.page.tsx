@@ -66,7 +66,7 @@ function MeusChamados() {
             />
             {chamados.length > 0 && (
                 <div>
-                    {   chamados.filter(chamado => chamado.status.texto != 'Encerrado')
+                    {   chamados.filter(chamado => chamado.status.texto !== 'Encerrado')
                         .map(chamado => {
                             console.log(chamado)
                             return <ChamadoComponent
