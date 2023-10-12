@@ -122,3 +122,43 @@
     background-color: #2fbf76;
     transition: 0.5s;
 }
+
+.atendente-table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.atendente-table th, .atendente-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Estilo para as linhas pares da tabela */
+.atendente-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.botao-verde {
+    background-color: #3ae584; /* Cor de fundo verde */
+    color: white; /* Cor do texto */
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    border: none; /* Remove a borda */
+    border-radius: 10px; /* Bordas arredondadas */
+    cursor: pointer; /* Altera o cursor ao passar o mouse */
+}
+
+/* Estilo de hover para o botão */
+.botao-verde:hover {
+    background-color: #45a049; /* Cor de fundo alterada quando o mouse passa por cima */
+}
+
+.fechar_btn{
+    background-color: #E52323;
+}
+
+.atendente{
+    font-size: 1.75rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
