@@ -11,16 +11,17 @@ function ChamadoAteDropdown(props:any){
                         <p>{desc.email}</p>
                         <h2>{desc.nome + ' - Cliente'}</h2>
                         <p className='texto-adm'>{desc.desc}</p>
+                        <a href={`mailto:${desc.email}`} className='btn'> Iniciar chamado </a>
                 </div>
         
             )
         })
 
         if (conversa.length > 0){
-            return(
+            console.log(conversa);
+            return (
                 <div className='chamado-dropdown'>
                     {conversa}
-                    <button className='btn'>Iniciar chamada</button>
                 </div>
             )
         }

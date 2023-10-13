@@ -24,6 +24,17 @@ h2{
     padding: 2em 0;
 }
 
+.chamado-ate-dropdown{
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    border: 2px solid black;
+    border-radius: 0 0 30px 30px;
+    border-top: none;
+    margin: -4em auto 2em;
+    padding: 2em;
+}
+
 .desc {
     padding: 1em;
 }
@@ -115,4 +126,26 @@ h2{
 .btn-adm:hover {
     background-color: #2fbf76;
     transition: 0.5s;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    width: 200px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    border: none;
+    background-color: #3ae584;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.5s;
+    font-weight: bolder;
+}
+
+.btn:hover {
+    background-color: #2fbf76;
 }

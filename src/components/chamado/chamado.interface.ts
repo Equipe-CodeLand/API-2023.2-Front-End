@@ -9,6 +9,7 @@ export default interface Chamado {
         texto: string
     },
     hora: string,
+    email: string,
     conversa: Mensagem[],
     descricao: string
 }

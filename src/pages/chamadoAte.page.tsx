@@ -21,8 +21,9 @@ function ChamadosAte() {
                             texto: c.sta_nome
                         },
                         hora: c.cha_inicio,
+                        email: c.user_email,
                         descricao: c.cha_desc,
-                        conversa: []
+                        conversa: [],
                     }
                 })
                 setChamados(chamados)
@@ -57,6 +58,7 @@ function ChamadosAte() {
                                 tema={chamado.tema}
                                 status={chamado.status}
                                 hora={chamado.hora}
+                                email={chamado.email}
                                 conversa={chamado.conversa}
                                 descricao={chamado.descricao}
                                 key={'chamado'+chamado.id}

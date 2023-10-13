@@ -4,7 +4,7 @@ import Header from "../components/header/headerComponent"
 
 function Chamados() {
     let chamados: Array<Chamado> = [
-        {id: 1, nome: 'Henrique Andrade', tema: 'Velocidade da Internet', status: { id: '4', texto: 'Encerrado'}, descricao: '', hora: '26/09/2023 00:59',
+        {id: 1, nome: 'Henrique Andrade', tema: 'Velocidade da Internet', status: { id: '4', texto: 'Encerrado'}, descricao: '', hora: '26/09/2023 00:59',email: 'email@gmail.com',
         conversa: [
             {remetente: 'Maria Silva', texto: `Nas últimas duas semanas, tenho notado ruídos estranhos durante minhas chamadas telefônicas. Esses ruídos tornaram difícil manter conversas claras e consistentes com meus amigos e familiares. Além disso, houve ocasiões em que as chamadas simplesmente caíram de forma inesperada, o que tem sido bastante frustrante.`, role: 'Cliente'},
             {remetente: 'Henrique Andrade', texto: `Olá Maria Silva, lamentamos sinceramente por qualquer inconveniente que isso possa ter causado a você e entendemos a importância de uma conexão telefônica confiável em sua vida cotidiana.
@@ -14,10 +14,10 @@ function Chamados() {
             Em reconhecimento aos problemas que você enfrentou, creditaremos sua próxima fatura com um valor correspondente aos inconvenientes causados pela má qualidade da linha.`, role: 'Atendente'}
         ]
         },
-            {id: 2, nome: 'Alice Nunes', tema: 'Problemas de Conexão', descricao: '', status: { id: '2', texto: 'Em andamento'}, hora: '26/09/2023 00:59',
+            {id: 2, nome: 'Alice Nunes', tema: 'Problemas de Conexão', descricao: '', status: { id: '2', texto: 'Em andamento'}, hora: '26/09/2023 00:59',email: 'email@gmail.com',
             conversa: []
         },
-            {id: 3, nome: 'Luís Oliveira', tema: 'Problemas com fatura', descricao: '', status: { id: '1', texto: 'Não iniciado'}, hora: '26/09/2023 00:59',
+            {id: 3, nome: 'Luís Oliveira', tema: 'Problemas com fatura', descricao: '', status: { id: '1', texto: 'Não iniciado'}, hora: '26/09/2023 00:59',email: 'email@gmail.com',
             conversa: []
         },
     ]
@@ -29,6 +29,7 @@ function Chamados() {
                 tema={chamado.tema}
                 status={chamado.status}
                 hora={chamado.hora}
+                email={chamado.email}
                 conversa={chamado.conversa}
                 descricao=""
             ></ChamadoComponent>

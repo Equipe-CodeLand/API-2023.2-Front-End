@@ -75,6 +75,7 @@ function MeusChamados() {
                                 tema={chamado.tema}
                                 status={chamado.status}
                                 hora={chamado.hora}
+                                email={chamado.email}
                                 conversa={chamado.conversa}
                                 descricao={chamado.descricao}
                                 key={'chamado'+chamado.id}

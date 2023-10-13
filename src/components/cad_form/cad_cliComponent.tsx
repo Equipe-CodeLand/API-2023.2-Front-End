@@ -258,10 +258,10 @@ export default function CadCli(props:CadaCli){
                 Tema:
                 <select className="browser-default" value={tema} onChange={handleTemaChange}>
                     <option value="">Selecione um tema</option>
-                    <option value="velocidade">Velocidade da Internet</option>
-                    <option value="modem">Modem</option>
-                    <option value="conexao">Problemas com conexão</option>
-                    <option value="outros">Outros</option>
+                    <option value="Velocidade da Internet">Velocidade da Internet</option>
+                    <option value="Modem">Modem</option>
+                    <option value="Problemas com conexão">Problemas com conexão</option>
+                    <option value="Outros">Outros</option>
                 </select>
                 <span style={{ color: 'red' }}>{temaError}</span>
             </label>

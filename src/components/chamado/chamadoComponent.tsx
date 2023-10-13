@@ -25,8 +25,10 @@ function ChamadoComponent(props: Chamado) {
             </div>
             <ChamadoDropdown 
             open={open}
+            nome={props.nome}
             conversa={props.conversa}
             descricao={props.descricao}
+            email={props.email}
             ></ChamadoDropdown>
         </div>
     )
