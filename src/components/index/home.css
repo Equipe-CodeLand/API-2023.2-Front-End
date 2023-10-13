@@ -1,0 +1,34 @@
+body{
+    font-style: Helvetica;
+}
+
+h1{
+    font-size: 40px !important;
+}
+
+h4{
+    font-size: 25px !important;
+    text-align: center;
+}
+.links {
+    text-align: center;
+    color: black !important;
+}
+
+.sobre{
+    text-align: center;
+    justify-content: center;
+    width: 80%;
+    margin-left:10%
+}
+
+.sobre h3{
+    font-weight: bold !important;
+    font-size: 30px !important;
+    color:#93B6E4;     
+    flex: 1
+}
+
+.sobre p{
+    flex:1
+}

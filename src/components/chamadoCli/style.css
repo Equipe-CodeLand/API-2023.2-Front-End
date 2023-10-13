@@ -1,0 +1,114 @@
+.chamado {
+    display: flex;
+    align-items: center;
+    height: 6.5em;
+    width: 80vw;
+    border: 2px solid black;
+    border-radius: 30px;
+    margin: 2em auto;
+}
+
+.chamado-cli-dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vw;
+    border: 2px solid black;
+    border-radius: 0 0 30px 30px;
+    border-top: none;
+    margin: -4em auto 2em;
+    padding: 2em 0;
+}
+
+.conteudo-cli {
+    margin: 0;
+    padding: 0 2em;
+}
+
+.texto {
+    padding: 0 1.5em;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-grow: 1;
+}
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 55%;
+}
+
+.status {
+    text-align: center;
+    width: 120px;
+    padding: 1em;
+    border-radius: 30px;
+}
+
+.status-cor1 {
+    border: 2px solid #5BC74A;
+    background-color: #DCFFD7;    
+
+}
+.status-cor2 {
+    border: 2px solid #F0AF09;
+    background-color: #FFF4E0;    
+}
+.status-cor3 {
+    border: 2px solid #ED6B4F;
+    background-color: #FBEDED;   
+}
+
+.icon {
+    width: 2em;
+    height: 2em;
+}
+
+.conteudo-cli {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    width: 95%;
+    margin-left: 30px;
+}
+
+.conteudo-cli h2 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 0;
+    font-size: 25px !important;
+}
+
+.texto-cli {
+    border-left: 2px solid grey;
+    padding-left: 20px;
+    margin-left: 15px;
+}
+
+.btn-cli {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    width: 200px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    border: none;
+    background-color: #f1242f;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.5s;
+    font-weight: bolder;
+}
+
+.btn-cli:hover {
+    background-color: #a11919;
+    transition: 0.5s;
+}
