@@ -1,7 +1,8 @@
 import './style.css'
 import { ChamadoAdmDetalhes } from './chamadoAdm.interface'
 import { useState } from 'react'; // Importe o useState do React
-import axios from 'axios';
+//import axios from 'axios';
+
 
 
 function ChamadoAdmDropdown(props: any) {

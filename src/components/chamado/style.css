@@ -1,3 +1,6 @@
+h2{
+    font-size: 30px !important;
+}
 
 .chamado {
     display: flex;
@@ -19,6 +22,21 @@
     border-top: none;
     margin: -4em auto 2em;
     padding: 2em 0;
+}
+
+.chamado-ate-dropdown{
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    border: 2px solid black;
+    border-radius: 0 0 30px 30px;
+    border-top: none;
+    margin: -4em auto 2em;
+    padding: 2em;
+}
+
+.desc {
+    padding: 1em;
 }
 
 .conteudo {
@@ -50,21 +68,17 @@
     border-radius: 30px;
 }
 
-.status-cor1, 
-.prioridade-cor3 {
-    border: 2px solid #5BC74A;
-    background-color: #DCFFD7;    
-
+.status-1, .status-3, .prioridade-cor1 {
+    border: 2px solid #ED6B4F;
+    background-color: #FBEDED;   
 }
-.status-cor2, 
-.prioridade-cor2 {
+.status-2, .prioridade-cor2 {
     border: 2px solid #F0AF09;
     background-color: #FFF4E0;    
 }
-.status-cor3, 
-.prioridade-cor1 {
-    border: 2px solid #ED6B4F;
-    background-color: #FBEDED;   
+.status-4, .prioridade-cor3 {
+    border: 2px solid #5BC74A;
+    background-color: #DCFFD7;
 }
 
 .icon {
@@ -83,20 +97,12 @@
 
 .conteudo-adm h2 {
     margin: 0;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    font-size: 25px !important;
-}
-
-.email-cliente {
-    padding-top: 20px;
 }
 
 .texto-adm {
     border-left: 2px solid grey;
     padding-left: 20px;
     margin-left: 15px;
-    padding-right: 25px;
 }
 
 .btn-adm {
@@ -115,7 +121,6 @@
     font-size: 1em;
     transition: 0.5s;
     font-weight: bolder;
-    margin-top: 15px;
 }
 
 .btn-adm:hover {
@@ -123,42 +128,24 @@
     transition: 0.5s;
 }
 
-.atendente-table {
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid #ccc;
+.btn {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    width: 200px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    border: none;
+    background-color: #3ae584;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.5s;
+    font-weight: bolder;
 }
 
-.atendente-table th, .atendente-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-}
-
-/* Estilo para as linhas pares da tabela */
-.atendente-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-.botao-verde {
-    background-color: #3ae584; /* Cor de fundo verde */
-    color: white; /* Cor do texto */
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    border: none; /* Remove a borda */
-    border-radius: 10px; /* Bordas arredondadas */
-    cursor: pointer; /* Altera o cursor ao passar o mouse */
-}
-
-/* Estilo de hover para o botão */
-.botao-verde:hover {
-    background-color: #45a049; /* Cor de fundo alterada quando o mouse passa por cima */
-}
-
-.fechar_btn{
-    background-color: #E52323;
-}
-
-.atendente{
-    font-size: 1.75rem;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.btn:hover {
+    background-color: #2fbf76;
 }
