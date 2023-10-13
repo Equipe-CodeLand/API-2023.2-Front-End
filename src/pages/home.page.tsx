@@ -21,13 +21,13 @@ const Home: React.FC<HomeProps> = ({ data }) => {
                 <h4>Escolha o que deseja visualizar:</h4>
             </div>
             <div className="links">
-                <Link to={'/chamados'}>Chamados</Link> <br />
-                <Link to={'/chamados/Adm'}>Chamados Adm</Link> <br />
+                {/*<Link to={'/chamados'}>Chamados</Link> <br />*/}
+                {/*<Link to={'/chamados/Adm'}>Chamados Adm</Link> <br />*/}
                 <Link to={'/cadastroUser'}>Cadastrar Usuário (ADM)</Link> <br />
                 <Link to={'/cadastroCliente'}>Forms Cadastro de Cliente</Link> <br />
-                <Link to={'/chamadoCli'}>Chamados Cli</Link><br />
+                {/*<Link to={'/chamadoCli'}>Chamados Cli</Link><br />*/}
                 <Link to={'/chamado/Ate'}>Chamados Atendente</Link><br />
-                <Link to={'/meusChamados'}>Meus Chamados(atendente)</Link><br />
+                {/*<Link to={'/meusChamados'}>Meus Chamados(atendente)</Link><br />*/}
             </div>
             <div className="sobre">
                 <h3>Sobre</h3>
