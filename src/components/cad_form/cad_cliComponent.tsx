@@ -182,7 +182,7 @@ export default function CadCli(props:CadaCli){
         }
 
         if (mensagem === "" || !validateMensagem(mensagem)) {
-            setMensagemError('Por favor, pdescreva o problema.');
+            setMensagemError('Por favor, descreva o problema.');
             formIsValid = false;
         } else {
             setMensagemError('');

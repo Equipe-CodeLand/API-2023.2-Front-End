@@ -26,10 +26,10 @@ label{
 
 input, select, textarea{
     width: 100%;
-    padding: 15px;
     border: 2px solid #ddd !important;
     border-radius: 10px !important;
     font-size: 1.2rem !important;
+    padding-left: 10px;
 }
 
 button{
@@ -41,4 +41,8 @@ button{
     font-size: 1.2rem;
     cursor: pointer;
     margin-bottom: 2%;
+}
+
+button, html [type="button"], [type="reset"], [type="submit"] {
+    height: 40px;
 }
