@@ -11,7 +11,7 @@ function ChamadosAte() {
     function buscarChamados() {
         axios.get(`http://localhost:5000/ChamadosAtendente`,)
             .then(res => {
-                let chamados = res.data.map((c:any) => {
+                let chamados = res.data.map((c: any) => {
                     return {
                         id: c.cha_id,
                         nome: c.user_nome + ' ' + c.user_sobrenome,
@@ -27,7 +27,7 @@ function ChamadosAte() {
                     }
                 })
                 setChamados(chamados)
-        }) 
+            })
     }
 
     useEffect(() => {
@@ -37,19 +37,19 @@ function ChamadosAte() {
     const link = ["/", "/", "/chamados"] // Link para as páginas
     const link_title = ["Iniciar Chamado", "Problemas Comuns", "Meus Chamados"] // titulo para as paginas
 
-    return(
+    return (
         <div>
-            <Header 
-                link_0 = {link[0]} // Link para as páginas
-                link_1 = {link[1]}
-                link_2 = {link[2]}
-                link_title_0 = {link_title[0]} // titulo para as paginas
-                link_title_1 = {link_title[1]}
-                link_title_2 = {link_title[2]}
+            <Header
+                link_0={link[0]} // Link para as páginas
+                link_1={link[1]}
+                link_2={link[2]}
+                link_title_0={link_title[0]} // titulo para as paginas
+                link_title_1={link_title[1]}
+                link_title_2={link_title[2]}
             />
             {chamados.length > 0 && (
                 <div>
-                    {   chamados.filter(chamado => chamado.status.texto !== 'Encerrado')
+                    {chamados.filter(chamado => chamado.status.texto !== 'Encerrado')
                         .map(chamado => {
                             console.log(chamado)
                             return <ChamadoComponent
@@ -61,10 +61,10 @@ function ChamadosAte() {
                                 email={chamado.email}
                                 conversa={chamado.conversa}
                                 descricao={chamado.descricao}
-                                key={'chamado'+chamado.id}
+                                key={'chamado' + chamado.id}
                             ></ChamadoComponent>
-                    })
-                }
+                        })
+                    }
                 </div>
             )}
         </div>
