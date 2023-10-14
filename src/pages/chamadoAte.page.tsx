@@ -57,7 +57,7 @@ function ChamadosAte() {
                                 nome={chamado.nome}
                                 tema={chamado.tema}
                                 status={chamado.status}
-                                hora={chamado.hora}
+                                hora={new Date(chamado.hora).toLocaleDateString() + " - " + new Date(chamado.hora).toLocaleTimeString()}
                                 email={chamado.email}
                                 conversa={chamado.conversa}
                                 descricao={chamado.descricao}

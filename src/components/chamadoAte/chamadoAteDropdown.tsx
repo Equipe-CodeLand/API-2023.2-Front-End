@@ -8,7 +8,7 @@ function ChamadoAteDropdown(props:any){
         let conversa = props.conversa.map((desc: ChamadoAteDetalhes) =>{
             return(
                 <div className='conteudo'>
-                        <p>{desc.email}</p>
+                        <p className='email-cliente'>{desc.email}</p>
                         <h2>{desc.nome + ' - Cliente'}</h2>
                         <p className='texto-adm'>{desc.desc}</p>
                         <a href={`mailto:${desc.email}`} className='btn'> Iniciar chamado </a>
