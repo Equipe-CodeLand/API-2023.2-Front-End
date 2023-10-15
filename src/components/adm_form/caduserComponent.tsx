@@ -141,6 +141,15 @@ export default function CadUser(props: CadaUser) {
     };    
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+        console.log(`nome: ${nome}`)
+        console.log(`sobrenome: ${sobrenome}`)
+        console.log(`cpf: ${cpf}`)
+        console.log(`telefone: ${telefone}`)
+        console.log(`email: ${email}`)
+        console.log(`tipo: ${tipo}`)
+        console.log(`turno: ${turno}`)
+
         event.preventDefault();
     
         let formIsValid = true;

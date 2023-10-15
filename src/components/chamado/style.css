@@ -1,5 +1,6 @@
 h2{
     font-size: 30px !important;
+    margin: 0 !important;
 }
 
 .chamado {
@@ -103,6 +104,7 @@ h2{
     border-left: 2px solid grey;
     padding-left: 20px;
     margin-left: 15px;
+    margin-bottom: 15px;
 }
 
 .btn-adm {
@@ -129,10 +131,6 @@ h2{
 }
 
 .btn {
-    display: flex;
-    align-items: center;
-    align-self: center;
-    justify-content: center;
     width: 200px;
     height: 40px;
     margin: 0;
@@ -148,4 +146,20 @@ h2{
 
 .btn:hover {
     background-color: #2fbf76;
+}
+
+.email-cliente {
+    padding-top: 15px;
+}
+
+.nome-cliente {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.cont {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
