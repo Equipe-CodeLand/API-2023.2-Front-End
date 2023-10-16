@@ -198,11 +198,10 @@ export default function CadUser(props: CadaUser) {
     
         if (formIsValid) {
             showSuccess();
+            axios.post('http://localhost:5000/cadastroUser',{'nome': nome,'sobrenome':sobrenome,'email':email,'telefone':telefone,'cpf':cpf,'tipo':tipo})
         } else {
             showWarning('Por favor, corrija os campos indicados.');
         }
-
-        axios.post('http://localhost:5000/cadastroUser',{'nome': nome,'sobrenome':sobrenome,'email':email,'telefone':telefone,'cpf':cpf,'tipo':tipo})
     };
     
 
