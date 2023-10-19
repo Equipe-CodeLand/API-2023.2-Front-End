@@ -115,10 +115,6 @@ export default function CadCli(props:CadaCli){
         return telefoneRegex.test(telefone); // Testa o formato do telefone
     }; 
     
-    const validateMensagem = (mensagem: string): boolean => {
-        const mensagemRegex = /^.*$/i;
-        return mensagemRegex.test(mensagem);
-    };    
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -226,7 +222,7 @@ export default function CadCli(props:CadaCli){
             </label>
             <br />
 
-            <input type="submit" value="Enviar" />
+            <button type="submit" value="Enviar">Enviar</button>
         </form>
     )
 

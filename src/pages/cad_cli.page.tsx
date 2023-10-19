@@ -18,7 +18,7 @@ const CadastroCli: React.FC = () => {
                 link_title_2 = {link_title[2]}
                 link_title_3 = {link_title[3]}
             />
-            <h1>Página de cadastro do cliente</h1>
+            <h1>Antes de continuarmos, precisamos <br /> de algumas informações</h1>
             <CadCli nome="" sobrenome="" cpf="" telefone="" email=''/>
         </div>
     )

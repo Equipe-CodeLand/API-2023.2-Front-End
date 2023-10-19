@@ -6,7 +6,6 @@ import cliForm from "./cli_form.interface";
 
 export default function CliForm(props:cliForm){
     const [tema, setTema] = useState(props.tema || '');
-    const [email, setEmail] = useState('');
     const [mensagem, setMensagem] = useState(props.mensagem || '');
     const [isValid, setIsValid] = useState(true);
     const [temaError, setTemaError] = useState('');
@@ -18,7 +17,7 @@ export default function CliForm(props:cliForm){
         setTema(newTema);
     };
 
-    const handleMensagemChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleMensagemChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const newMensagem = e.target.value;
         setMensagem(newMensagem);
     };    
@@ -97,12 +96,12 @@ export default function CliForm(props:cliForm){
 
             <label>
                 Mensagem:
-                <input type="text" value={mensagem} onChange={handleMensagemChange} />
+                <textarea id="input-msg" value={mensagem} onChange={handleMensagemChange} />
                 <span style={{ color: 'red' }}>{mensagemError}</span>
             </label>
             <br />
 
-            <input type="submit" value="Enviar" />
+            <button type="submit" value="Enviar" >Enviar</button>
         </form>
     )
 
