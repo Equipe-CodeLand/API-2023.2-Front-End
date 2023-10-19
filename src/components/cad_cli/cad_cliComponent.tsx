@@ -70,7 +70,7 @@ export default function CadCli(props:CadaCli){
             setIsValid(validateCpf(newCpf));
             setCpfError(''); 
         }
-    };  
+    };    
 
     const handleTelefoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newTelefone = formatTelefone(e.target.value);
@@ -114,6 +114,12 @@ export default function CadCli(props:CadaCli){
         const telefoneRegex = /^\(\d{2}\) \d{4,5}-\d{4}$/;
         return telefoneRegex.test(telefone); // Testa o formato do telefone
     }; 
+    
+    const validateMensagem = (mensagem: string): boolean => {
+        const mensagemRegex = /^.*$/i;
+        return mensagemRegex.test(mensagem);
+    };    
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
     
@@ -153,14 +159,14 @@ export default function CadCli(props:CadaCli){
         } else {
             setEmailError('');
         }
-
+    
         if (formIsValid) {
             showSuccess();
         } else {
             showWarning('Por favor, corrija os campos indicados.');
         }
 
-    axios.post('http://localhost:5000/cadastro/cliente',{'nome': nome,'sobrenome':sobrenome,'email':email,'telefone':telefone,'cpf':cpf/*'tema':tema,'mensagem':mensagem*/})
+        axios.post('http://localhost:5000/cadastro/cliente',{'nome': nome,'sobrenome':sobrenome,'email':email,'telefone':telefone,'cpf':cpf})
     };
     
 
@@ -219,7 +225,9 @@ export default function CadCli(props:CadaCli){
                 <span style={{ color: 'red' }}>{telefoneError}</span>
             </label>
             <br />
-            </form>
+
+            <input type="submit" value="Enviar" />
+        </form>
     )
 
 }
