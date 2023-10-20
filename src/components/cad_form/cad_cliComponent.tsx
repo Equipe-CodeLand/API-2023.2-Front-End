@@ -218,7 +218,7 @@ export default function CadCli(props:CadaCli){
     };
 
     return(
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} id="cliUserForm">
             <label>
                 Nome:
                 <input type="text" value={nome} onChange={handleNomeChange} />
