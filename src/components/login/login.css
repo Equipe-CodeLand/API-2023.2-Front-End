@@ -4,6 +4,7 @@
 :root {
     --Inter: 'Inter', sans-serif;
     --Kadwa: 'Kadwa', serif;
+    --branco_azulado: #e3efff;
     --azul_claro: #AFC8E9;
     --azul: #93B6E4;
 }
@@ -82,6 +83,42 @@ div#login form.login div.loginPassword input#inputLogin:focus,
 div#login form.login div.loginPassword input#inputPassword:focus {
     outline: invert;
     border: 4px solid var(--azul);
+    box-shadow: none;
+}
+
+div#login form.login div.tipoUsuario select.inputTipoUsuario {
+    transition: all 0.5s;
+    margin: 0px 0px 40px 0px;
+    padding: 4px 5px;
+    width: 422px;
+    height: 52px;
+    border-radius: 15px;
+    font-family: var(--Inter);
+    font-size: 1em;
+    font-weight: 600;
+    background-color: var(--branco_azulado);
+    border: 2px solid var(--azul_claro) ;
+}
+
+div#login form.login div.tipoUsuario select.inputTipoUsuarioColor {
+    color: #8b8b8b;
+}
+
+div#login form.login div.tipoUsuario select.inputTipoUsuario option {
+    color: #202020;
+    font-family: var(--Inter);
+    font-size: 0.9em;
+    border-radius: 5px;
+    font-weight: 600;
+    background-color: var(--branco_azulado);
+    border: 2px solid var(--azul_claro) ;
+}
+
+div#login form.login div.tipoUsuario select.inputTipoUsuario option.nullValue {
+    color: #8b8b8b;
+}
+
+div#login form.login div.tipoUsuario select.inputTipoUsuario:focus {
     box-shadow: none;
 }
 

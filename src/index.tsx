@@ -15,7 +15,7 @@ import Home from './pages/home.page';
 import ChamadoCli from './pages/chamadoCli.page';
 import ChamadosAte from './pages/chamadoAte.page';
 import MeusChamados from './pages/meusChamados.page';
-import Login from './pages/login.page';
+import LoginPage from './pages/login.page';
 
 const router = createBrowserRouter([
   {
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
   },
   {
     path:"/login",
-    element:<Login />
+    element:<LoginPage />
   }
 
 ]);
