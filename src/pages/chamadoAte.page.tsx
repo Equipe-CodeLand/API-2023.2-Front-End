@@ -7,32 +7,36 @@ import axios from "axios"
 function ChamadosAte() {
     const [chamados, setChamados] = useState<Chamado[]>([])
 
-
     function buscarChamados() {
-        axios.get(`http://localhost:5000/ChamadosAtendente`,)
-            .then(res => {
-                let chamados = res.data.map((c: any) => {
-                    return {
-                        id: c.cha_id,
-                        nome: c.user_nome + ' ' + c.user_sobrenome,
-                        tema: c.cha_tema,
-                        status: {
-                            id: c.sta_id,
-                            texto: c.sta_nome
-                        },
-                        hora: c.cha_inicio,
-                        email: c.user_email,
-                        descricao: c.cha_desc,
-                        conversa: [],
-                    }
-                })
-                setChamados(chamados)
-            })
+      axios.get(`http://localhost:5000/chamados`)
+        .then(res => {
+          console.log(res);
+          let chamados = res.data.map((c: any) => {
+            let nomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.nome;
+            let sobrenomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.sobrenome;
+  
+            console.log(c.status);
+          
+            return {
+              id: c.id,
+              nome: (nomeCliente && sobrenomeCliente) ? nomeCliente + ' ' + sobrenomeCliente : '',
+              tema: c.tema,
+              status: {
+                id: c.status.id,
+                texto: c.status.nome
+              },
+              hora: c.inicio,
+              fim: c.final
+            }                
+          })
+          console.log(chamados);
+          setChamados(chamados);
+        });
     }
-
+  
     useEffect(() => {
-        buscarChamados()
-    }, [])
+      buscarChamados();
+    }, []);
 
     const link = ["/", "/", "/chamados"] // Link para as páginas
     const link_title = ["Iniciar Chamado", "Problemas Comuns", "Meus Chamados"] // titulo para as paginas
