@@ -1,15 +1,36 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import "./login.css"
 import logo from "../../static/images/logo.svg"
 import LoginInterface from "./login_interface"
 import { act } from "react-dom/test-utils"
+import axios from "axios"
 
 export default function Login(props:LoginInterface){
     const [tipoUsuario, setTipoUsuario] = useState(props.tipo_usuario || '')
     const [usuario, setUsuario] = useState(props.usuario || '')
     const [senha, setSenha] = useState(props.senha || '')
 
+    const [usuarios, setUsuarios] = useState<LoginInterface[]>([])
+
     const [active, setMode] = useState(true);
+
+    function buscarUsuario(user_email:string, user_senha:string) {
+        axios.get (`http://localhost:5000/login/${user_email}`,).then(res => {
+            if (res.data == null) {
+                console.log("Email incorreto")
+            } else {
+                console.log("Email correto")
+                console.log(res.data.email)
+                if (res.data.senha == user_senha) {
+                    console.log("Senha correta")
+                } else {
+                    console.log("Senha incorreta")
+                    console.log(res.data.senha)
+                    console.log(user_senha)
+                }
+            }
+        })
+    }
 
     // Função que envia o formulario
 
@@ -17,10 +38,8 @@ export default function Login(props:LoginInterface){
         e.preventDefault();
 
         // adicione aqui o código para enviar para o backend
-
-        console.log(usuario);
-        console.log(senha);
-        console.log(tipoUsuario);
+        
+        console.log(buscarUsuario(usuario, senha))
     }
 
     // Função que muda o valor do Tipo de Usuario
@@ -63,7 +82,7 @@ export default function Login(props:LoginInterface){
             <form onSubmit={handleSubmit} className="login">
                 
                 <div className="loginPassword">
-                    <input value={usuario} type="text" id="inputLogin" className="inputLogin" placeholder="Usuário" onChange={handleUsuarioChange}/>
+                    <input value={usuario} type="email" id="inputLogin" className="inputLogin" placeholder="Usuário" onChange={handleUsuarioChange}/>
                     <input value={senha} type="password" id="inputPassword" className="inputPassword input" placeholder="Senha" onChange={handleSenhaChange}/>
                 </div>
                 <div className="tipoUsuario">
