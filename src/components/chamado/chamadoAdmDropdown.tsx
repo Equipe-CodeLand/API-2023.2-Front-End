@@ -1,9 +1,7 @@
-import './style.css'
-import { ChamadoAdmDetalhes } from './chamadoAdm.interface'
-import { useState } from 'react'; // Importe o useState do React
-//import axios from 'axios';
-
-
+import React, { useState } from 'react';
+import { ChamadoAdmDetalhes } from './chamadoAdm.interface';
+import axios from 'axios'; // Importe o axios
+import './style.css';
 
 function ChamadoAdmDropdown(props: any) {
     const [mostrarPopup, setMostrarPopup] = useState(false); // Estado para controlar a exibição do pop-up
@@ -15,7 +13,18 @@ function ChamadoAdmDropdown(props: any) {
     const fecharPopup = () => {
         setMostrarPopup(false);
     }
-    
+
+    const atribuirAtendente = (atendenteId: number) => {
+        // Aqui você pode usar o axios para fazer uma requisição
+        axios.post(`http://localhost:5000/atribuirAtendente/${atendenteId}`, { chamadoId: props.chamadoId })
+            .then(response => {
+                // Atualize o estado ou faça qualquer outra ação necessária
+                console.log("Atendente atribuído com sucesso!");
+            })
+            .catch(error => {
+                console.error("Erro ao atribuir atendente:", error);
+            });
+    }
 
     if (props.open) {
         let conversa = props.conversa.map((msg: ChamadoAdmDetalhes) => {
@@ -25,7 +34,6 @@ function ChamadoAdmDropdown(props: any) {
                         <p>{msg.email}</p>
                         <h2>{msg.nome + ' - Cliente'}</h2>
                         <p className='texto-adm'>{msg.msg}</p>
-
                     </div>
                     <button className='btn-adm' onClick={abrirPopup}>Atribuir atendente</button>
                 </>
@@ -43,68 +51,35 @@ function ChamadoAdmDropdown(props: any) {
                                 <table className="atendente-table">
                                     <thead>
                                         <tr>
-                                        <th>Atendente</th>
-                                        <th>Chamados</th>
-                                        <th>Atribuir Atendente</th>
+                                            <th>Atendente</th>
+                                            <th>Chamados</th>
+                                            <th>Atribuir Atendente</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                        <td>Lucas Almeida</td>
-                                        <td>0 Chamado(s) ativo(s) no momento</td>
-                                        <td>
-                                            <button className="botao-verde" >Atribuir atendente</button>
-                                        </td>
+                                            <td>Lucas Almeida</td>
+                                            <td>0 Chamado(s) ativo(s) no momento</td>
+                                            <td>
+                                                <button className="botao-verde" onClick={() => atribuirAtendente(1)}>Atribuir atendente</button>
+                                            </td>
                                         </tr>
-                                        <tr>
-                                        <td>Matias Pereira</td>
-                                        <td>1 Chamado(s) ativo(s) no momento</td>
-                                        <td>
-                                            <button className="botao-verde">Atribuir atendente</button>
-                                        </td>
-                                        </tr>
-                                        <tr>
-                                        <td>Daniel Costa</td>
-                                        <td>2 Chamado(s) ativo(s) no momento</td>
-                                        <td>
-                                            <button className="botao-verde">Atribuir atendente</button>
-                                        </td>
-                                        </tr>
-                                        <tr>
-                                        <td>Felipe Ribeiro</td>
-                                        <td>3 Chamado(s) ativo(s) no momento</td>
-                                        <td>
-                                            <button className="botao-verde">Atribuir atendente</button>
-                                        </td>
-                                        </tr>
-                                        <tr>
-                                        <td>Rafaela Costa</td>
-                                        <td>4 Chamado(s) ativo(s) no momento</td>
-                                        <td>
-                                            <button className="botao-verde">Atribuir atendente</button>
-                                        </td>
-                                        </tr>
-                                        <tr>
-                                        <td>Isadora Barbosa</td>
-                                        <td>4 Chamado(s) ativo(s) no momento</td>
-                                        <td>
-                                            <button className="botao-verde">Atribuir atendente</button>
-                                        </td>
-                                        </tr>
+                                        {/* (outros atendentes) */}
                                     </tbody>
-                                    </table>
-                                    <br></br>
+                                </table>
+                                <br></br>
                                 <button className='fechar_btn' onClick={fecharPopup}>Fechar</button>
                             </div>
                         </div>
                     )}
                 </div>
             )
-        } return (<></>)
-    } return (
+        } 
+        return (<></>)
+    } 
+    return (
         <></>
     )
-
 }
 
-export default ChamadoAdmDropdown
+export default ChamadoAdmDropdown;

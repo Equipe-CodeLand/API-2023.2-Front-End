@@ -22,7 +22,7 @@ const Home: React.FC<HomeProps> = ({ data }) => {
             </div>
             <div className="links">
                 {/*<Link to={'/chamados'}>Chamados</Link> <br />*/}
-                {/*<Link to={'/chamados/Adm'}>Chamados Adm</Link> <br />*/}
+                <Link to={'/chamados/Adm'}>Chamados Adm</Link> <br />
                 <Link to={'/cadastroUser'}>Cadastrar Usuário (ADM)</Link> <br />
                 <Link to={'/cadastroCliente'}>Forms Cadastro de Cliente</Link> <br />
                 {/*<Link to={'/chamadoCli'}>Chamados Cli</Link><br />*/}
