@@ -8,6 +8,10 @@ export default interface Chamado {
         id: string,
         texto: string
     },
+    prioridade: {
+        id: number,
+        value: string
+    },
     hora: string,
     email: string,
     conversa: Mensagem[],

@@ -74,6 +74,7 @@ function MeusChamados() {
                                 nome={chamado.nome}
                                 tema={chamado.tema}
                                 status={chamado.status}
+                                prioridade={chamado.prioridade}
                                 hora={chamado.hora}
                                 email={chamado.email}
                                 conversa={chamado.conversa}

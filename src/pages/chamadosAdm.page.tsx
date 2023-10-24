@@ -16,7 +16,7 @@ export default function ChamadosAdm() {
           let nomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.nome;
           let sobrenomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.sobrenome;
 
-          console.log(c.status);
+          console.log(c.id);
         
           return {
             id: c.id,
@@ -25,6 +25,10 @@ export default function ChamadosAdm() {
             status: {
               id: c.status.id,
               texto: c.status.nome
+            },
+            prioridade:{
+              id: c.prioridade.id,
+              value: c.prioridade.nome
             },
             hora: c.inicio,
             fim: c.final
@@ -61,10 +65,10 @@ export default function ChamadosAdm() {
                 nome={chamado.nome}
                 tema={chamado.tema}
                 status={chamado.status}
+                prioridade = {chamado.prioridade}
                 hora={new Date(chamado.hora).toLocaleDateString() + " - " + new Date(chamado.hora).toLocaleTimeString()}
                 conversa={chamado.conversa ? chamado.conversa : []}
                 key={'chamado' + chamado.id}
-                prioridade={{ id: 0, value: "" }}
               />
               {chamado.conversa && chamado.conversa.length > 0 && (
                 <ChamadoAdmDropdown open={true} conversa={chamado.conversa} /> 

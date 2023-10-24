@@ -2,7 +2,7 @@ import ChamadoComponent from "../components/chamado/chamadoComponent"
 import Chamado from "../components/chamado/chamado.interface"
 import Header from "../components/header/headerComponent"
 
-function Chamados() {
+/*function Chamados() {
     let chamados: Array<Chamado> = [
         {id: 1, nome: 'Henrique Andrade', tema: 'Velocidade da Internet', status: { id: '4', texto: 'Encerrado'}, descricao: '', hora: '26/09/2023 00:59',email: 'email@gmail.com',
         conversa: [
@@ -54,3 +54,4 @@ function Chamados() {
 }
 
 export default Chamados
+*/

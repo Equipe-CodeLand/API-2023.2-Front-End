@@ -1,4 +1,5 @@
 export interface ChamadoAte{
+    id: number,
     nome: string,
     tema: string,
     status: {
