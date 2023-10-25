@@ -3,7 +3,7 @@ export interface ChamadoAte{
     nome: string,
     tema: string,
     status: {
-        id: string,
+        id: number,
         texto: string
     }
     prioridade: {

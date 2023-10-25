@@ -4,9 +4,11 @@ import Header from "../components/header/headerComponent";
 import ChamadoAdmComponent from "../components/chamado/chamadoAdmComponent";
 import { ChamadoAdm, ChamadoAdmDetalhes } from "../components/chamado/chamadoAdm.interface";
 import ChamadoAdmDropdown from "../components/chamado/chamadoAdmDropdown";
+import ChamadoAteComponent from "../components/chamadoAte/chamadoAteComponent";
+import { ChamadoAte } from "../components/chamadoAte/chamadoAte.interface";
 
-export default function ChamadosAdm() {
-  const [chamados, setChamados] = useState<ChamadoAdm[]>([]);
+export default function ChamadosAte() {
+  const [chamados, setChamados] = useState<ChamadoAte[]>([]);
 
   function buscarChamados() {
     axios.get(`http://localhost:5000/chamados`)
@@ -58,18 +60,18 @@ export default function ChamadosAdm() {
         <div>
           {chamados.map(chamado => (
             <div key={'chamado' + chamado.id}>
-              <ChamadoAdmComponent
+              <ChamadoAteComponent
                 id={chamado.id}
                 nome={chamado.nome}
                 tema={chamado.tema}
                 status={chamado.status}
                 prioridade = {chamado.prioridade}
                 hora={new Date(chamado.hora).toLocaleDateString() + " - " + new Date(chamado.hora).toLocaleTimeString()}
-                conversa={chamado.conversa ? chamado.conversa : []}
+                descricao={chamado.descricao ? chamado.descricao : []}
                 key={'chamado' + chamado.id}
               />
-              {chamado.conversa && chamado.conversa.length > 0 && (
-                <ChamadoAdmDropdown open={false} conversa={chamado.conversa} /> 
+              {chamado.descricao && chamado.descricao.length > 0 && (
+                <ChamadoAdmDropdown open={false} conversa={chamado.descricao} /> 
               )}
             </div>
           ))}
