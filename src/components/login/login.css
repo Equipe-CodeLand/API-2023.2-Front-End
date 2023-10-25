@@ -7,6 +7,9 @@
     --branco_azulado: #e3efff;
     --azul_claro: #AFC8E9;
     --azul: #93B6E4;
+    --error_border: #A94442;
+    --error_background: #F2DEDE;
+    --error_placeholder: #a9444286;
 }
 
 * {
@@ -62,10 +65,10 @@ div#login form.login div.loginPassword {
     align-items: center;
 }
 
-div#login form.login div.loginPassword input#inputLogin, 
-div#login form.login div.loginPassword input#inputPassword {
+div#login form.login div.loginPassword input.inputLogin, 
+div#login form.login div.loginPassword input.inputPassword {
     transition: all 0.5s;
-    margin: 0px 0px 40px 0px;
+    margin: 0px;
     padding: 4px 9px;
     width: 400px;
     height: 40px;
@@ -74,21 +77,46 @@ div#login form.login div.loginPassword input#inputPassword {
     border: 2px solid var(--azul_claro) ;
 }
 
-div#login form.login div.loginPassword input#inputLogin::placeholder, 
-div#login form.login div.loginPassword input#inputPassword::placeholder {
+div#login form.login div.loginPassword input.inputLogin::placeholder, 
+div#login form.login div.loginPassword input.inputPassword::placeholder {
     color: #8b8b8b;
 }
 
-div#login form.login div.loginPassword input#inputLogin:focus,
-div#login form.login div.loginPassword input#inputPassword:focus {
+div#login form.login div.loginPassword input.error::placeholder {
+    color: var(--error_border);
+}
+
+div.errorText {
+    align-self: left;
+    height: 10px;
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 35px;
+    color: var(--error_border);
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+}
+
+div#login form.login div.loginPassword input.inputLogin:focus,
+div#login form.login div.loginPassword input.inputPassword:focus {
     outline: invert;
     border: 4px solid var(--azul);
     box-shadow: none;
 }
 
+div#login form.login div.tipoUsuario div.select {
+    transition: all 0.5s;
+    height: auto;
+    width: auto;
+    border: 2px solid var(--azul_claro) ;
+    padding: -10;
+    border-radius: 15px;
+    background-color: var(--branco_azulado);
+}
+
 div#login form.login div.tipoUsuario select.inputTipoUsuario {
     transition: all 0.5s;
-    margin: 0px 0px 40px 0px;
     padding: 4px 5px;
     width: 422px;
     height: 52px;
@@ -96,8 +124,8 @@ div#login form.login div.tipoUsuario select.inputTipoUsuario {
     font-family: var(--Inter);
     font-size: 1em;
     font-weight: 600;
-    background-color: var(--branco_azulado);
-    border: 2px solid var(--azul_claro) ;
+    background-color: transparent;
+    border: 2px solid transparent ;
 }
 
 div#login form.login div.tipoUsuario select.inputTipoUsuarioColor {
@@ -111,18 +139,19 @@ div#login form.login div.tipoUsuario select.inputTipoUsuario option {
     border-radius: 5px;
     font-weight: 600;
     background-color: var(--branco_azulado);
-    border: 2px solid var(--azul_claro) ;
+    border: 3px solid var(--azul_claro) ;
 }
 
 div#login form.login div.tipoUsuario select.inputTipoUsuario option.nullValue {
     color: #8b8b8b;
 }
 
-div#login form.login div.tipoUsuario select.inputTipoUsuario:focus {
-    box-shadow: none;
+div#login form.login div.tipoUsuario select.inputTipoUsuario::selection {
+    outline: invert;
 }
 
 div#login form.login div.button {
+    margin-top: 10px;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -152,4 +181,15 @@ div#login form.login div.button input#inputButton:active {
     width: 142px;
     height: 38px;
     font-size: 0.95em;
+}
+
+/* CSS DO ERROR */
+
+input.error, div.error {
+    background-color: var(--error_background) !important;
+    border: 2px solid var(--error_border) !important;
+}
+
+div#login form.login div.tipoUsuario div.select.error select.inputTipoUsuarioColor {
+    color: var(--error_placeholder);
 }

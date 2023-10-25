@@ -10,26 +10,76 @@ export default function Login(props:LoginInterface){
     const [usuario, setUsuario] = useState(props.usuario || '')
     const [senha, setSenha] = useState(props.senha || '')
 
-    const [usuarios, setUsuarios] = useState<LoginInterface[]>([])
-
     const [active, setMode] = useState(true);
 
-    function buscarUsuario(user_email:string, user_senha:string) {
-        axios.get (`http://localhost:5000/login/${user_email}`,).then(res => {
-            if (res.data == null) {
-                console.log("Email incorreto")
+    const [errorLogin, setErrorLogin] = useState(false);
+    const [errorPassword, setErrorPassword] = useState(false);
+    const [errorType, setErrorType] = useState(false)
+
+    var [loginErrorText, setLoginErrorText] = useState("")
+    var [passwordErrorText, setPasswordErrorText] = useState("")
+    var [typeErrorText, setTypeErrorText] = useState("")
+
+    function authentificarUser() {
+        // authentificar usuario
+        alert(tipoUsuario)
+    }
+
+    function usuarioExistente(type: string, user_email:string, user_senha:string) {
+        axios.get (`http://localhost:5000/login/${user_email}/${user_senha}/${type}`,).then(res => {
+            console.log(res.data)
+            if (!res.data.validUser) {
+                loginError("Usuário não encontrado")
             } else {
-                console.log("Email correto")
-                console.log(res.data.email)
-                if (res.data.senha == user_senha) {
-                    console.log("Senha correta")
+                if (!res.data.validPassword) {
+                    passwordError("Senha incorreta")
+
                 } else {
-                    console.log("Senha incorreta")
-                    console.log(res.data.senha)
-                    console.log(user_senha)
+                    if (!res.data.validType) {
+                        loginError("Usuário não encontrado")
+                    } else {
+                        allSucess()
+                        authentificarUser()
+                    }
                 }
             }
         })
+    }
+
+    function loginError(mensagem:string) {
+        setErrorLogin(true)
+        setErrorPassword(false)
+        setErrorType(false)
+        setLoginErrorText(mensagem)
+        setPasswordErrorText("")
+        setTypeErrorText("")
+    }
+
+    function passwordError(mensagem:string) {
+        setErrorLogin(false)
+        setErrorPassword(true)
+        setErrorType(false)
+        setLoginErrorText("")
+        setPasswordErrorText(mensagem)
+        setTypeErrorText("")
+    }
+
+    function typeError(mensagem:string) {
+        setErrorLogin(false)
+        setErrorPassword(false)
+        setErrorType(true)
+        setLoginErrorText("")
+        setPasswordErrorText("")
+        setTypeErrorText(mensagem)
+    }
+
+    function allSucess() {
+        setErrorLogin(false)
+        setErrorPassword(false)
+        setErrorType(false)
+        setLoginErrorText("")
+        setPasswordErrorText("")
+        setTypeErrorText("")
     }
 
     // Função que envia o formulario
@@ -39,7 +89,16 @@ export default function Login(props:LoginInterface){
 
         // adicione aqui o código para enviar para o backend
         
-        console.log(buscarUsuario(usuario, senha))
+        if (usuario == "") {
+            loginError("Insira um usuário")
+        } else if (senha == "") {
+            passwordError("Insira uma senha")
+        } else if (tipoUsuario == "") {
+            typeError("Selecione um tipo de usuário")
+        } else {
+            allSucess()
+            usuarioExistente(tipoUsuario, usuario, senha)
+        }
     }
 
     // Função que muda o valor do Tipo de Usuario
@@ -82,16 +141,22 @@ export default function Login(props:LoginInterface){
             <form onSubmit={handleSubmit} className="login">
                 
                 <div className="loginPassword">
-                    <input value={usuario} type="email" id="inputLogin" className="inputLogin" placeholder="Usuário" onChange={handleUsuarioChange}/>
-                    <input value={senha} type="password" id="inputPassword" className="inputPassword input" placeholder="Senha" onChange={handleSenhaChange}/>
+                    <input value={usuario} type="email" id="inputLogin" className={errorLogin ? "inputLogin error" : "inputLogin"} placeholder="Usuário" onChange={handleUsuarioChange}/>
+                    <div className="errorText">{loginErrorText}</div>
+
+                    <input value={senha} type="password" id="inputPassword" className={errorPassword ? "inputPassword error" : "inputPassword"} placeholder="Senha" onChange={handleSenhaChange}/>
+                    <div className="errorText">{passwordErrorText}</div>
                 </div>
                 <div className="tipoUsuario">
-                    <select className={active ? "inputTipoUsuarioColor inputTipoUsuario browser-default" : "inputTipoUsuario browser-default"} value={tipoUsuario} onChange={handleTipoUsuario} onClick={handleTipoUsuarioColor}>
-                        <option value="" className="nullValue">- Selecione uma opção -</option>
-                        <option value="cliente">Cliente</option>
-                        <option value="tecnico">Técnico</option>
-                        <option value="administrador">Administrador</option>
-                    </select>
+                    <div className={errorType ? "select error" : "select"}>
+                        <select className={active ? "inputTipoUsuarioColor inputTipoUsuario browser-default" : "inputTipoUsuario browser-default"} value={tipoUsuario} onChange={handleTipoUsuario} onClick={handleTipoUsuarioColor}>
+                            <option value="" className="nullValue">- Selecione uma opção -</option>
+                            <option value="cliente">Cliente</option>
+                            <option value="atendente">Atendente</option>
+                            <option value="administrador">Administrador</option>
+                        </select>
+                    </div>
+                    <div className="errorText">{typeErrorText}</div>
                 </div>
                 <div className="button">
                     <input type="submit" id="inputButton" value="Entrar" />
