@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import "./login.css"
 import logo from "../../static/images/logo.svg"
 import LoginInterface from "./login_interface"
-import { act } from "react-dom/test-utils"
 import axios from "axios"
 
 export default function Login(props:LoginInterface){
@@ -22,22 +21,23 @@ export default function Login(props:LoginInterface){
 
     function authentificarUser() {
         // authentificar usuario
-        alert(tipoUsuario)
+        alert("Usuário autentificado")
     }
 
     function usuarioExistente(type: string, user_email:string, user_senha:string) {
         axios.get (`http://localhost:5000/login/${user_email}/${user_senha}/${type}`,).then(res => {
-            console.log(res.data)
-            if (!res.data.validUser) {
+            if (!res.data.validUser) { // se o usuario não for valido
                 loginError("Usuário não encontrado")
+                return(false)
             } else {
-                if (!res.data.validPassword) {
-                    passwordError("Senha incorreta")
-
+                if (!res.data.validType) { // se o tipo não for valido
+                    loginError("Usuário não encontrado")
+                    return(false)
                 } else {
-                    if (!res.data.validType) {
-                        loginError("Usuário não encontrado")
-                    } else {
+                    if (!res.data.validPassword) { // se a senha não for valida
+                        passwordError("Senha incorreta")
+                        return(false)
+                    } else { // se tudo estiver certo
                         allSucess()
                         authentificarUser()
                     }
@@ -46,7 +46,7 @@ export default function Login(props:LoginInterface){
         })
     }
 
-    function loginError(mensagem:string) {
+    function loginError(mensagem:string) { // função para mostrar o erro de login
         setErrorLogin(true)
         setErrorPassword(false)
         setErrorType(false)
@@ -55,7 +55,7 @@ export default function Login(props:LoginInterface){
         setTypeErrorText("")
     }
 
-    function passwordError(mensagem:string) {
+    function passwordError(mensagem:string) { // função para mostrar erro de senha
         setErrorLogin(false)
         setErrorPassword(true)
         setErrorType(false)
@@ -64,7 +64,7 @@ export default function Login(props:LoginInterface){
         setTypeErrorText("")
     }
 
-    function typeError(mensagem:string) {
+    function typeError(mensagem:string) { // função para mostrar erro de tipo
         setErrorLogin(false)
         setErrorPassword(false)
         setErrorType(true)
@@ -73,7 +73,7 @@ export default function Login(props:LoginInterface){
         setTypeErrorText(mensagem)
     }
 
-    function allSucess() {
+    function allSucess() { // função para zerar os erros
         setErrorLogin(false)
         setErrorPassword(false)
         setErrorType(false)
@@ -86,18 +86,16 @@ export default function Login(props:LoginInterface){
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        // adicione aqui o código para enviar para o backend
         
-        if (usuario == "") {
+        if (usuario === "") {
             loginError("Insira um usuário")
-        } else if (senha == "") {
+        } else if (senha === "") {
             passwordError("Insira uma senha")
-        } else if (tipoUsuario == "") {
+        } else if (tipoUsuario === "") {
             typeError("Selecione um tipo de usuário")
         } else {
             allSucess()
-            usuarioExistente(tipoUsuario, usuario, senha)
+            usuarioExistente(tipoUsuario, usuario, senha) // perguntar se o usuario existe
         }
     }
 
@@ -109,7 +107,7 @@ export default function Login(props:LoginInterface){
     }
 
     const handleTipoUsuarioColor = () => {
-        if (tipoUsuario != "") {
+        if (tipoUsuario !== "") {
             setMode(false)
         } else {
             setMode(true)
