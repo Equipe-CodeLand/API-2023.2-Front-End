@@ -6,7 +6,7 @@ export interface ChamadoCli {
         texto: string
     }
     hora: string,
-    conversa: ChamadoCliDetalhes[]
+    descricao: ChamadoCliDetalhes[]
 }
 
 export interface ChamadoCliDetalhes {
