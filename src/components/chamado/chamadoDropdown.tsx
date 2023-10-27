@@ -1,27 +1,62 @@
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react'
+import { useState, useEffect } from 'react'
 import './style.css'
+import Mensagem from './mensagem.interface';
+import axios from 'axios';
 
 function ChamadoDropdown(props: any) {
-    if (props.open) {
-        let thread = (
-            <div className='container-dropdown'>
-                <p className='email-cliente'>{'E-mail: ' + props.email}</p>
-                <h2 className='nome-cliente'>{props.nome}</h2>
-                <p className='texto-adm'>{props.descricao}</p>
-                <div className="cont">
-                    <a href={`mailto:${props.email}`} className='btn'> Iniciar chamado </a>
-                </div>
-            </div>
-        );
-        console.log(props);
 
-        if (props.descricao.length > 0) {
-            return (
-                <div className="chamado-ate-dropdown">
-                    {thread}
+    const [mensagens, setMensagens] = useState<Mensagem[]>([])
+
+    function buscarMensagens() {
+        axios.get(`http://localhost:5000/chamados/${props.id}/mensagens`)
+            .then(res => {
+                let mensagens = res.data.map((msg: any) => {
+                    let nome = msg.usuario && msg.usuario.nome;
+                    let sobrenome = msg.usuario && msg.usuario.sobrenome;
+                    
+                    return {
+                        id: msg.id,
+                        usuario: (nome && sobrenome) ? nome + ' ' + sobrenome : '',
+                        horaEnvio: new Date(msg.hora).toLocaleDateString() + " - " + new Date(msg.hora).toLocaleTimeString(),
+                        texto: msg.texto,
+                        tipoUsuario: msg.tipoUsuario
+                    }
+                })
+                setMensagens(mensagens);
+        }) 
+    }
+
+    useEffect(() => {
+        buscarMensagens()
+    }, [])
+
+    if (props.open) {
+        let thread = mensagens.map(msg => {
+            return(
+                <div key={'msg'+msg.id}>
+                    <h2 className='nome-cliente'>{msg.usuario + ' - ' + msg.tipoUsuario}</h2>
+                    <p className='texto-adm'>{msg.texto}</p>
                 </div>
             )
-        } return (<></>)
+        })
+
+       
+        return (
+                <div className="chamado-ate-dropdown">
+                    <p className='email-cliente'>{'E-mail: ' + props.email}</p>                
+                    {thread}
+                    {/* colocar caixa de  e botão de enviar se for usuario com id incluso no chamado e o chamado estiver em andamento*/}
+                    {/* colocar botões de encerrar chamada se for atendente e chamado estiver em andamento */}
+                    <div className="cont">
+                        {(props.tipoUsuario === 'ATENDENTE' && props.status.id == 1) && 
+                            <a href={`mailto:${props.email}`} className='btn'> Iniciar chamado </a>
+                        }
+                        {(props.tipoUsuario === 'ADMIN' && props.status.id == 1) &&
+                            <button className='btn-adm'>Atribuir atendente</button>
+                        }
+                    </div>
+                </div>
+            )
     } return (
         <></>
     )

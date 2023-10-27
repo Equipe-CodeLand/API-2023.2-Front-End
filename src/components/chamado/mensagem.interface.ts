@@ -1,5 +1,7 @@
-export default interface Mensagem{
-    remetente: string,
+export default interface Mensagem {
+    id: number,
+    usuario: string,
     texto: string,
-    role: string
+    tipoUsuario: string,
+    horaEnvio: string
 }
