@@ -16,12 +16,15 @@ export default function ChamadosAdm() {
           let nomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.nome;
           let sobrenomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.sobrenome;
 
-          console.log(c.id);
+          console.log(c.tema.id);
         
           return {
             id: c.id,
             nome: (nomeCliente && sobrenomeCliente) ? nomeCliente + ' ' + sobrenomeCliente : '',
-            tema: c.tema,
+            tema:{
+              id: c.tema.id,
+              texto: c.tema.nome
+            },
             status: {
               id: c.status.id,
               texto: c.status.nome
@@ -58,7 +61,8 @@ export default function ChamadosAdm() {
       />
       {chamados.length > 0 && (
         <div>
-          {chamados.map(chamado => (
+          {chamados.map(chamado => {
+          return (
             <div key={'chamado' + chamado.id}>
               <ChamadoAdmComponent
                 id={chamado.id}
@@ -74,7 +78,8 @@ export default function ChamadosAdm() {
                 <ChamadoAdmDropdown open={true} conversa={chamado.conversa} /> 
               )}
             </div>
-          ))}
+          )
+        })}
         </div>
       )}
     </div>

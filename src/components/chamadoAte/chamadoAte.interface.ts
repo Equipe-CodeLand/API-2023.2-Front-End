@@ -1,7 +1,10 @@
 export interface ChamadoAte{
     id: number,
     nome: string,
-    tema: string,
+    tema: {
+        id: number,
+        texto: string
+    },
     status: {
         id: number,
         texto: string
@@ -16,6 +19,7 @@ export interface ChamadoAte{
 }
 
 export interface ChamadoAteDetalhes {
+    open: any
     email: string,
     desc: string,
     nome: string

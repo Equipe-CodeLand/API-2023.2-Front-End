@@ -1,7 +1,10 @@
 export interface ChamadoAdm {
     id: number
     nome: string,
-    tema: string,
+    tema: {
+        id: number,
+        texto: string
+    },
     status: {
         id: number,
         texto: string

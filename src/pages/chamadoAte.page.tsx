@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/header/headerComponent";
-import ChamadoAdmComponent from "../components/chamado/chamadoAdmComponent";
-import { ChamadoAdm, ChamadoAdmDetalhes } from "../components/chamado/chamadoAdm.interface";
-import ChamadoAdmDropdown from "../components/chamado/chamadoAdmDropdown";
-import ChamadoAteComponent from "../components/chamadoAte/chamadoAteComponent";
 import { ChamadoAte } from "../components/chamadoAte/chamadoAte.interface";
+import ChamadoAteComponent from "../components/chamadoAte/chamadoAteComponent";
+import ChamadoAteDropdown from "../components/chamadoAte/chamadoAteDropdown";
 
-export default function ChamadosAte() {
+export default function ChamadosAdm() {
   const [chamados, setChamados] = useState<ChamadoAte[]>([]);
 
   function buscarChamados() {
@@ -21,7 +19,10 @@ export default function ChamadosAte() {
           return {
             id: c.id,
             nome: (nomeCliente && sobrenomeCliente) ? nomeCliente + ' ' + sobrenomeCliente : '',
-            tema: c.tema,
+            tema:{
+              id: c.tema.id,
+              texto: c.tema.nome
+            },
             status: {
               id: c.status.id,
               texto: c.status.nome
@@ -58,7 +59,8 @@ export default function ChamadosAte() {
       />
       {chamados.length > 0 && (
         <div>
-          {chamados.map(chamado => (
+          {chamados.map(chamado => {
+          return (
             <div key={'chamado' + chamado.id}>
               <ChamadoAteComponent
                 id={chamado.id}
@@ -71,10 +73,11 @@ export default function ChamadosAte() {
                 key={'chamado' + chamado.id}
               />
               {chamado.descricao && chamado.descricao.length > 0 && (
-                <ChamadoAdmDropdown open={false} conversa={chamado.descricao} /> 
+                <ChamadoAteDropdown open={true} conversa={chamado.descricao} /> 
               )}
             </div>
-          ))}
+          )
+        })}
         </div>
       )}
     </div>

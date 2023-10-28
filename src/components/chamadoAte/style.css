@@ -13,15 +13,15 @@ h2{
 }
 
 .chamado-dropdown {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 80vw;
-    border: 2px solid black;
-    border-radius: 0 0 30px 30px;
-    border-top: none;
-    margin: -4em auto 2em;
-    padding: 2em 0;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 80vw !important;
+    border: 2px solid black !important;
+    border-radius: 0 0 30px 30px !important;
+    border-top: none !important;
+    margin: -4em auto 2em !important;
+    padding: 2em 0 !important;
 }
 
 .conteudo {
@@ -71,8 +71,8 @@ h2{
 }
 
 .icon {
-    width: 2em;
-    height: 2em;
+    width: 2em !important;
+    height: 2em !important;
 }
 
 .conteudo {
