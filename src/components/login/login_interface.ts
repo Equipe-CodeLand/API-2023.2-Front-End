@@ -1,5 +1,5 @@
 export default interface LoginInterface {
-    tipo_usuario: string;
-    usuario: string;
+    cargo: string;
+    email: string;
     senha: string;
 }

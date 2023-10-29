@@ -3,10 +3,11 @@ import "./login.css"
 import logo from "../../static/images/logo.svg"
 import LoginInterface from "./login_interface"
 import axios from "axios"
+//import { decodeJWT } from "../../utils/utils"
 
 export default function Login(props:LoginInterface){
-    const [tipoUsuario, setTipoUsuario] = useState(props.tipo_usuario || '')
-    const [usuario, setUsuario] = useState(props.usuario || '')
+    const [cargo, setCargo] = useState(props.cargo || '')
+    const [email, setEmail] = useState(props.email || '')
     const [senha, setSenha] = useState(props.senha || '')
 
     const [active, setMode] = useState(true);
@@ -19,12 +20,54 @@ export default function Login(props:LoginInterface){
     var [passwordErrorText, setPasswordErrorText] = useState("")
     var [typeErrorText, setTypeErrorText] = useState("")
 
-    function authentificarUser() {
-        // authentificar usuario
-        alert("Usuário autentificado")
-    }
+    /* Função para redirecionar após o login
+    function redirectUser(tipo:string) {
+        switch (tipo) {
+            case 'Cliente':
+                window.location.href = '/chamados';
+                break;
+            case 'Atendente':
+                window.location.href = '/chamados/Ate';
+                break;
+            case 'Administrador':
+                window.location.href = '/chamados/Adm';
+                break;
+        
+            default:
+                break;
+        }        
+    }*/
 
-    function usuarioExistente(type: string, user_email:string, user_senha:string) {
+    function usuarioExistente(email:string, senha:string) {
+        console.log(`Estes são os argumentos passados para o back:${email},${senha}`);
+        
+        axios.post('http://localhost:5000/login', {
+            email: email,
+            senha: senha,
+        })
+        .then(res => {
+            const token = res.data.token; 
+            console.log("Token gerado com sucesso");
+            console.log(token);
+            
+
+            /*Isso aqui tá dando tudo errado
+            const decodedToken = decodeJWT(token);
+            localStorage.setItem('token', token);
+
+            redirectUser(decodedToken);*/
+
+        })
+        .catch(error => {
+            if (error.response.status === 401) {
+                alert('E-mail ou senha incorretos');
+                
+            } else {
+                console.log(error);
+                
+            }
+        });
+        /*
         axios.get (`http://localhost:5000/login/${user_email}/${user_senha}/${type}`,).then(res => {
             if (!res.data.validUser) { // se o usuario não for valido
                 loginError("Usuário não encontrado")
@@ -43,7 +86,7 @@ export default function Login(props:LoginInterface){
                     }
                 }
             }
-        })
+        })*/
     }
 
     function loginError(mensagem:string) { // função para mostrar o erro de login
@@ -64,6 +107,7 @@ export default function Login(props:LoginInterface){
         setTypeErrorText("")
     }
 
+    /*
     function typeError(mensagem:string) { // função para mostrar erro de tipo
         setErrorLogin(false)
         setErrorPassword(false)
@@ -71,15 +115,15 @@ export default function Login(props:LoginInterface){
         setLoginErrorText("")
         setPasswordErrorText("")
         setTypeErrorText(mensagem)
-    }
+    }*/
 
     function allSucess() { // função para zerar os erros
         setErrorLogin(false)
         setErrorPassword(false)
-        setErrorType(false)
+        //setErrorType(false)
         setLoginErrorText("")
         setPasswordErrorText("")
-        setTypeErrorText("")
+        //setTypeErrorText("")
     }
 
     // Função que envia o formulario
@@ -87,27 +131,29 @@ export default function Login(props:LoginInterface){
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
-        if (usuario === "") {
-            loginError("Insira um usuário")
+        if (email === "") {
+            loginError("Insira um email")
         } else if (senha === "") {
             passwordError("Insira uma senha")
-        } else if (tipoUsuario === "") {
-            typeError("Selecione um tipo de usuário")
-        } else {
+        } 
+        /*else if (cargo === "") {
+            typeError("Selecione um cargo")
+        }*/
+        else {
             allSucess()
-            usuarioExistente(tipoUsuario, usuario, senha) // perguntar se o usuario existe
+            usuarioExistente(email, senha) // perguntar se o usuario existe
         }
     }
 
     // Função que muda o valor do Tipo de Usuario
 
-    const handleTipoUsuario = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newTipoUsuario = e.target.value;
-        setTipoUsuario(newTipoUsuario);
+    const handleCargo = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newCargo = e.target.value;
+        setCargo(newCargo);
     }
 
-    const handleTipoUsuarioColor = () => {
-        if (tipoUsuario !== "") {
+    const handleCargoColor = () => {
+        if (cargo !== "") {
             setMode(false)
         } else {
             setMode(true)
@@ -116,9 +162,9 @@ export default function Login(props:LoginInterface){
 
     // Função que muda o valor do Usuario
 
-    const handleUsuarioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newUsuario = e.target.value;
-        setUsuario(newUsuario);
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newEmail = e.target.value;
+        setEmail(newEmail);
     }
 
     // Função que muda o valor da Senha
@@ -139,22 +185,11 @@ export default function Login(props:LoginInterface){
             <form onSubmit={handleSubmit} className="login">
                 
                 <div className="loginPassword">
-                    <input value={usuario} type="email" id="inputLogin" className={errorLogin ? "inputLogin error" : "inputLogin"} placeholder="Usuário" onChange={handleUsuarioChange}/>
+                    <input value={email} type="email" id="inputLogin" className={errorLogin ? "inputLogin error" : "inputLogin"} placeholder="Email" onChange={handleEmailChange}/>
                     <div className="errorText">{loginErrorText}</div>
 
                     <input value={senha} type="password" id="inputPassword" className={errorPassword ? "inputPassword error" : "inputPassword"} placeholder="Senha" onChange={handleSenhaChange}/>
                     <div className="errorText">{passwordErrorText}</div>
-                </div>
-                <div className="tipoUsuario">
-                    <div className={errorType ? "select error" : "select"}>
-                        <select className={active ? "inputTipoUsuarioColor inputTipoUsuario browser-default" : "inputTipoUsuario browser-default"} value={tipoUsuario} onChange={handleTipoUsuario} onClick={handleTipoUsuarioColor}>
-                            <option value="" className="nullValue">- Selecione uma opção -</option>
-                            <option value="cliente">Cliente</option>
-                            <option value="atendente">Atendente</option>
-                            <option value="administrador">Administrador</option>
-                        </select>
-                    </div>
-                    <div className="errorText">{typeErrorText}</div>
                 </div>
                 <div className="button">
                     <input type="submit" id="inputButton" value="Entrar" />
