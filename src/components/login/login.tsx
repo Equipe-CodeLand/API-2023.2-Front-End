@@ -3,8 +3,27 @@ import "./login.css"
 import logo from "../../static/images/logo.svg"
 import LoginInterface from "./login_interface"
 import axios from "axios"
-import { decodeJWT } from "../../utils/utils"
-//import { decodeJWT } from "../../utils/utils"
+import { strict } from "assert"
+import { useNavigate } from 'react-router-dom'
+
+function redirectUser(tipoUser: string, navigate:any) {
+  
+    switch (tipoUser) {
+      case 'Cliente':
+        navigate('/chamados');
+        break;
+      case 'Atendente':
+        console.log('ino pa pagina');
+        
+        navigate('/chamados/Ate');
+        break;
+      case 'Administrador':
+        navigate('/chamados/Adm');
+        break;
+      default:
+        break;
+    }
+  }
 
 export default function Login(props:LoginInterface){
     const [cargo, setCargo] = useState(props.cargo || '')
@@ -21,26 +40,9 @@ export default function Login(props:LoginInterface){
     var [passwordErrorText, setPasswordErrorText] = useState("")
     var [typeErrorText, setTypeErrorText] = useState("")
 
-    /* Função para redirecionar após o login
-    function redirectUser(tipo:string) {
-        switch (tipo) {
-            case 'Cliente':
-                window.location.href = '/chamados';
-                break;
-            case 'Atendente':
-                window.location.href = '/chamados/Ate';
-                break;
-            case 'Administrador':
-                window.location.href = '/chamados/Adm';
-                break;
-        
-            default:
-                break;
-        }        
-    }*/
+    const navigate = useNavigate()
 
     function usuarioExistente(email:string, senha:string) {
-        console.log(`Estes são os argumentos passados para o back:${email},${senha}`);
         
         axios.post('http://localhost:5000/login', {
             email: email,
@@ -48,21 +50,17 @@ export default function Login(props:LoginInterface){
         })
         .then(res => {
             const token = res.data.token; 
-            //console.log("Token gerado com sucesso");
-            //console.log(token);
-            
+            console.log("Token gerado com sucesso");            
 
-            //Isso aqui tá dando tudo errado
-            const decodedToken = decodeJWT(token);
             localStorage.setItem('token', token);
-
-            //redirectUser(decodedToken);
-
+            
+            const tipoUser = res.data.tipoUser
+            redirectUser(tipoUser, navigate)            
         })
         .catch(error => {
             if (error.response.status === 401) {
                 alert('E-mail ou senha incorretos');
-                
+            
             } else {
                 console.log(error);
                 
