@@ -3,6 +3,7 @@ import "./login.css"
 import logo from "../../static/images/logo.svg"
 import LoginInterface from "./login_interface"
 import axios from "axios"
+import { decodeJWT } from "../../utils/utils"
 //import { decodeJWT } from "../../utils/utils"
 
 export default function Login(props:LoginInterface){
@@ -47,15 +48,15 @@ export default function Login(props:LoginInterface){
         })
         .then(res => {
             const token = res.data.token; 
-            console.log("Token gerado com sucesso");
-            console.log(token);
+            //console.log("Token gerado com sucesso");
+            //console.log(token);
             
 
-            /*Isso aqui tá dando tudo errado
+            //Isso aqui tá dando tudo errado
             const decodedToken = decodeJWT(token);
             localStorage.setItem('token', token);
 
-            redirectUser(decodedToken);*/
+            //redirectUser(decodedToken);
 
         })
         .catch(error => {
