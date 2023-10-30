@@ -98,6 +98,10 @@ div.errorText {
     text-align: center;
 }
 
+div.errorPassword {
+    margin-bottom: 25px;
+}
+
 div#login form.login div.loginPassword input.inputLogin:focus,
 div#login form.login div.loginPassword input.inputPassword:focus {
     outline: invert;
@@ -148,6 +152,15 @@ div#login form.login div.tipoUsuario select.inputTipoUsuario option.nullValue {
 
 div#login form.login div.tipoUsuario select.inputTipoUsuario::selection {
     outline: invert;
+}
+
+div#login form.login div.links {
+    width: 410px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+    margin-bottom: 40px;
 }
 
 div#login form.login div.button {

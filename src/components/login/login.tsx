@@ -190,7 +190,11 @@ export default function Login(props:LoginInterface){
                     <div className="errorText">{loginErrorText}</div>
 
                     <input value={senha} type="password" id="inputPassword" className={errorPassword ? "inputPassword error" : "inputPassword"} placeholder="Senha" onChange={handleSenhaChange}/>
-                    <div className="errorText">{passwordErrorText}</div>
+                    <div className="errorText errorPassword">{passwordErrorText}</div>
+                </div>
+                <div className="links">
+                    <a href="#"></a>
+                    <a href="/cadastroUser">Ainda não tem conta?</a>
                 </div>
                 <div className="button">
                     <input type="submit" id="inputButton" value="Entrar" />
