@@ -9,6 +9,7 @@ export default function ChamadosAdm() {
   const [chamados, setChamados] = useState<ChamadoAte[]>([]);
 
   function buscarChamados() {
+    const inicio = new Date();
     axios.get(`http://localhost:5000/chamados`)
       .then(res => {
         console.log(res);
@@ -31,7 +32,7 @@ export default function ChamadosAdm() {
               id: c.prioridade.id,
               value: c.prioridade.nome
             },
-            hora: c.inicio,
+            hora: inicio,
             fim: c.final
           }                
         })
@@ -60,23 +61,23 @@ export default function ChamadosAdm() {
       {chamados.length > 0 && (
         <div>
           {chamados.map(chamado => {
-          return (
-            <div key={'chamado' + chamado.id}>
-              <ChamadoAteComponent
-                id={chamado.id}
-                nome={chamado.nome}
-                tema={chamado.tema}
-                status={chamado.status}
-                prioridade = {chamado.prioridade}
-                hora={new Date(chamado.hora).toLocaleDateString() + " - " + new Date(chamado.hora).toLocaleTimeString()}
-                descricao={chamado.descricao ? chamado.descricao : []}
-                key={'chamado' + chamado.id}
-              />
-              {chamado.descricao && chamado.descricao.length > 0 && (
-                <ChamadoAteDropdown open={true} conversa={chamado.descricao} /> 
-              )}
-            </div>
-          )
+            return (
+              <div key={'chamado' + chamado.id}>
+                <ChamadoAteComponent
+                  id={chamado.id}
+                  nome={chamado.nome}
+                  tema={chamado.tema}
+                  status={chamado.status}
+                  prioridade = {chamado.prioridade}
+                  hora={new Date(chamado.hora).toLocaleDateString() + " - " + new Date(chamado.hora).toLocaleTimeString()}
+                  descricao={chamado.descricao ? chamado.descricao : []}
+                  key={'chamado' + chamado.id}
+                />
+                {chamado.descricao && chamado.descricao.length > 0 && (
+                  <ChamadoAteDropdown open={true} conversa={chamado.descricao} /> 
+                )}
+              </div>
+            )
         })}
         </div>
       )}

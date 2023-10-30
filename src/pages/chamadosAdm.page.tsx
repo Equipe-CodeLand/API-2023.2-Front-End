@@ -2,21 +2,20 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/header/headerComponent";
 import ChamadoAdmComponent from "../components/chamado/chamadoAdmComponent";
-import { ChamadoAdm, ChamadoAdmDetalhes } from "../components/chamado/chamadoAdm.interface";
+import { ChamadoAdm } from "../components/chamado/chamadoAdm.interface";
 import ChamadoAdmDropdown from "../components/chamado/chamadoAdmDropdown";
 
 export default function ChamadosAdm() {
   const [chamados, setChamados] = useState<ChamadoAdm[]>([]);
 
   function buscarChamados() {
+    const inicio = new Date();
     axios.get(`http://localhost:5000/chamados`)
       .then(res => {
         console.log(res);
         let chamados = res.data.map((c: any) => {
           let nomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.nome;
           let sobrenomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.sobrenome;
-
-          console.log(c.tema.id);
         
           return {
             id: c.id,
@@ -33,7 +32,7 @@ export default function ChamadosAdm() {
               id: c.prioridade.id,
               value: c.prioridade.nome
             },
-            hora: c.inicio,
+            hora: inicio,
             fim: c.final
           }                
         })
