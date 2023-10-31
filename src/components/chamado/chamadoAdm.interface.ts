@@ -1,8 +1,9 @@
 export interface ChamadoAdm {
+    id: number
     nome: string,
     tema: string,
     status: {
-        id: string,
+        id: number,
         texto: string
     },
     prioridade: {
@@ -14,6 +15,7 @@ export interface ChamadoAdm {
 }
 
 export interface ChamadoAdmDetalhes {
+    id:number
     email: string,
     msg: string,
     nome: string,

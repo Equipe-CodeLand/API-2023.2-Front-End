@@ -15,8 +15,8 @@ function App() {
       .catch(err => console.log(err));
   }, []);
 
-  const link = ["/chamados", "/chamados/Adm", "/cadastroUser", "/cadastroCliente","/chamados/Ate", "/login"] // Link para as páginas
-  const link_title = ["Chamados", "Chamados Adm", "Cadastrar Usuário (ADM)", "Forms Cadastro de Cliente (ADM)","Chamados Atendente", "Login"] // titulo para as paginas
+  const link = ["/chamados", "/chamados/Adm", "/cadastroUser", "/cadastroCliente","/chamados/Ate","/formularioCli","/login"] // Link para as páginas
+  const link_title = ["Chamados", "Chamados Adm", "Cadastrar Usuário (ADM)", "Forms Cadastro de Cliente (ADM)","Chamados Atendente","Formulário Cliente","Login"] // titulo para as paginas
 
   return (
     <div className="App">

@@ -7,27 +7,34 @@ import axios from "axios"
 function ChamadosAte() {
     const [chamados, setChamados] = useState<Chamado[]>([])
 
-
     function buscarChamados() {
-        axios.get(`http://localhost:5000/ChamadosAtendente`,)
+        axios.get(`http://localhost:5000/chamados`,)
             .then(res => {
                 let chamados = res.data.map((c: any) => {
+                    console.log(c)
+                    let nomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.nome;
+                    let sobrenomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.sobrenome;
+                    
                     return {
-                        id: c.cha_id,
-                        nome: c.user_nome + ' ' + c.user_sobrenome,
-                        tema: c.cha_tema,
+                        id: c.id,
+                        nome: (nomeCliente && sobrenomeCliente) ? nomeCliente + ' ' + sobrenomeCliente : '',
+                        tema: c.tema,
                         status: {
-                            id: c.sta_id,
-                            texto: c.sta_nome
+                            id: c.status.id,
+                            texto: c.status.nome
                         },
-                        hora: c.cha_inicio,
-                        email: c.user_email,
-                        descricao: c.cha_desc,
-                        conversa: [],
-                    }
+                        prioridade: {
+                            id: c.prioridade.id,
+                            value: c.prioridade.nome
+                        },
+                        email: c.cliente.usuario.email,
+                        hora: new Date(c.inicio).toLocaleDateString() + " - " + new Date(c.inicio).toLocaleTimeString(),
+                        fim: c.final,
+                        descricao: c.desc
+                    }                
                 })
-                setChamados(chamados)
-            })
+                setChamados(chamados);
+            });
     }
 
     useEffect(() => {
@@ -47,21 +54,22 @@ function ChamadosAte() {
                 link_title_1={link_title[1]}
                 link_title_2={link_title[2]}
             />
+            <h1>Chamados (Atendente)</h1>
             {chamados.length > 0 && (
                 <div>
                     {chamados.filter(chamado => chamado.status.texto !== 'Encerrado')
                         .map(chamado => {
-                            console.log(chamado)
                             return <ChamadoComponent
-                                id={chamado.id}
-                                nome={chamado.nome}
-                                tema={chamado.tema}
-                                status={chamado.status}
-                                hora={new Date(chamado.hora).toLocaleDateString() + " - " + new Date(chamado.hora).toLocaleTimeString()}
-                                email={chamado.email}
-                                conversa={chamado.conversa}
-                                descricao={chamado.descricao}
-                                key={'chamado' + chamado.id}
+                                    id={chamado.id}
+                                    nome={chamado.nome}
+                                    tema={chamado.tema}
+                                    status={chamado.status}
+                                    hora={chamado.hora}
+                                    email={chamado.email}
+                                    prioridade={chamado.prioridade}
+                                    descricao={chamado.descricao}
+                                    tipoUsuario={'ATENDENTE'}
+                                    key={'chamado'+chamado.id}
                             ></ChamadoComponent>
                         })
                     }

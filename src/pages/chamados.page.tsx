@@ -1,26 +1,41 @@
 import ChamadoComponent from "../components/chamado/chamadoComponent"
 import Chamado from "../components/chamado/chamado.interface"
 import Header from "../components/header/headerComponent"
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-function Chamados() {
-    let chamados: Array<Chamado> = [
-        {id: 1, nome: 'Henrique Andrade', tema: 'Velocidade da Internet', status: { id: '4', texto: 'Encerrado'}, descricao: '', hora: '26/09/2023 00:59',email: 'email@gmail.com',
-        conversa: [
-            {remetente: 'Maria Silva', texto: `Nas últimas duas semanas, tenho notado ruídos estranhos durante minhas chamadas telefônicas. Esses ruídos tornaram difícil manter conversas claras e consistentes com meus amigos e familiares. Além disso, houve ocasiões em que as chamadas simplesmente caíram de forma inesperada, o que tem sido bastante frustrante.`, role: 'Cliente'},
-            {remetente: 'Henrique Andrade', texto: `Olá Maria Silva, lamentamos sinceramente por qualquer inconveniente que isso possa ter causado a você e entendemos a importância de uma conexão telefônica confiável em sua vida cotidiana.
-            Quero assegurar a você que estamos dedicados a resolver esse problema o mais rápido possível. Após revisar seu relato, tomamos as seguintes providências:
-            Agendamos uma visita técnica para verificar a qualidade da linha em sua residência. O técnico responsável estará programado para comparecer em 27 de agosto de 2023, conforme discutido.
-            Estaremos monitorando de perto o progresso da visita técnica para garantir que o problema seja tratado de maneira adequada e eficaz.
-            Em reconhecimento aos problemas que você enfrentou, creditaremos sua próxima fatura com um valor correspondente aos inconvenientes causados pela má qualidade da linha.`, role: 'Atendente'}
-        ]
-        },
-            {id: 2, nome: 'Alice Nunes', tema: 'Problemas de Conexão', descricao: '', status: { id: '2', texto: 'Em andamento'}, hora: '26/09/2023 00:59',email: 'email@gmail.com',
-            conversa: []
-        },
-            {id: 3, nome: 'Luís Oliveira', tema: 'Problemas com fatura', descricao: '', status: { id: '1', texto: 'Não iniciado'}, hora: '26/09/2023 00:59',email: 'email@gmail.com',
-            conversa: []
-        },
-    ]
+function ChamadosPage() {
+
+    const [chamados, setChamados] = useState<Chamado[]>([]);
+
+    function buscarChamados() {
+        axios.get(`http://localhost:5000/chamados`)
+            .then(res => {
+                let chamados = res.data.map((c: any) => {
+                    let nomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.nome;
+                    let sobrenomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.sobrenome;
+                    
+                    return {
+                        id: c.id,
+                        nome: (nomeCliente && sobrenomeCliente) ? nomeCliente + ' ' + sobrenomeCliente : '',
+                        tema: c.tema,
+                        status: {
+                            id: c.status.id,
+                            texto: c.status.nome
+                        },
+                        email: c.cliente.usuario.email,
+                        hora: new Date(c.inicio).toLocaleDateString() + " - " + new Date(c.inicio).toLocaleTimeString(),
+                        fim: c.final,
+                        descricao: c.desc
+                    }                
+                })
+                setChamados(chamados);
+            });
+    }
+    
+    useEffect(() => {
+        buscarChamados();
+        }, []);
 
     let list = chamados.map(chamado => {
             return <ChamadoComponent
@@ -30,8 +45,8 @@ function Chamados() {
                 status={chamado.status}
                 hora={chamado.hora}
                 email={chamado.email}
-                conversa={chamado.conversa}
-                descricao=""
+                descricao={chamado.descricao}
+                tipoUsuario={'ADMIN'}
             ></ChamadoComponent>
     })
 
@@ -53,4 +68,4 @@ function Chamados() {
     )
 }
 
-export default Chamados
+export default ChamadosPage

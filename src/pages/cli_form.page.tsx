@@ -1,8 +1,8 @@
 import React from 'react'
-import CadCli from '../components/cad_cli/cad_cliComponent'
+import CliForm from '../components/cli_form/cli_formComponent'
 import Header from '../components/header/headerComponent'
 
-const CadastroCli: React.FC = () => {
+const FormularioCli: React.FC = () => {
 
     const link = ["/", "/chamados/Cliente", "/problemas", "/cadastroCliente"] // Link para as páginas
     const link_title = ["Home", "Painel do Cliente", "Problemas comuns", "Iniciar chamado"] // titulo para as paginas
@@ -18,10 +18,10 @@ const CadastroCli: React.FC = () => {
                 link_title_2 = {link_title[2]}
                 link_title_3 = {link_title[3]}
             />
-            <h1>Antes de continuarmos, precisamos <br /> de algumas informações</h1>
-            <CadCli nome="" sobrenome="" cpf="" telefone="" email=''/>
+            <h1>Antes de começarmos, precisamos que você <br /> descreva um pouco sobre o problema</h1>
+            <CliForm tema=""mensagem=''/>
         </div>
     )
 }
 
-export default CadastroCli;
+export default FormularioCli;
