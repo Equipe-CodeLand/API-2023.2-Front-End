@@ -34,10 +34,11 @@ const router = createBrowserRouter([
   {
     path: "/chamados/Adm",
     element: <ChamadosAdm />
+  },
   {
      path:"/formularioCli",
      element:<FormularioCli />
-   }
+   },
   {
     path: "/cadastroUser",
     element: <CadastroUser />

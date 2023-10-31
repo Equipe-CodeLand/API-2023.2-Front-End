@@ -14,7 +14,7 @@ function ChamadoComponent(props: any) {
                 <div className='left'>
                     <div>{'ID da chamada: '}{props.id}</div>
                     <div>{props.nome}</div>
-                    <div>{props.tema}</div>
+                    <div>{props.tema.texto}</div>
                 </div>
                 <div className='right'>
                     <div className={`status status-${props.status.id}`}>{props.status.texto}</div>
@@ -30,7 +30,6 @@ function ChamadoComponent(props: any) {
             nome={props.nome}
             status={props.status}
             descricao={props.descricao}
-            email={props.email}
             tipoUsuario={props.tipoUsuario}
             ></ChamadoDropdown>
         </div>

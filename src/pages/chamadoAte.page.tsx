@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/header/headerComponent";
 import { ChamadoAte } from "../components/chamadoAte/chamadoAte.interface";
-import ChamadoAteComponent from "../components/chamadoAte/chamadoAteComponent";
-import ChamadoAteDropdown from "../components/chamadoAte/chamadoAteDropdown";
+import ChamadoComponent from "../components/chamado/chamadoComponent";
+import ChamadoDropdown from "../components/chamado/chamadoDropdown";
 
 export default function ChamadosAdm() {
   const [chamados, setChamados] = useState<ChamadoAte[]>([]);
@@ -62,21 +62,16 @@ export default function ChamadosAdm() {
         <div>
           {chamados.map(chamado => {
             return (
-              <div key={'chamado' + chamado.id}>
-                <ChamadoAteComponent
+                <ChamadoComponent
                   id={chamado.id}
                   nome={chamado.nome}
                   tema={chamado.tema}
                   status={chamado.status}
                   prioridade = {chamado.prioridade}
                   hora={new Date(chamado.hora).toLocaleDateString() + " - " + new Date(chamado.hora).toLocaleTimeString()}
-                  descricao={chamado.descricao ? chamado.descricao : []}
+                  descricao={chamado.descricao}
                   key={'chamado' + chamado.id}
                 />
-                {chamado.descricao && chamado.descricao.length > 0 && (
-                  <ChamadoAteDropdown open={true} conversa={chamado.descricao} /> 
-                )}
-              </div>
             )
         })}
         </div>
