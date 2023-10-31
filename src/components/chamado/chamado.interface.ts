@@ -11,7 +11,7 @@ export default interface Chamado {
     prioridade: {
         id: number,
         value: string
-    }
+    },
     hora: string,
     email: string,
     descricao: string

@@ -20,7 +20,7 @@ function ChamadoCliComponent(props: ChamadoCli) {
                     <div className={'status status-cor' + props.status.id}>{props.status.texto}</div>
                     <div>{props.hora}</div>
 
-                    {props.conversa.length > 0 ?
+                    {props.descricao.length > 0 ?
                         <BsChevronDown className='icon' onClick={toggleDropdown}
                         ></BsChevronDown>
                         :
@@ -30,7 +30,7 @@ function ChamadoCliComponent(props: ChamadoCli) {
             </div>
             <ChamadoCliDropdown
                 open={open}
-                conversa={props.conversa}
+                conversa={props.descricao}
             ></ChamadoCliDropdown>
         </div>
     )

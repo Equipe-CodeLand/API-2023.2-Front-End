@@ -64,7 +64,6 @@ function ChamadoAdmDropdown(props: any) {
                                                 <button className="botao-verde" onClick={() => atribuirAtendente(1)}>Atribuir atendente</button>
                                             </td>
                                         </tr>
-                                        {/* (outros atendentes) */}
                                     </tbody>
                                 </table>
                                 <br></br>

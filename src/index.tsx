@@ -6,7 +6,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
-import Chamados from './pages/chamados.page';
+//import Chamados from './pages/chamados.page';
 import App from './App';
 import ChamadosAdm from './pages/chamadosAdm.page';
 import CadastroUser from './pages/cad_user.page';
@@ -23,10 +23,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <App></App>,
   },
-  {
+  /*{
     path: "/chamados",
     element: <Chamados></Chamados>,
-  },
+  },*/
   {
     path: "/meusChamados",
     element: <MeusChamados></MeusChamados>,
