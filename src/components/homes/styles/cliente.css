@@ -12,7 +12,8 @@
 div.homeCli {
     background-color: green;
     margin: auto;
-    width: 1200px;
+    max-width: 1200px;
+    min-width: 400px;
 }
 
 div.homeCli h1 {

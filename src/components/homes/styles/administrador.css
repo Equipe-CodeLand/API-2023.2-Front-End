@@ -12,7 +12,8 @@
 div.homeAdm {
     background-color: red;
     margin: auto;
-    width: 1200px;
+    max-width: 1200px;
+    min-width: 400px;
 }
 
 div.homeAdm h1 {
