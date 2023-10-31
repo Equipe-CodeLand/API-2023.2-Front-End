@@ -15,7 +15,7 @@ const Home: React.FC<HomeProps> = ({ data }) => {
     const link = ["/chamados", "/chamados/Adm", "/cadastroUser", "/cadastroCliente", '/meusChamados'] // Link para as páginas
     const link_title = ["Chamados", "Chamados ADM", "Cadastrar Usuário", "Forms Cadastro de Cliente", 'Meus Chamados'] // titulo para as paginas
     return(
-        <div>
+        <div id="home">
             <h1 className="text-tiny">Seja Bem-vindo(a) ao CallNet!</h1>
             <div>
                 <h4>Escolha o que deseja visualizar:</h4>

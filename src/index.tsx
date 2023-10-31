@@ -16,6 +16,7 @@ import ChamadoCli from './pages/chamadoCli.page';
 import ChamadosAte from './pages/chamadoAte.page';
 import MeusChamados from './pages/meusChamados.page';
 import FormularioCli from './pages/cli_form.page';
+import LoginPage from './pages/login.page';
 
 const router = createBrowserRouter([
   {
@@ -33,28 +34,30 @@ const router = createBrowserRouter([
   {
     path: "/chamados/Adm",
     element: <ChamadosAdm />
-    },
-    {
-      path: "/cadastroUser",
-      element: <CadastroUser />
-      },
-      {
-        path: "/cadastroCliente",
-        element: <CadastroCli />
-        },
-        {
-          path: "/chamadoCli",
-          element: <ChamadoCli />
-        },
-        {
-          path:"/chamado/Ate",
-          element:<ChamadosAte />
-        },
-        {
-          path:"/formularioCli",
-          element:<FormularioCli />
-        }
-
+  {
+     path:"/formularioCli",
+     element:<FormularioCli />
+   }
+  {
+    path: "/cadastroUser",
+    element: <CadastroUser />
+  },
+  {
+    path: "/cadastroCliente",
+    element: <CadastroCli />
+  },
+  {
+    path: "/chamadoCli",
+    element: <ChamadoCli />
+  },
+  {
+    path:"/chamado/Ate",
+    element:<ChamadosAte />
+  },
+  {
+    path:"/login",
+    element:<LoginPage />
+  }
 
 ]);
 

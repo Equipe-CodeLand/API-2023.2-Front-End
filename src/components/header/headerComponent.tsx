@@ -8,7 +8,7 @@ export default function Header(props: any) {
         setMode(!active)
     }
 
-    const link = [props.link_0, props.link_1, props.link_2, props.link_3]
+    const link = [props.link_0, props.link_1, props.link_2, props.link_3, props.link_4, props.link_5, props.link_6, props.link_7, props.link_8, props.link_9]
 
     return (
         <header id="navbar">

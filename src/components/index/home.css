@@ -2,7 +2,7 @@ body{
     font-style: Helvetica;
 }
 
-h1{
+div#home h1{
     font-size: 40px !important;
 }
 
@@ -10,6 +10,7 @@ h4{
     font-size: 25px !important;
     text-align: center;
 }
+
 .links {
     text-align: center;
     color: black !important;
