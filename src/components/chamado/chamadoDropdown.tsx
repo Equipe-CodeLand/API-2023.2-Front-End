@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react'
 import './style.css'
 import Mensagem from './mensagem.interface';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 function ChamadoDropdown(props: any) {
 
+
     const [mensagens, setMensagens] = useState<Mensagem[]>([])
+
 
     function buscarMensagens() {
         axios.get(`http://localhost:5000/chamados/${props.id}/mensagens`)
@@ -30,7 +33,7 @@ function ChamadoDropdown(props: any) {
         buscarMensagens()
     }, [])
 
-    if (props.open) {
+    if (props.open && mensagens.length > 0) {
         let thread = mensagens.map(msg => {
             return(
                 <div key={'msg'+msg.id}>
@@ -42,13 +45,12 @@ function ChamadoDropdown(props: any) {
 
        
         return (
-                <div className="chamado-ate-dropdown">
-                    <p className='email-cliente'>{'E-mail: ' + props.email}</p>                
+                <div className="chamado-ate-dropdown">              
                     {thread}
                     {/* colocar caixa de  e botão de enviar se for usuario com id incluso no chamado e o chamado estiver em andamento*/}
                     {/* colocar botões de encerrar chamada se for atendente e chamado estiver em andamento */}
                     <div className="cont">
-                        {(props.tipoUsuario === 'ATENDENTE' && props.status.id == 1) && 
+                        {(props.tipoUsuario === 'Atendente' && props.status.id == 1) && 
                             <a href={`mailto:${props.email}`} className='btn'> Iniciar chamado </a>
                         }
                         {(props.tipoUsuario === 'ADMIN' && props.status.id == 1) &&

@@ -4,9 +4,10 @@ import Header from "../components/header/headerComponent";
 import { ChamadoAte } from "../components/chamadoAte/chamadoAte.interface";
 import ChamadoComponent from "../components/chamado/chamadoComponent";
 import ChamadoDropdown from "../components/chamado/chamadoDropdown";
+import Chamado from "../components/chamado/chamado.interface";
 
 export default function ChamadosAdm() {
-  const [chamados, setChamados] = useState<ChamadoAte[]>([]);
+  const [chamados, setChamados] = useState<Chamado[]>([]);
 
   function buscarChamados() {
     const inicio = new Date();
