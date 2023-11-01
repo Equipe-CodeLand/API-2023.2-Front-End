@@ -10,7 +10,9 @@ export default function ChamadosCli() {
     const [chamados, setChamados] = useState<ChamadoCli[]>([])
 
     function buscarChamados() {
-        axios.get(`http://localhost:5000/chamadosCli`)
+      const token = localStorage.getItem('token');
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      axios.get(`http://localhost:5000/chamadosCli`)
       .then(res => {
         console.log(res);
         let chamados = res.data.map((c: any) => {

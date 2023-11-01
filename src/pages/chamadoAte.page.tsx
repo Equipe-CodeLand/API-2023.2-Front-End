@@ -11,7 +11,9 @@ export default function ChamadosAdm() {
 
   function buscarChamados() {
     const inicio = new Date();
-    axios.get(`http://localhost:5000/chamados`)
+    const token = localStorage.getItem('token');
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    axios.get(`http://localhost:5000/chamadosAte`)
       .then(res => {
         console.log(res);
         let chamados = res.data.map((c: any) => {

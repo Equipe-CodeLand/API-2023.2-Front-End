@@ -21,7 +21,7 @@ import LoginPage from './pages/login.page';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: <App />,
   },
   /*{
     path: "/chamados",
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     element: <MeusChamados></MeusChamados>,
   },
   {
-    path: "/chamados/Adm",
+    path: "/chamadosAdm",
     element: <ChamadosAdm />
   },
   {
@@ -48,11 +48,11 @@ const router = createBrowserRouter([
     element: <CadastroCli />
   },
   {
-    path: "/chamadoCli",
+    path: "/chamadosCli",
     element: <ChamadoCli />
   },
   {
-    path:"/chamado/Ate",
+    path:"/chamadosAte",
     element:<ChamadosAte />
   },
   {

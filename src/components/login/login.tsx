@@ -10,15 +10,13 @@ function redirectUser(tipoUser: string, navigate:any) {
   
     switch (tipoUser) {
       case 'Cliente':
-        navigate('/chamados');
+        navigate('/chamadosCli');
         break;
       case 'Atendente':
-        console.log('ino pa pagina');
-        
-        navigate('/chamados/Ate');
+        navigate('/chamadosAte');
         break;
       case 'Administrador':
-        navigate('/chamados/Adm');
+        navigate('/chamadosAdm');
         break;
       default:
         break;
@@ -53,6 +51,8 @@ export default function Login(props:LoginInterface){
             console.log("Token gerado com sucesso");            
 
             localStorage.setItem('token', token);
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
             
             const tipoUser = res.data.tipoUser
             redirectUser(tipoUser, navigate)            
