@@ -10,12 +10,12 @@ export default function ChamadosCli() {
     const [chamados, setChamados] = useState<ChamadoCli[]>([])
 
     function buscarChamados() {
-        axios.get(`http://localhost:5000/chamados`)
+        axios.get(`http://localhost:5000/chamadosCli`)
       .then(res => {
         console.log(res);
         let chamados = res.data.map((c: any) => {
-          let nomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.nome;
-          let sobrenomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.sobrenome;
+          let nomeCliente = c.atendente && c.atendente.usuario && c.atendente.usuario.nome;
+          let sobrenomeCliente = c.atendente && c.atendente.usuario && c.cliente.atendente.sobrenome;
 
           return {
             id: c.id,
