@@ -1,4 +1,5 @@
 export interface ChamadoAdm {
+    id: number,
     nome: string,
     tema: string,
     status: {
