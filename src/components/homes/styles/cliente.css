@@ -9,14 +9,100 @@
     --azul: #93B6E4;
 }
 
+footer {
+    background-color: var(--azul);
+    height: 40px;
+}
+
 div.homeCli {
-    background-color: green;
     margin: auto;
     max-width: 1200px;
     min-width: 400px;
 }
 
 div.homeCli h1 {
+    font-size: 1em;
     margin: 0px;
     padding: 0px;
+}
+
+div.homeCli section.conteudo {
+    width: 100%;
+    height: calc(100vh - 80px);
+    background-color: red;
+}
+
+div.homeCli section.problemasComuns {
+    margin: 20px auto;
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid #a5a5a5;
+    min-width: none;
+    max-width: 1000px;
+}
+
+div.homeCli section.problemasComuns h2#titulo {
+    font-family: var(--Inter);
+    font-size: 1.6em !important;
+    font-weight: 600;
+}
+
+div.homeCli section.problemasComuns hr {
+    margin-top: 20px;
+}
+
+div.homeCli section.problemasComuns .problema h3 {
+    margin-top: 30px;
+    margin-bottom: 0px;
+    font-family: var(--Inter);
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+div.homeCli section.problemasComuns .problema ul {
+    padding: 0px;
+    margin: 0px;
+    margin-left: 5px;
+    padding: 10px;
+}
+
+div.homeCli section.problemasComuns .problema details {
+    margin-top: 15px;
+}
+
+div.homeCli section.problemasComuns .problema summary {
+    font-family: var(--Inter);
+    font-weight: 500;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+div.homeCli section.problemasComuns .problema p {
+    font-family: var(--Inter);
+    font-weight: 400;
+    font-size: 0.9em;
+    margin-top: 10px;
+    margin-left: 3.5px;
+    padding: 0px 20px;
+    text-align: justify;
+    color: #666666;
+    border-left: 1px solid #8b8b8b83;
+}
+
+div.homeCli section.problemasComuns .problema details ul {
+    font-family: var(--Inter);
+    font-weight: 400;
+    font-size: 1em;
+    text-align: justify;
+    padding: 0px 10px;
+}
+
+
+div.homeCli section.problemasComuns .problema details ul li {
+    margin-top: 10px;
+}
+
+div.homeCli section.problemasComuns .problema details ul li::before {
+    margin-right: 5px;
+    content: "•";
 }
