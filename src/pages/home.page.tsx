@@ -28,17 +28,13 @@ const Home: React.FC<HomeProps> = ({ data }) => {
                 {/*<Link to={'/chamadoCli'}>Chamados Cli</Link><br />*/}
                 <Link to={'/chamado/Ate'}>Chamados Atendente</Link><br />
                 {/*<Link to={'/meusChamados'}>Meus Chamados(atendente)</Link><br />*/}
-                <Link to={'formularioCli'}>Formulário Cliente</Link><br />
+                <Link to={'formularioCli'}>Criar um novo Chamado</Link><br />
             </div>
             <div className="sobre">
                 <h3>Sobre</h3>
                 <p>CallNet, o sistema que será desenvolvido, é focado em fornecer auxílio aos problemas relacionados a Internet Fixa, e busca aprimorar o sistema de Gerenciamento de Chamadas de Serviço. Nosso objetivo é que nossos clientes tenham acesso à soluções de seus problemas sobre Internet, de forma mais rápida e eficaz. </p>
             </div>
-            <div className="dados-da-api">
-                {data.map(item => (
-                    <div key={item.id}>{item.nome}</div>
-                ))}
-            </div>
+
         </div>
     )
 }
