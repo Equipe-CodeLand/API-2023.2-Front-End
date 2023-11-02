@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react'
 import './style.css'
 import Mensagem from './mensagem.interface';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
 
 function ChamadoDropdown(props: any) {
-
 
     const [mensagens, setMensagens] = useState<Mensagem[]>([])
 
@@ -53,7 +51,7 @@ function ChamadoDropdown(props: any) {
                         {(props.tipoUsuario === 'Atendente' && props.status.id == 1) && 
                             <a href={`mailto:${props.email}`} className='btn'> Iniciar chamado </a>
                         }
-                        {(props.tipoUsuario === 'ADMIN' && props.status.id == 1) &&
+                        {(props.tipoUsuario === 'Administrador' && props.status.id == 1) &&
                             <button className='btn-adm'>Atribuir atendente</button>
                         }
                     </div>
