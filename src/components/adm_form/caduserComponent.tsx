@@ -225,51 +225,7 @@ export default function CadUser(props: CadaUser) {
     
         if (formIsValid) {
             showSuccess();
-            /*let rotaCadastro = '';
-    
-                if (tipo === 'Cliente') {
-                    rotaCadastro = 'http://localhost:5000/cadastro/cliente';
-                } else if (tipo === 'Atendente') {
-                    rotaCadastro = 'http://localhost:5000/cadastro/atendente';
-                } else if (tipo === 'Administrador') {
-                    rotaCadastro = 'http://localhost:5000/cadastro/adm';
-                }
-        
-                axios.post(rotaCadastro, {
-                    'nome': nome,
-                    'sobrenome': sobrenome,
-                    'email': email,
-                    'tipo': tipo,
-                    'turno': turno,
-                    'telefone': telefone,
-                    'cpf': cpf,
-                    'senha': senha
-                });*/
-        } else {
-            showWarning('Por favor, corrija os campos indicados.');
-        }
-    };
-    
-
-    const showWarning = (message: string) => {
-        Swal.fire({
-            title: 'Aviso',
-            text: message,
-            icon: 'warning',
-        });
-    };
-
-    const showSuccess = () => {
-        Swal.fire({
-            title: "Enviado com sucesso",
-            text: "Suas informações foram enviadas com sucesso!",
-            icon: "success",
-            confirmButtonText: "OK",
-            showCancelButton: true,
-            cancelButtonText: "Cancelar",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                let rotaCadastro = '';
+            let rotaCadastro = '';
     
                 if (tipo === 'Cliente') {
                     rotaCadastro = 'http://localhost:5000/cadastro/cliente';
@@ -291,8 +247,27 @@ export default function CadUser(props: CadaUser) {
                 });
         } else {
             showWarning('Por favor, corrija os campos indicados.');
-        }}
-    )};
+        }
+    };
+    
+
+    const showWarning = (message: string) => {
+        Swal.fire({
+            title: 'Aviso',
+            text: message,
+            icon: 'warning',
+        });
+    };
+
+    const showSuccess = () => {
+        Swal.fire({
+            title: "Enviado com sucesso",
+            text: "Suas informações foram enviadas com sucesso!",
+            icon: "success",
+            confirmButtonText: "OK",
+            showCancelButton: true,
+        });
+    };
 
     return (
         <form onSubmit={handleSubmit}>

@@ -15,6 +15,8 @@ import Home from './pages/home.page';
 import ChamadoCli from './pages/chamadoCli.page';
 import ChamadosAte from './pages/chamadoAte.page';
 import MeusChamados from './pages/meusChamados.page';
+import ChamadosForm from './components/cad_chamado/cadChamadoComponent';
+import CadastroChamada from './pages/cad_chamados.page';
 
 const router = createBrowserRouter([
   {
@@ -49,7 +51,10 @@ const router = createBrowserRouter([
     path:"/chamado/Ate",
     element:<ChamadosAte />
   },
-
+  {
+    path:'/cadastroChamados',
+    element:<CadastroChamada />
+  }
 
 ]);
 
