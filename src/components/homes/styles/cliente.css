@@ -16,8 +16,9 @@ footer {
 
 div.homeCli {
     margin: auto;
-    max-width: 1200px;
-    min-width: 400px;
+    padding-bottom: 100px;
+    max-width: 1600px;
+    min-width: none;
 }
 
 div.homeCli h1 {
@@ -28,15 +29,75 @@ div.homeCli h1 {
 
 div.homeCli section.conteudo {
     width: 100%;
-    height: calc(100vh - 80px);
-    background-color: red;
+    height: calc(80vh);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+div.homeCli section.conteudo .titulo {
+    max-width: 400px;
+    min-width: none;
+    margin: auto;
+}
+
+div.homeCli section.conteudo h1#tituloPrincipal, strong {
+    font-family: var(--Inter);
+    font-size: 0.9em;
+    font-weight: 400;
+    margin: 20px 0px !important;
+    padding: 0px;
+    margin-top: 20px;
+}
+
+div.homeCli section.conteudo strong {
+    font-weight: 500;
+    margin: 0px;
+    padding: 0px;
+    margin-top: 20px;
+}
+
+div.homeCli section.conteudo p {
+    font-size: 1.1em;
+}
+
+div.homeCli section.conteudo div.chamados {
+    display: flex;
+    margin: 40px auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 600px;
+    min-width: none;
+}
+
+div.homeCli section.conteudo div.chamados div {
+    width: 300px;
+    margin: 20px 0px;
+}
+
+div.homeCli section.conteudo div.chamados div a {
+    transition: all 0.1s;
+    color: #5d7491;
+    font-family: var(--Inter);
+    font-size: 1.05em;
+    font-weight: 400;
+    padding: 15px;
+}
+
+div.homeCli section.conteudo div.chamados div.acessar a {
+    border: 2px solid var(--azul_claro);
+    border-radius: 20px;
+}
+
+div.homeCli section.conteudo div.chamados div a:hover {
+    font-weight: 600;
 }
 
 div.homeCli section.problemasComuns {
-    margin: 20px auto;
+    margin: auto;
     padding: 40px;
-    border-radius: 10px;
-    border: 1px solid #a5a5a5;
     min-width: none;
     max-width: 1000px;
 }

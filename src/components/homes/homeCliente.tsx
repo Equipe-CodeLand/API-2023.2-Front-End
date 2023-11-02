@@ -4,7 +4,16 @@ export default function Home() {
     return (
         <div className="homeCli">
             <section className="conteudo">
-
+                <div>
+                    <div className="titulo">
+                        <h1 id="tituloPrincipal">Bem vindo ao <strong>Callnet</strong>!</h1>
+                        <p>Faça chamadas com nossos atententes para solucionar seu problema!</p>
+                    </div>
+                    <div className="chamados">
+                        <div className="acessar"><a href="/meusChamados">Acessar meus chamados</a></div>
+                        <div className="criar"><a href="#">Criar um novo chamado</a></div>
+                    </div>
+                </div>
             </section>
             <section className="problemasComuns">
                 <h2 id="titulo">Problemas Comuns</h2>
