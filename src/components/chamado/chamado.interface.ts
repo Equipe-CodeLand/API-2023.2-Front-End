@@ -1,4 +1,4 @@
-import Mensagem from "./mensagem.interface"
+import { Mensagem } from "./mensagem.interface"
 
 export default interface Chamado {
     id: number,
