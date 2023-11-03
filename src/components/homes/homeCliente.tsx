@@ -10,8 +10,8 @@ export default function Home() {
                         <p>Faça chamadas com nossos atententes para solucionar seu problema!</p>
                     </div>
                     <div className="chamados">
-                        <div className="acessar"><a href="/meusChamados">Acessar meus chamados</a></div>
-                        <div className="criar"><a href="#">Criar um novo chamado</a></div>
+                        <div className="acessar"><a href="/chamadoCli">Acessar meus chamados</a></div>
+                        <div className="criar"><a href="/criarChamados">Criar um novo chamado</a></div>
                     </div>
                 </div>
             </section>
