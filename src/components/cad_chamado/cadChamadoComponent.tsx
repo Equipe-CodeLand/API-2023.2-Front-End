@@ -52,11 +52,13 @@ export default function ChamadosForm(props:cadChamados){
 
         if (formIsValid) {
             showSuccess();
+            const token = localStorage.getItem('token');
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+            axios.post('http://localhost:5000/criarChamados',{'idTema':tema,'desc':mensagem})
+            console.log(tema);
         } else {
             showWarning('Por favor, corrija os campos indicados.');
         }
-
-        axios.post('http://localhost:5000/criarChamados',{'tema':tema,'mensagem':mensagem})
     };
 
 
@@ -86,10 +88,10 @@ export default function ChamadosForm(props:cadChamados){
                 Tema:
                 <select className="browser-default" value={tema} onChange={handleTemaChange}>
                     <option value="">Selecione um tema</option>
-                    <option value="Velocidade da Internet">Velocidade da Internet</option>
-                    <option value="Modem">Modem</option>
-                    <option value="Problemas com conexão">Problemas com conexão</option>
-                    <option value="Outros">Outros</option>
+                    <option value="1">Velocidade da Internet</option>
+                    <option value="2">Modem</option>
+                    <option value="4">Problemas com conexão</option>
+                    <option value="3">Outros</option>
                 </select>
                 <span style={{ color: 'red' }}>{temaError}</span>
             </label>

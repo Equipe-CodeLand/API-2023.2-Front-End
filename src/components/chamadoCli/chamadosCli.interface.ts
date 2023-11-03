@@ -1,6 +1,10 @@
 export interface ChamadoCli {
+    id: number,
     nome: string,
-    tema: string,
+    tema: {
+        id:number,
+        texto: string
+    },
     status: {
         id: string,
         texto: string
