@@ -12,6 +12,7 @@ export default function CadUser(props: CadaUser) {
     const [telefone, setTelefone] = useState(props.telefone || '');
     const [turno, setTurno] = useState(props.turno || '');
     const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState(props.senha || '')
     const [isValid, setIsValid] = useState(true);
     const [emailError, setEmailError] = useState('');
     const [nomeError, setNomeError] = useState('');
@@ -19,6 +20,7 @@ export default function CadUser(props: CadaUser) {
     const [cpfError, setCpfError] = useState('');
     const [tipoError, setTipoError] = useState('');
     const [telefoneError, setTelefoneError] = useState('');
+    const [senhaError, setSenhaError] = useState('')
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = e.target.value;
@@ -32,6 +34,19 @@ export default function CadUser(props: CadaUser) {
             setIsValid(true);
         }
     };     
+
+    const handleSenhaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newSenha = e.target.value;
+        setSenha(newSenha);
+    
+        if (!validateEmail(newSenha) && newSenha.length > 8) {
+            setSenhaError('Por favor, preencha uma senha válida.');
+            setIsValid(false);
+        } else {
+            setSenhaError(''); 
+            setIsValid(true);
+        }
+    };  
 
     const handleNomeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newNome = e.target.value;
@@ -106,6 +121,11 @@ export default function CadUser(props: CadaUser) {
         const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return regex.test(email);
     };
+
+    const validateSenha = (senha: string): boolean => {
+        const senhaRegex = /^[a-zA-Z0-9]{1,8}$/i;
+        return senhaRegex.test(senha);
+    };  
 
     const validateNome = (nome: string): boolean => {
         const nomeRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s]*$/i;
@@ -195,10 +215,36 @@ export default function CadUser(props: CadaUser) {
         } else {
             setEmailError('');
         }
+
+        if (senha === "" || !validateSenha(senha)) {
+            setSenhaError('Por favor, preencha uma senha válida.');
+            formIsValid = false;
+        } else {
+            setSenhaError('');
+        }
     
         if (formIsValid) {
             showSuccess();
-            axios.post('http://localhost:5000/cadastroUser',{'nome': nome,'sobrenome':sobrenome,'email':email,'telefone':telefone,'cpf':cpf,'tipo':tipo})
+            let rotaCadastro = '';
+    
+                if (tipo === 'Cliente') {
+                    rotaCadastro = 'http://localhost:5000/cadastro/cliente';
+                } else if (tipo === 'Atendente') {
+                    rotaCadastro = 'http://localhost:5000/cadastro/atendente';
+                } else if (tipo === 'Administrador') {
+                    rotaCadastro = 'http://localhost:5000/cadastro/administrador';
+                }
+        
+                axios.post(rotaCadastro, {
+                    'nome': nome,
+                    'sobrenome': sobrenome,
+                    'email': email,
+                    'tipo': tipo,
+                    'turno': turno,
+                    'telefone': telefone,
+                    'cpf': cpf,
+                    'senha': senha
+                });
         } else {
             showWarning('Por favor, corrija os campos indicados.');
         }
@@ -220,7 +266,6 @@ export default function CadUser(props: CadaUser) {
             icon: "success",
             confirmButtonText: "OK",
             showCancelButton: true,
-            cancelButtonText: "Cancelar",
         });
     };
 
@@ -248,6 +293,12 @@ export default function CadUser(props: CadaUser) {
                 E-mail:
                 <input type="text" value={email} onChange={handleEmailChange} />
                 <span style={{ color: 'red' }}>{emailError}</span>
+            </label>
+            <br />
+            <label>
+                Senha:
+                <input type="password" value={senha} onChange={handleSenhaChange} maxLength={8} placeholder="Digite uma senha de 8 dígitos alfanumérica" />
+                <span style={{ color: 'red' }}>{senhaError}</span>
             </label>
             <br />
             <label>
@@ -283,4 +334,4 @@ export default function CadUser(props: CadaUser) {
             <input type="submit" value="Enviar" />
         </form>
     );
-}
+};

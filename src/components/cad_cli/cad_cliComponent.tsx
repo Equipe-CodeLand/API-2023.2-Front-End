@@ -10,12 +10,14 @@ export default function CadCli(props:CadaCli){
     const [cpf, setCpf] = useState(props.cpf || '');
     const [telefone, setTelefone] = useState(props.telefone || '');
     const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState(props.senha || '')
     const [isValid, setIsValid] = useState(true);
     const [emailError, setEmailError] = useState('');
     const [nomeError, setNomeError] = useState('');
     const [sobrenomeError, setSobrenomeError] = useState('');
     const [cpfError, setCpfError] = useState('');
     const [telefoneError, setTelefoneError] = useState('');
+    const [senhaError, setSenhaError] = useState('')
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = e.target.value;
@@ -26,6 +28,19 @@ export default function CadCli(props:CadaCli){
             setIsValid(false);
         } else {
             setEmailError(''); 
+            setIsValid(true);
+        }
+    };     
+
+    const handleSenhaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newSenha = e.target.value;
+        setSenha(newSenha);
+    
+        if (!validateEmail(newSenha) && newSenha.length > 8) {
+            setSenhaError('Por favor, preencha uma senha válida.');
+            setIsValid(false);
+        } else {
+            setSenhaError(''); 
             setIsValid(true);
         }
     };     
@@ -86,6 +101,11 @@ export default function CadCli(props:CadaCli){
         const nomeRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s]*$/i;
         return nomeRegex.test(nome);
     }; 
+
+    const validateSenha = (senha: string): boolean => {
+        const senhaRegex = /^[a-zA-Z0-9]{1,8}$/i;
+        return senhaRegex.test(senha);
+    };    
     
     const validateSobrenome = (sobrenome: string): boolean => {
         const sobrenomeRegex = /^[a-zA-Z\s]*$/i;
@@ -149,6 +169,13 @@ export default function CadCli(props:CadaCli){
             setTelefoneError('');
         }
 
+        if (senha === "" || !validateSenha(senha)) {
+            setSenhaError('Por favor, preencha uma senha válida.');
+            formIsValid = false;
+        } else {
+            setSenhaError('');
+        }
+
         if (email === "" || !validateEmail(email)) {
             setEmailError('Por favor, preencha um email válido.');
             formIsValid = false;
@@ -162,7 +189,7 @@ export default function CadCli(props:CadaCli){
             showWarning('Por favor, corrija os campos indicados.');
         }
 
-        axios.post('http://localhost:5000/cadastro/cliente',{'nome': nome,'sobrenome':sobrenome,'email':email,'telefone':telefone,'cpf':cpf})
+        //axios.post('http://localhost:5000/cadastro/cliente',{'nome': nome,'sobrenome':sobrenome,'email':email,'telefone':telefone,'cpf':cpf, 'senha':senha})
     };
     
 
@@ -182,6 +209,17 @@ export default function CadCli(props:CadaCli){
             confirmButtonText: "OK",
             showCancelButton: true,
             cancelButtonText: "Cancelar",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post('http://localhost:5000/cadastro/cliente', {
+                    'nome': nome,
+                    'sobrenome': sobrenome,
+                    'email': email,
+                    'telefone': telefone,
+                    'cpf': cpf,
+                    'senha': senha
+                });
+            }
         });
     };
 
@@ -214,6 +252,12 @@ export default function CadCli(props:CadaCli){
                 <span style={{ color: 'red' }}>{emailError}</span>
             </label>
             <br />
+
+            <label>
+                Senha:
+                <input type="password" value={senha} onChange={handleSenhaChange} maxLength={8} placeholder="Digite uma senha de 8 dígitos alfanumérica" />
+                <span style={{ color: 'red' }}>{senhaError}</span>
+            </label>
 
             <label>
                 Telefone para contato:

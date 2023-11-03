@@ -26,8 +26,9 @@ const Home: React.FC<HomeProps> = ({ data }) => {
                 <Link to={'/cadastroUser'}>Cadastrar Usuário (ADM)</Link> <br />
                 <Link to={'/cadastroCliente'}>Forms Cadastro de Cliente</Link> <br />
                 <Link to={'/chamado/Ate'}>Chamados Atendente</Link><br />
-                <Link to={'formularioCli'}>Formulário Cliente</Link><br />
                 <Link to={'/chamadoCli'}>Chamados Cliente</Link><br />
+                {/*<Link to={'/meusChamados'}>Meus Chamados(atendente)</Link><br />*/}
+                <Link to={'/cadastroChamados'}>Criar um novo Chamado</Link><br />
             </div>
             <div className="sobre">
                 <h3>Sobre</h3>

@@ -15,8 +15,9 @@ import Home from './pages/home.page';
 import ChamadoCli from './pages/chamadoCli.page';
 import ChamadosAte from './pages/chamadoAte.page';
 import MeusChamados from './pages/meusChamados.page';
-import FormularioCli from './pages/cli_form.page';
 import LoginPage from './pages/login.page';
+import CadastroChamada from './pages/cad_chamados.page';
+import ChamadosForm from './components/cad_chamado/cadChamadoComponent';
 
 const router = createBrowserRouter([
   {
@@ -36,10 +37,6 @@ const router = createBrowserRouter([
     element: <ChamadosAdm />
   },
   {
-     path:"/formularioCli",
-     element:<FormularioCli />
-   },
-  {
     path: "/cadastroUser",
     element: <CadastroUser />
   },
@@ -58,6 +55,10 @@ const router = createBrowserRouter([
   {
     path:"/login",
     element:<LoginPage />
+  },
+  {
+    path:'/cadastroChamados',
+    element:<CadastroChamada />
   }
 
 ]);
