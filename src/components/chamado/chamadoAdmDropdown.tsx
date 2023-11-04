@@ -88,6 +88,7 @@ function ChamadoAdmDropdown(props: any) {
                                             )
                                            
                                         } )}
+
                                     </tbody>
                                 </table>
                                 <br></br>

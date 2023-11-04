@@ -3,9 +3,12 @@ import Mensagem from "./mensagem.interface"
 export default interface Chamado {
     id: number,
     nome: string,
-    tema: string,
+    tema: {
+        id: number,
+        texto: string
+    },
     status: {
-        id: string,
+        id: number,
         texto: string
     },
     prioridade: {
@@ -14,6 +17,5 @@ export default interface Chamado {
     },
     hora: string,
     email: string,
-    conversa: Mensagem[],
     descricao: string
 }

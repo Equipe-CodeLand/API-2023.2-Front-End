@@ -3,15 +3,14 @@
     box-sizing: border-box;
 }
 
-
-h1{
+form#cliUserForm h1{
     margin: 2%;
     font-size: 35px !important;
     text-align: center;
     margin-bottom: 2% !important;
 }
 
-form{
+form#cliUserForm {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -19,43 +18,36 @@ form{
     margin: 3% auto;
 }
 
-label{
+form#cliUserForm label{
     font-weight: bold;
     margin-bottom: 10px;
     font-size: 1.0rem !important;
 }
 
-input, select, textarea {
+form#cliUserForm input, 
+form#cliUserForm select, 
+form#cliUserForm textarea {
     width: 100%;
     border: 2px solid #ddd !important;
     border-radius: 10px !important;
     font-size: 1.2rem !important;
     text-indent: 10px;
-    resize: none;
-
 }
 
-#input-msg{
-    height: 150px !important; 
-}
-
-
-
-
-button{
+form#cliUserForm button{
     padding: 15px;
     border: none;
     border-radius: 10px;
-    background-color: #5BC74A;
-    color: #000000;
+    background-color: #444;
+    color: #fff;
     font-size: 1.2rem;
     cursor: pointer;
     margin-bottom: 2%;
 }
 
-button, html [type="button"], [type="reset"], [type="submit"] {
-    height: 60px;
-    width: 120px;
-    align-self: center;
-    
+form#cliUserForm button, 
+form#cliUserForm html [type="button"], 
+form#cliUserForm [type="reset"], 
+form#cliUserForm [type="submit"] {
+    height: 40px;
 }

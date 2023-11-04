@@ -1,8 +1,8 @@
 import React from 'react'
-import CliForm from '../components/cli_form/cli_formComponent'
 import Header from '../components/header/headerComponent'
+import ChamadosForm from '../components/cad_chamado/cadChamadoComponent'
 
-const FormularioCli: React.FC = () => {
+const CadastroChamada: React.FC = () => {
 
     const link = ["/", "/chamados/Cliente", "/problemas", "/cadastroCliente"] // Link para as páginas
     const link_title = ["Home", "Painel do Cliente", "Problemas comuns", "Iniciar chamado"] // titulo para as paginas
@@ -18,10 +18,10 @@ const FormularioCli: React.FC = () => {
                 link_title_2 = {link_title[2]}
                 link_title_3 = {link_title[3]}
             />
-            <h1>Antes de começarmos, precisamos que você <br /> descreva um pouco sobre o problema</h1>
-            <CliForm tema=""mensagem=''/>
+            <h1>Página de cadastro do cliente</h1>
+            <ChamadosForm tema="" mensagem=''/>
         </div>
     )
 }
 
-export default FormularioCli;
+export default CadastroChamada;
