@@ -1,4 +1,4 @@
-export default interface cliForm{
+export default interface cadChamados{
     tema: string,
     mensagem: string
 }
