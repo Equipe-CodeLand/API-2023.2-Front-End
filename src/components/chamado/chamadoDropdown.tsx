@@ -127,8 +127,6 @@ function ChamadoDropdown(props: any) {
                             setMensagem('')
                         })
                     })
-
-
             }
         } catch (error) {
             console.log(error);
@@ -174,13 +172,9 @@ function ChamadoDropdown(props: any) {
                         </div>
                     </>}
                 <div className="cont">
-                    {(jwtDecode(localStorage.getItem('token') || '')['cargo'] === 'Cliente' && props.status.id === 1)&&
-
-                        <a href={`mailto:${props.email}`} className='btn'> Iniciar chamado </a>
-                    }
                     {jwtDecode(localStorage.getItem('token') || '')['cargo'] === 'Administrador'&&
                         <>
-                        <button onClick={abrirPopup} className='btn-adm'>Atribuir atendente</button>
+                        {!mostrarPopup && <button onClick={abrirPopup} className='btn-adm'>Atribuir atendente</button>}
                         <div>
                             {mostrarPopup && (
                                 <div id='meu-modal' className="modal">
@@ -219,18 +213,6 @@ function ChamadoDropdown(props: any) {
                         </div>
                     </>
                     }
-                  {/*<div className="chamado-ate-dropdown">              
-                    {thread}
-                    {/* colocar caixa de  e botão de enviar se for usuario com id incluso no chamado e o chamado estiver em andamento*/}
-                    {/* colocar botões de encerrar chamada se for atendente e chamado estiver em andamento */}
-                  {/* <div className="cont">
-                        {(props.tipoUsuario === 'Atendente' && props.status.id == 1) && 
-                            <a href={`mailto:${props.email}`} className='btn'> Iniciar chamado </a>
-                        }
-                        {(props.tipoUsuario === 'Administrador' && props.status.id == 1) &&
-                            <button className='btn-adm'>Atribuir atendente</button>
-                        }
-                    </div>*/}
                 </div>
             </div>
         )
