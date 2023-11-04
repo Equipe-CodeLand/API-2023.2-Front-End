@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Swal, { SweetAlertResult } from 'sweetalert2';
-import './cli_form.css';
+import './cadChamado.css';
 import axios from "axios";
-import cliForm from "./cli_form.interface";
+import cadChamados from "./cadChamado.interface";
 
-export default function CliForm(props:cliForm){
+export default function ChamadosForm(props:cadChamados){
     const [tema, setTema] = useState(props.tema || '');
+    const [email, setEmail] = useState('');
     const [mensagem, setMensagem] = useState(props.mensagem || '');
     const [isValid, setIsValid] = useState(true);
     const [temaError, setTemaError] = useState('');
@@ -17,13 +18,13 @@ export default function CliForm(props:cliForm){
         setTema(newTema);
     };
 
-    const handleMensagemChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleMensagemChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newMensagem = e.target.value;
         setMensagem(newMensagem);
     };    
 
 
-    
+
     const validateMensagem = (mensagem: string): boolean => {
         const mensagemRegex = /^.*$/i;
         return mensagemRegex.test(mensagem);
@@ -31,10 +32,10 @@ export default function CliForm(props:cliForm){
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-    
+
         let formIsValid = true;
-    
-        
+
+
         if (tema === "") {
             setTemaError('Por favor, selecione o tipo de usuário.');
             formIsValid = false;
@@ -48,16 +49,18 @@ export default function CliForm(props:cliForm){
         } else {
             setMensagemError('');
         }
-    
+
         if (formIsValid) {
             showSuccess();
+            const token = localStorage.getItem('token');
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+            axios.post('http://localhost:5000/criarChamados',{'idTema':tema,'desc':mensagem})
+            console.log(tema);
         } else {
             showWarning('Por favor, corrija os campos indicados.');
         }
-
-        axios.post('http://localhost:5000/cadastro/cliente',{'tema':tema,'mensagem':mensagem})
     };
-    
+
 
     const showWarning = (message: string) => {
         Swal.fire({
@@ -85,10 +88,10 @@ export default function CliForm(props:cliForm){
                 Tema:
                 <select className="browser-default" value={tema} onChange={handleTemaChange}>
                     <option value="">Selecione um tema</option>
-                    <option value="Velocidade da Internet">Velocidade da Internet</option>
-                    <option value="Modem">Modem</option>
-                    <option value="Problemas com conexão">Problemas com conexão</option>
-                    <option value="Outros">Outros</option>
+                    <option value="1">Velocidade da Internet</option>
+                    <option value="2">Modem</option>
+                    <option value="4">Problemas com conexão</option>
+                    <option value="3">Outros</option>
                 </select>
                 <span style={{ color: 'red' }}>{temaError}</span>
             </label>
@@ -96,12 +99,12 @@ export default function CliForm(props:cliForm){
 
             <label>
                 Mensagem:
-                <textarea id="input-msg" value={mensagem} onChange={handleMensagemChange} />
+                <input type="text" value={mensagem} onChange={handleMensagemChange} />
                 <span style={{ color: 'red' }}>{mensagemError}</span>
             </label>
             <br />
 
-            <button type="submit" value="Enviar" >Enviar</button>
+            <input type="submit" value="Enviar" />
         </form>
     )
 

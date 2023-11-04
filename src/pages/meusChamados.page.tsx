@@ -3,35 +3,42 @@ import Chamado from "../components/chamado/chamado.interface"
 import Header from "../components/header/headerComponent"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { jwtDecode } from "jwt-decode";
+import Token from "../components/login/token.interface"
 
 function MeusChamados() {
 
     const [chamados, setChamados] = useState<Chamado[]>([])
-    const atendente_id: number = 2
+    let token = jwtDecode<Token>(localStorage.getItem('token'))
 
     function buscarChamados() {
-        axios.get(`http://localhost:5000/chamados`)
+        axios.get(`http://localhost:5000/atendenteChamados/${token.userId}`)
             .then(res => {
                 let chamados = res.data.map((c: any) => {
                     let nomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.nome;
                     let sobrenomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.sobrenome;
-                    
+          
                     return {
-                        id: c.id,
-                        nome: (nomeCliente && sobrenomeCliente) ? nomeCliente + ' ' + sobrenomeCliente : '',
-                        tema: c.tema,
-                        status: {
-                            id: c.status.id,
-                            texto: c.status.nome
-                        },
-                        email: c.cliente.usuario.email,
-                        hora: new Date(c.inicio).toLocaleDateString() + " - " + new Date(c.inicio).toLocaleTimeString(),
-                        fim: c.final,
-                        descricao: c.desc
+                      id: c.id,
+                      nome: (nomeCliente && sobrenomeCliente) ? nomeCliente + ' ' + sobrenomeCliente : '',
+                      tema:{
+                        id: c.tema.id,
+                        texto: c.tema.nome
+                      },
+                      status: {
+                        id: c.status.id,
+                        texto: c.status.nome
+                      },
+                      prioridade:{
+                        id: c.prioridade.id,
+                        value: c.prioridade.nome
+                      },
+                      hora: new Date(c.inicio).toLocaleDateString() + " - " + new Date(c.inicio).toLocaleTimeString(),
+                      fim: c.final
                     }                
-                })
-                setChamados(chamados);
-        }) 
+                  })
+                  setChamados(chamados);
+                });
     }
 
     useEffect(() => {
@@ -65,6 +72,7 @@ function MeusChamados() {
                                 hora={chamado.hora}
                                 email={chamado.email}
                                 descricao={chamado.descricao}
+                                tipoUsuario={token.cargo}
                                 key={'chamado'+chamado.id}
                             ></ChamadoComponent>
                         })

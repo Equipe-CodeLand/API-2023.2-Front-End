@@ -10,15 +10,13 @@ function redirectUser(tipoUser: string, navigate:any) {
   
     switch (tipoUser) {
       case 'Cliente':
-        navigate('/chamados');
+        navigate('/cadastroChamados');
         break;
       case 'Atendente':
-        console.log('ino pa pagina');
-        
-        navigate('/chamados/Ate');
+        navigate('/chamadosAte');
         break;
       case 'Administrador':
-        navigate('/chamados/Adm');
+        navigate('/chamadosAdm');
         break;
       default:
         break;
@@ -50,9 +48,11 @@ export default function Login(props:LoginInterface){
         })
         .then(res => {
             const token = res.data.token; 
-            console.log("Token gerado com sucesso");            
+            console.log("Token gerado com sucesso", token);            
 
             localStorage.setItem('token', token);
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
             
             const tipoUser = res.data.tipoUser
             redirectUser(tipoUser, navigate)            
@@ -177,8 +177,9 @@ export default function Login(props:LoginInterface){
 
     return(
         <div id="login">
-            <div className="logo">
-                <img src={logo} alt="Logo" />
+            <div className="logo" style={{ marginTop: '80px' }}>
+                <></>
+                <img src={logo} alt="Logo"  />
                 <h1 id="textLogo">Callnet</h1>
             </div>
             <form onSubmit={handleSubmit} className="login">

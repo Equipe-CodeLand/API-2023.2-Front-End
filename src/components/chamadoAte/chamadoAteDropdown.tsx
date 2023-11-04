@@ -36,7 +36,7 @@ function ChamadoAteDropdown(props:any){
                     console.error(error);
                 });
         }
-    }, [props.conversa, props.open]);
+    }, [props.conversa, props.open]);    
 
     let conversa = dropdownData ? dropdownData : [];
     return (

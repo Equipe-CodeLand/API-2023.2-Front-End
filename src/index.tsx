@@ -15,8 +15,9 @@ import CadastroCli from './pages/cad_cli.page';
 import ChamadoCli from './pages/chamadoCli.page';
 import ChamadosAte from './pages/chamadoAte.page';
 import MeusChamados from './pages/meusChamados.page';
-import FormularioCli from './pages/cli_form.page';
 import LoginPage from './pages/login.page';
+import CadastroChamada from './pages/cad_chamados.page';
+import ChamadosForm from './components/cad_chamado/cadChamadoComponent';
 
 // Homes temporarias
 
@@ -27,24 +28,20 @@ import HomePageAdministrador from './pages/home.page.administrador';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: <App />,
   },
   /*{
     path: "/chamados",
     element: <Chamados></Chamados>,
   },*/
   {
-    path: "/meusChamados",
+    path: "/meusChamados/atendente",
     element: <MeusChamados></MeusChamados>,
   },
   {
-    path: "/chamados/Adm",
+    path: "/chamadosAdm",
     element: <ChamadosAdm />
   },
-  {
-     path:"/formularioCli",
-     element:<FormularioCli />
-   },
   {
     path: "/cadastroUser",
     element: <CadastroUser />
@@ -54,11 +51,11 @@ const router = createBrowserRouter([
     element: <CadastroCli />
   },
   {
-    path: "/chamadoCli",
+    path: "/chamadosCli",
     element: <ChamadoCli />
   },
   {
-    path:"/chamado/Ate",
+    path:"/chamadosAte",
     element:<ChamadosAte />
   },
   {
@@ -76,6 +73,10 @@ const router = createBrowserRouter([
   {
     path:"/home/administrador",
     element:<HomePageAdministrador />
+  },
+  {
+    path:'/cadastroChamados',
+    element:<CadastroChamada />
   }
 
 ]);

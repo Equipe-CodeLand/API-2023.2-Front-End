@@ -31,7 +31,8 @@ function ChamadoComponent(props: any) {
             status={props.status}
             descricao={props.descricao}
             tipoUsuario={props.tipoUsuario}
-            ></ChamadoDropdown>
+            >
+            </ChamadoDropdown>
         </div>
     )
 }

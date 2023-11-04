@@ -5,5 +5,6 @@ export default interface CadaUser{
     cpf: string,
     tipo: string,
     telefone: string
-    turno: string
+    turno: string,
+    senha: string
 }

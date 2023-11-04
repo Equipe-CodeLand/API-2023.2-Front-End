@@ -10,28 +10,29 @@ export default function ChamadosCli() {
     const [chamados, setChamados] = useState<ChamadoCli[]>([])
 
     function buscarChamados() {
-        axios.get(`http://localhost:5000/chamados`)
+      const token = localStorage.getItem('token');
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      axios.get(`http://localhost:5000/chamadosCli`)
       .then(res => {
         console.log(res);
         let chamados = res.data.map((c: any) => {
-          let nomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.nome;
-          let sobrenomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.sobrenome;
+          let nomeAtendente = c.atendente && c.atendente.usuario && c.atendente.usuario.nome;
+          let sobrenomeAtendente = c.atendente && c.atendente.usuario && c.atendente.usuario.sobrenome;
 
           return {
             id: c.id,
-            nome: (nomeCliente && sobrenomeCliente) ? nomeCliente + ' ' + sobrenomeCliente : '',
-            tema: c.tema,
+            nome: (nomeAtendente && sobrenomeAtendente) ? nomeAtendente + ' ' + sobrenomeAtendente : '',
+            tema: {
+              id: c.tema.id,
+              texto: c.tema.nome
+            },
             status: {
               id: c.status.id,
               texto: c.status.nome
             },
-            prioridade:{
-              id: c.prioridade.id,
-              value: c.prioridade.nome
-            },
             hora: c.inicio,
             fim: c.final
-          }                
+          }        
         })
         console.log(chamados);
         setChamados(chamados);
@@ -57,11 +58,12 @@ export default function ChamadosCli() {
                 <div>
                 {chamados.map(chamado => (
                     <ChamadoCliComponent
+                    id={chamado.id}
                     nome={chamado.nome}
                     tema={chamado.tema}
                     status={chamado.status}
                     hora={new Date(chamado.hora).toLocaleDateString() + " - " + new Date(chamado.hora).toLocaleTimeString()}
-                    descricao={chamado.descricao ? chamado.descricao : []}
+                    descricao={chamado.descricao}
                 />
                 ))}
                 </div>
