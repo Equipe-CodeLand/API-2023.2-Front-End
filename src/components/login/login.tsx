@@ -10,13 +10,13 @@ export function redirectUser(tipoUser: string, navigate:any) {
   
     switch (tipoUser) {
       case 'Cliente':
-        navigate('/cadastroChamados');
+        navigate('/home/cliente');
         break;
       case 'Atendente':
-        navigate('/chamadosAte');
+        navigate('/home/atendente');
         break;
       case 'Administrador':
-        navigate('/chamadosAdm');
+        navigate('/home/administrador');
         break;
       default:
         break;
