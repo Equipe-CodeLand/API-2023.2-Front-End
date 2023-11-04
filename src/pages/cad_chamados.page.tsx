@@ -4,7 +4,7 @@ import ChamadosForm from '../components/cad_chamado/cadChamadoComponent'
 
 const CadastroChamada: React.FC = () => {
 
-    const link = ["/", "/chamados/Cliente", "/problemas", "/cadastroCliente"] // Link para as páginas
+    const link = ["/", "/chamadosCli", "/problemas", "/cadastroCliente"] // Link para as páginas
     const link_title = ["Home", "Painel do Cliente", "Problemas comuns", "Iniciar chamado"] // titulo para as paginas
     return(
         <div>

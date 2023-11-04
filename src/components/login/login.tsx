@@ -177,8 +177,9 @@ export default function Login(props:LoginInterface){
 
     return(
         <div id="login">
-            <div className="logo">
-                <img src={logo} alt="Logo" />
+            <div className="logo" style={{ marginTop: '80px' }}>
+                <></>
+                <img src={logo} alt="Logo"  />
                 <h1 id="textLogo">Callnet</h1>
             </div>
             <form onSubmit={handleSubmit} className="login">

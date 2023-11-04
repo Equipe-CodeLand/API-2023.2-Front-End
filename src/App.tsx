@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from './components/header/headerComponent';
 import Home from './pages/home.page';
 import { useEffect, useState } from 'react';
+import LoginPage from './pages/login.page';
 
 function App() {
   const [data, setData] = useState([]);
@@ -20,22 +21,9 @@ function App() {
 
   return (
     <div className="App">
-      <Header 
-        link_0 = {link[0]} // Link para as páginas
-        link_1 = {link[1]}
-        link_2 = {link[2]}
-        link_3 = {link[3]}
-        link_4 = {link[4]}
-        link_5 = {link[5]}
-        link_title_0 = {link_title[0]} // titulo para as paginas
-        link_title_1 = {link_title[1]}
-        link_title_2 = {link_title[2]}
-        link_title_3 = {link_title[3]}
-        link_title_4 = {link_title[4]}
-        link_title_5 = {link_title[5]}
-      />
+      <></>
       <main>
-        <Home data={data} />
+        <LoginPage />
       </main>
     </div>
   );
