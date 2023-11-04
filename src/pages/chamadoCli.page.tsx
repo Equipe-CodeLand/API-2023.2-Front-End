@@ -5,9 +5,11 @@ import ChamadoCliDropdown from "../components/chamadoCli/chamadoCliDropdown"
 import ChamadoCliComponent from "../components/chamadoCli/chamadoCliComponent"
 import { ChamadoCli, ChamadoCliDetalhes } from "../components/chamadoCli/chamadosCli.interface"
 import Header from "../components/header/headerComponent"
+import ChamadoComponent from "../components/chamado/chamadoComponent"
+import Chamado from "../components/chamado/chamado.interface"
 
 export default function ChamadosCli() {
-    const [chamados, setChamados] = useState<ChamadoCli[]>([])
+    const [chamados, setChamados] = useState<Chamado[]>([])
 
     function buscarChamados() {
       const token = localStorage.getItem('token');
@@ -43,8 +45,8 @@ export default function ChamadosCli() {
         buscarChamados();
       }, [])
 
-      const link = ["/", "/", "/cadastroUser"]
-  const link_title = ["Chamadas em Aberto"]
+      const link = ["/home/cliente", "/", "/cadastroUser"]
+  const link_title = ["Home","Chamadas em Aberto"]
 
     return (
         <div>
@@ -57,7 +59,7 @@ export default function ChamadosCli() {
             {chamados.length > 0 && (
                 <div>
                 {chamados.map(chamado => (
-                    <ChamadoCliComponent
+                    <ChamadoComponent
                     id={chamado.id}
                     nome={chamado.nome}
                     tema={chamado.tema}

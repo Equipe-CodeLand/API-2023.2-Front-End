@@ -6,7 +6,7 @@ import axios from "axios"
 import { strict } from "assert"
 import { useNavigate } from 'react-router-dom'
 
-function redirectUser(tipoUser: string, navigate:any) {
+export function redirectUser(tipoUser: string, navigate:any) {
   
     switch (tipoUser) {
       case 'Cliente':

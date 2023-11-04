@@ -1,8 +1,10 @@
+import { redirectUser } from "../login/login";
 import "./style.css"
+import jwt from 'jsonwebtoken';
 import { useState } from "react";
 
 
-export default function Header(props: any) {
+export default function Header(props: any, navigate: any) {
     const [active, setMode] = useState(false);
     const ToggleMode = () => {
         setMode(!active)
@@ -27,7 +29,7 @@ export default function Header(props: any) {
                     <li><a href={link[9]}>{props.link_title_9}</a></li>
                 </ul>
                 <div className="exit">
-                    <a href="#">Sair</a>
+                    <a href="/login">Sair</a>
                 </div>
             </div>
 
@@ -35,7 +37,7 @@ export default function Header(props: any) {
                 <div className={active ? "icon iconActive" : "icon"} onClick={ToggleMode}>
                     <div className="hamburguer hamburguerIcon"></div>
                 </div>
-                <a href="/">Callnet</a>
+                <p>Callnet</p>
             </div>
         </header>
     );

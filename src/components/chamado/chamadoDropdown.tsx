@@ -4,11 +4,19 @@ import { BiSend } from 'react-icons/bi';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 import './style.css'
+import Atendente from './Atendente.interface';
 
 function ChamadoDropdown(props: any) {
     const [mensagem, setMensagem] = useState('');
     const [mensagemErro, setMensagemErro] = useState(false)
     const [mensagens, setMensagens] = useState<Mensagem[]>([])
+    const [mostrarPopup, setMostrarPopup] = useState(false); // Estado para controlar a exibição do pop-up
+
+
+    const fecharPopup = () => {
+        setMostrarPopup(false);
+    }
+    const [atendentes, setAtendentes] = useState<Atendente[]>([])
 
     function buscarMensagens() {
         axios.get(`http://localhost:5000/chamados/${props.id}/mensagens`)
@@ -34,8 +42,38 @@ function ChamadoDropdown(props: any) {
         buscarMensagens()
     }, [])
 
+    function buscarAtendentes() {
+        axios.get(`http://localhost:5000/atendentes`,)
+            .then(res => {
+                let atendentes = res.data.map((atendente:any) => {
+                    return {
+                        id: atendente.id,
+                        nome: atendente.usuario.nome + ' ' + atendente.usuario.sobrenome,
+                    }
+                })
+                setAtendentes(atendentes)
+        }) 
+    }
+    const abrirPopup = () => {
+        setMostrarPopup(true);
+        buscarAtendentes();
+    }
+
+    function atribuirAtendente(atendenteId){
+        console.log(props.id);
+        // Aqui você pode usar o axios para fazer uma requisição
+        axios.post(`http://localhost:5000/atribuirAtendente`, { chamadoId: props.id, atendenteId: atendenteId })
+            .then(response => {
+                // Atualize o estado ou faça qualquer outra ação necessária
+                console.log("Atendente atribuído com sucesso!");
+            })
+            .catch(error => {
+                console.error("Erro ao atribuir atendente:", error);
+            });
+    }
+
     const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        if (e.target.value == "cancelar-chamado") {
+        if (e.target.value === "cancelar-chamado") {
             const data = {
                 idChamado: props.id,
                 idStatus: 3
@@ -47,7 +85,7 @@ function ChamadoDropdown(props: any) {
                 buscarMensagens()
             })
         } else {
-            if (e.target.value == "concluir-chamado") {
+            if (e.target.value === "concluir-chamado") {
                 const data = {
                     idChamado: props.id,
                     idStatus: 4
@@ -97,7 +135,7 @@ function ChamadoDropdown(props: any) {
         }
     }
 
-    if (props.open && mensagens.length > 0) {
+    if (props.open) {
         let thread = mensagens.map(msg => {
             return (
                 <div key={'msg' + msg.id}>
@@ -121,11 +159,13 @@ function ChamadoDropdown(props: any) {
                         {mensagemErro && <p className='erro'>Campo obrigatório</p>}
 
                         <div className="select-botao">
-                            <select className='select-chamado' onChange={handleSelect} style={{ display: 'block' }}>
+                            {jwtDecode(localStorage.getItem('token') || '')['cargo'] !== 'Cliente'&&
+
+                                <select className='select-chamado' onChange={handleSelect} style={{ display: 'block' }}>
                                 <option value="" hidden>Gerenciar Chamado</option>
                                 <option value="cancelar-chamado">Cancelar Chamado</option>
                                 <option value="concluir-chamado">Concluir Chamado</option>
-                            </select>
+                            </select>}
 
                             <button type="submit" value="enviar" className='btn-chamado' onClick={enviarMensagem} style={{ display: 'flex', alignItems: 'center' }}>
                                 <span style={{ marginRight: 5 }}>Enviar Mensagem</span>
@@ -134,11 +174,50 @@ function ChamadoDropdown(props: any) {
                         </div>
                     </>}
                 <div className="cont">
-                    {(props.tipoUsuario === 'Atendente' && props.status.id == 1) &&
+                    {(jwtDecode(localStorage.getItem('token') || '')['cargo'] === 'Cliente' && props.status.id === 1)&&
+
                         <a href={`mailto:${props.email}`} className='btn'> Iniciar chamado </a>
                     }
-                    {(props.tipoUsuario === 'ADMIN' && props.status.id == 1) &&
-                        <button className='btn-adm'>Atribuir atendente</button>
+                    {jwtDecode(localStorage.getItem('token') || '')['cargo'] === 'Administrador'&&
+                        <>
+                        <button onClick={abrirPopup} className='btn-adm'>Atribuir atendente</button>
+                        <div>
+                            {mostrarPopup && (
+                                <div id='meu-modal' className="modal">
+                                    <div className="modal-content">
+                                        <br></br>
+                                        <table className="atendente-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Atendentes</th>
+                                                    <th>Atribuir Atendente</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {atendentes.map(atendente=> {
+                                                    console.log(atendente);
+                                                    return (
+                                                        <tr>
+                                                            <td>{atendente.id}</td>
+                                                            <td>{atendente.nome}</td>
+                                                            <td>
+                                                                <button className="btn" onClick={() => atribuirAtendente(atendente.id)}>Atribuir atendente</button>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                
+                                                } )}
+
+                                            </tbody>
+                                        </table>
+                                        <br></br>
+                                        <button className='fechar_btn' onClick={fecharPopup}>Fechar</button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </>
                     }
                   {/*<div className="chamado-ate-dropdown">              
                     {thread}

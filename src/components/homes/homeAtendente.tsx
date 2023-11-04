@@ -10,8 +10,8 @@ export default function Home() {
                         <p>Escolha o que deseja vizualizar:</p>
                     </div>
                     <div className="chamados">
-                        <div className="acessar"><a href="/criarNovoChamado">Acessar chamados</a></div>
-                        <div className="acessar"><a href="/visualizarChamado">Cadastrar novo usuario</a></div>
+                        <div className="acessar"><a href="/chamadosAte">Acessar todos os chamados</a></div>
+                        <div className="acessar"><a href="/meuschamados/atendente">Visualizar meus chamados</a></div>
                     </div>
                 </div>
             </section>           

@@ -12,24 +12,8 @@ const Home: React.FC<HomeProps> = ({ data }) => {
     useEffect(() => {
         document.title="Home"
     }, []);
-    const link = ["/chamados", "/chamados/Adm", "/cadastroUser", "/cadastroCliente", '/meusChamados'] // Link para as páginas
-    const link_title = ["Chamados", "Chamados ADM", "Cadastrar Usuário", "Forms Cadastro de Cliente", 'Meus Chamados'] // titulo para as paginas
     return(
         <div id="home">
-            <Header 
-            link_0 = {link[0]} // Link para as páginas
-            link_1 = {link[1]}
-            link_2 = {link[2]}
-            link_3 = {link[3]}
-            link_4 = {link[4]}
-            link_5 = {link[5]}
-            link_title_0 = {link_title[0]} // titulo para as paginas
-            link_title_1 = {link_title[1]}
-            link_title_2 = {link_title[2]}
-            link_title_3 = {link_title[3]}
-            link_title_4 = {link_title[4]}
-            link_title_5 = {link_title[5]}
-        />
             <h1 className="text-tiny">Seja Bem-vindo(a) ao CallNet!</h1>
             <div>
                 <h4>Escolha o que deseja visualizar:</h4>

@@ -46,8 +46,8 @@ export default function ChamadosAdm() {
     buscarChamados();
   }, []);
 
-  const link = ["/", "/", "/cadastroUser"]; // Link para as páginas
-  const link_title = ["Relatórios", "Chamadas em Aberto", "Cadastrar Usuário"]; // titulo para as paginas
+  const link = ["/home/atendente", "/chamadosAte", "/meusChamados/atendente"]; // Link para as páginas
+  const link_title = ["Home", "Chamadas em Aberto", "Meus chamados"]; // titulo para as paginas
 
   return (
     <div>

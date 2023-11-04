@@ -45,8 +45,8 @@ function MeusChamados() {
         buscarChamados()
     }, [])
 
-    const link = ["/", "/", "/chamados"] // Link para as páginas
-    const link_title = ["Iniciar Chamado", "Problemas Comuns", "Meus Chamados"] // titulo para as paginas
+    const link = ["/home/atendente", "/", "/chamadosAte"] // Link para as páginas
+    const link_title = ["Home", "Iniciar Chamado", "Ver todos os chamados"] // titulo para as paginas
 
     return(
         <div>
