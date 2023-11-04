@@ -26,6 +26,7 @@ const CadastroAdmin: React.FC = () => {
                 tipo="" 
                 telefone="" 
                 turno="" 
+                senha= ""
             />
         </div>
     );
