@@ -1,21 +1,42 @@
-import Header from "../header/headerComponent"
-import Home from "./homeCliente"
-
+import "./styles/administrador.css";
+import problemas from "../homes/chamadosfrequentes.png";
+import atendentes from "../homes/atendentes.png";
 
 export default function HomePageAdministrador() {
-    const link = ["/home/administrador", "/home/atendente", "/home/administrador"] // Link para as páginas
-    const link_title = ["Home", "atendente", "administrador"] // titulo para as paginas
     return (
-        <div>
-            <Header 
-                link_0 = {link[0]}
-                link_1 = {link[1]}
-                link_2 = {link[2]}
-                link_title_0 = {link_title[0]}
-                link_title_1 = {link_title[1]}
-                link_title_2 = {link_title[2]}
-            />
-            <Home />
+        <div className="homeCli">
+            <section className="conteudo">
+                <div>
+                    <div className="titulo">
+                        <h1 id="tituloPrincipal">Bem vindo ao <strong>Callnet</strong>!</h1>
+                        <p>Escolha o que deseja vizualizar:</p>
+                    </div>
+                    <div className="chamados">
+                        <div className="acessar"><a href="/chamados/Adm">Gerenciar chamados</a></div>
+                        <div className="acessar"><a href="/cadastroUser">Cadastrar novo usuario</a></div>
+                    </div>
+                </div>
+                
+            </section>
+            
+            <section className="problemasComuns">
+                <h2 id="titulo">Relatorios</h2>
+                <hr />
+                <div className="problema 1">
+                    
+                    <h3>Problemas mais recorrentes:</h3>
+                    <p>
+                        <img src={problemas} alt="problemas recorrentes" />
+                    </p>
+                    <br></br>
+                    <h3>Atendente com mais atendimentos:</h3>
+                    <p>
+                        <img src={atendentes} alt="atendentes e seus atendimentos" />
+
+                    </p>
+                    
+                </div>
+            </section>
         </div>
-    )
+    );
 }
