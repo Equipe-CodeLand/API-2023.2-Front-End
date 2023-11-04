@@ -2,8 +2,6 @@ import Home from "../components/homes/homeAdministrador";
 import Header from "../components/header/headerComponent";
 
 export default function HomePageAdministrador() {
-    const link = ["/home/cliente", "/home/atendente", "/home/administrador"] // Link para as páginas
-    const link_title = ["cliente", "atendente", "administrador"] // titulo para as paginas
     return (
         <div>
             <Header 
