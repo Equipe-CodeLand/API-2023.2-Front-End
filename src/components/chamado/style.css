@@ -163,3 +163,23 @@ h2{
     align-items: center;
     justify-content: center;
 }
+
+.select-botao {
+    display: flex;
+    justify-content: space-between;
+}
+
+.select-chamado, .btn-chamado {
+    width: 220px !important;
+    border: 2px solid #a0a0a0;
+    border-radius: 10px;
+    height: 50px !important;
+    background-color: rgb(209, 209, 209);
+    font-weight: bolder;
+}
+
+.btn-chamado:focus {
+    outline: none; 
+    background-color: #d3d2d2; 
+}
+
