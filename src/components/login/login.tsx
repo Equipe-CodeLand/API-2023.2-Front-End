@@ -193,7 +193,7 @@ export default function Login(props:LoginInterface){
                 </div>
                 <div className="links">
                     <a href="#"></a>
-                    <a href="/cadastroUser">Ainda não tem conta?</a>
+                    <a href="/cadastroCliente">Ainda não tem conta?</a>
                 </div>
                 <div className="button">
                     <input type="submit" id="inputButton" value="Entrar" />

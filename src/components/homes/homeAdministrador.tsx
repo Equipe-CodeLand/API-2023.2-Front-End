@@ -12,7 +12,7 @@ export default function HomePageAdministrador() {
                         <p>Escolha o que deseja vizualizar:</p>
                     </div>
                     <div className="chamados">
-                        <div className="acessar"><a href="/chamados/Adm">Gerenciar chamados</a></div>
+                        <div className="acessar"><a href="/chamadosAdm">Gerenciar chamados</a></div>
                         <div className="acessar"><a href="/cadastroUser">Cadastrar novo usuario</a></div>
                     </div>
                 </div>
