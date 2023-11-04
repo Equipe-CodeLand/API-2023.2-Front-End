@@ -11,13 +11,19 @@ import App from './App';
 import ChamadosAdm from './pages/chamadosAdm.page';
 import CadastroUser from './pages/cad_user.page';
 import CadastroCli from './pages/cad_cli.page';
-import Home from './pages/home.page';
+// import Home from './pages/home.page';
 import ChamadoCli from './pages/chamadoCli.page';
 import ChamadosAte from './pages/chamadoAte.page';
 import MeusChamados from './pages/meusChamados.page';
 import LoginPage from './pages/login.page';
 import CadastroChamada from './pages/cad_chamados.page';
 import ChamadosForm from './components/cad_chamado/cadChamadoComponent';
+
+// Homes temporarias
+
+import HomePageCliente from './pages/home.page.cliente';
+import HomePageAtendente from './pages/home.page.atendente';
+import HomePageAdministrador from './pages/home.page.administrador';
 
 const router = createBrowserRouter([
   {
@@ -55,6 +61,18 @@ const router = createBrowserRouter([
   {
     path:"/login",
     element:<LoginPage />
+  },
+  {
+    path:"/home/cliente",
+    element:<HomePageCliente />
+  },
+  {
+    path:"/home/atendente",
+    element:<HomePageAtendente />
+  },
+  {
+    path:"/home/administrador",
+    element:<HomePageAdministrador />
   },
   {
     path:'/cadastroChamados',
