@@ -46,16 +46,17 @@ export default function ChamadosCli() {
         buscarChamados();
       }, [])
 
-      const link = ["/home/cliente", "/", "/cadastroUser"]
-  const link_title = ["Home","Chamadas em Aberto"]
+      const link = ["/home/cliente", "/cadastroChamados"]
+  const link_title = ["Home","Criar novo chamado"]
 
     return (
         <div>
             <Header
                 link_0 = {link[0]} 
                 link_1 = {link[1]}
-                link_2 = {link[2]}
                 link_title_0 = {link_title[0]}
+                link_title_1 = {link_title[1]}
+
             />
             {chamados.length > 0 && (
                 <div>

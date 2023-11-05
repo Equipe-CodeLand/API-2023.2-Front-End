@@ -5,7 +5,7 @@ import axios from "axios";
 import cadChamados from "./cadChamado.interface";
 import { jwtDecode } from "jwt-decode";
 
-export default function ChamadosForm(props:cadChamados){
+export default function ChamadosForm(props: cadChamados) {
     const [tema, setTema] = useState(props.tema || '');
     const [email, setEmail] = useState('');
     const [mensagem, setMensagem] = useState(props.mensagem || '');
@@ -13,29 +13,25 @@ export default function ChamadosForm(props:cadChamados){
     const [temaError, setTemaError] = useState('');
     const [mensagemError, setMensagemError] = useState('');
 
-
     const handleTemaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const newTema = e.target.value;
         setTema(newTema);
     };
 
-    const handleMensagemChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleMensagemChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const newMensagem = e.target.value;
         setMensagem(newMensagem);
-    };    
-
-
+    };
 
     const validateMensagem = (mensagem: string): boolean => {
         const mensagemRegex = /^.*$/i;
         return mensagemRegex.test(mensagem);
-    };    
+    };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         let formIsValid = true;
-
 
         if (tema === "") {
             setTemaError('Por favor, selecione o tipo de usuário.');
@@ -55,14 +51,12 @@ export default function ChamadosForm(props:cadChamados){
             showSuccess();
             const token = localStorage.getItem('token');
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-            axios.post('http://localhost:5000/criarChamados',{'idTema':tema,'desc':mensagem,'userId': jwtDecode(localStorage.getItem('token') || '')['userId'],
-        })
+            axios.post('http://localhost:5000/criarChamados', { 'idTema': tema, 'desc': mensagem, 'userId': jwtDecode(localStorage.getItem('token') || '')['userId'], })
             console.log(tema);
         } else {
             showWarning('Por favor, corrija os campos indicados.');
         }
     };
-
 
     const showWarning = (message: string) => {
         Swal.fire({
@@ -83,12 +77,13 @@ export default function ChamadosForm(props:cadChamados){
         });
     };
 
-    return(
+    return (
         <form onSubmit={handleSubmit}>
 
             <label id="tema">
                 Tema:
-                <select className="browser-default" value={tema} onChange={handleTemaChange}>
+                <select className="browser-default" value={tema} onChange={handleTemaChange}
+                    style={{ height: 50, marginTop: 10 }}>
                     <option value="">Selecione um tema</option>
                     <option value="1">Velocidade da Internet</option>
                     <option value="2">Modem</option>
@@ -101,7 +96,8 @@ export default function ChamadosForm(props:cadChamados){
 
             <label>
                 Mensagem:
-                <input type="text" value={mensagem} onChange={handleMensagemChange} />
+                <textarea value={mensagem} onChange={handleMensagemChange}
+                    style={{ height: 200, marginTop: 10, paddingTop: 10}} />
                 <span style={{ color: 'red' }}>{mensagemError}</span>
             </label>
             <br />
@@ -109,5 +105,4 @@ export default function ChamadosForm(props:cadChamados){
             <input type="submit" value="Enviar" />
         </form>
     )
-
 }

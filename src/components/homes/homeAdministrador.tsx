@@ -9,7 +9,7 @@ export default function HomePageAdministrador() {
                 <div>
                     <div className="titulo">
                         <h1 id="tituloPrincipal">Bem vindo ao <strong>Callnet</strong>!</h1>
-                        <p>Escolha o que deseja vizualizar:</p>
+                        <p>Escolha o que deseja visualizar:</p>
                     </div>
                     <div className="chamados">
                         <div className="acessar"><a href="/chamadosAdm">Gerenciar chamados</a></div>
@@ -20,7 +20,7 @@ export default function HomePageAdministrador() {
             </section>
             
             <section className="problemasComuns">
-                <h2 id="titulo">Relatorios</h2>
+                <h2 id="titulo">Relatórios</h2>
                 <hr />
                 <div className="problema 1">
                     

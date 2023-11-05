@@ -61,7 +61,7 @@ export default function Home() {
                     </ul>
                 </div>
                 <div className="problema 2">
-                    <h3>Moldem</h3>
+                    <h3>Modem</h3>
                     <ul>
                         <li>
                             <details>

@@ -7,7 +7,7 @@ export default function Home() {
                 <div>
                     <div className="titulo">
                         <h1 id="tituloPrincipal">Bem vindo ao <strong>Callnet</strong>!</h1>
-                        <p>Escolha o que deseja vizualizar:</p>
+                        <p>Escolha o que deseja visualizar:</p>
                     </div>
                     <div className="chamados">
                         <div className="acessar"><a href="/chamadosAte">Acessar todos os chamados</a></div>

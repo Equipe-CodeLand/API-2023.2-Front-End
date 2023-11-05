@@ -39,8 +39,10 @@ input, select, textarea {
     height: 150px !important; 
 }
 
-
-
+.formCliente input {
+    height: 40px;
+    margin-top: 10px;
+}
 
 button{
     padding: 15px;

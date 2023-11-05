@@ -32,6 +32,8 @@ form#cadUserForm textarea {
     border-radius: 10px !important;
     font-size: 1.2rem !important;
     padding-left: 10px;
+    height: 40px;
+    margin-top: 10px;
 }
 
 form#cadUserForm button{

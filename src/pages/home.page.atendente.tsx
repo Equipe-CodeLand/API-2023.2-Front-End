@@ -2,8 +2,8 @@ import Home from "../components/homes/homeAtendente";
 import Header from "../components/header/headerComponent";
 
 export default function HomePageAtendente() {
-    const link = ["/home/cliente", "/home/atendente", "/home/administrador"] // Link para as páginas
-    const link_title = ["cliente", "atendente", "administrador"] // titulo para as paginas
+    const link = ["/home/atendente", "/chamadosAte", "/meuschamados/atendente"] // Link para as páginas
+    const link_title = ["Home", "Ver todos os chamados", "Meus chamados"] // titulo para as paginas
     return (
         <div>
             <Header 

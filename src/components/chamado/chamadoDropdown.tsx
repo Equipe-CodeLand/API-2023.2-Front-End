@@ -101,7 +101,7 @@ function ChamadoDropdown(props: any) {
         }
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const newNome = e.target.value;
         setMensagem(newNome);
         setMensagemErro(false)
@@ -154,7 +154,7 @@ function ChamadoDropdown(props: any) {
                     null
                     :
                     <>
-                        <input name="input-mensagem" placeholder="Digite sua mensagem" type="text" value={mensagem} onChange={handleChange} />
+                        <textarea name="input-mensagem" placeholder="Digite sua mensagem" value={mensagem} onChange={handleChange} style={{ marginBottom: 10, height: 60 }}/>
 
                         {mensagemErro && <p className='erro'>Campo obrigatório</p>}
 
