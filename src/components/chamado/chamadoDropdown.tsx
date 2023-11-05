@@ -66,6 +66,7 @@ function ChamadoDropdown(props: any) {
             .then(response => {
                 // Atualize o estado ou faça qualquer outra ação necessária
                 console.log("Atendente atribuído com sucesso!");
+                window.location.reload()
             })
             .catch(error => {
                 console.error("Erro ao atribuir atendente:", error);
@@ -121,11 +122,12 @@ function ChamadoDropdown(props: any) {
 
                 axios.post('http://localhost:5000/chamado/enviarMensagem', data)
                     .then(res => {
-                        axios.put('http://localhost:5000/chamado/andamentoChamado', { idChamado: props.id }).then(res => {
-                            window.location.reload()
-                            buscarMensagens()
-                            setMensagem('')
-                        })
+                        if(jwtDecode(localStorage.getItem('token') || '')['cargo'] === 'Atendente'){
+                            axios.put('http://localhost:5000/chamado/andamentoChamado', { idChamado: props.id }).then(res => {
+                        })}
+                        window.location.reload()
+                        buscarMensagens()
+                        setMensagem('')
                     })
             }
         } catch (error) {
@@ -174,7 +176,7 @@ function ChamadoDropdown(props: any) {
                 <div className="cont">
                     {jwtDecode(localStorage.getItem('token') || '')['cargo'] === 'Administrador'&&
                         <>
-                        {!mostrarPopup && <button onClick={abrirPopup} className='btn-adm'>Atribuir atendente</button>}
+                        {(!mostrarPopup && props.status.id === 1)&& <button onClick={abrirPopup} className='btn-adm'>Atribuir atendente</button>}
                         <div>
                             {mostrarPopup && (
                                 <div id='meu-modal' className="modal">
@@ -192,7 +194,7 @@ function ChamadoDropdown(props: any) {
                                                 {atendentes.map(atendente=> {
                                                     console.log(atendente);
                                                     return (
-                                                        <tr>
+                                                        <tr key={'atendente'+atendente.id}>
                                                             <td>{atendente.id}</td>
                                                             <td>{atendente.nome}</td>
                                                             <td>
@@ -206,7 +208,7 @@ function ChamadoDropdown(props: any) {
                                             </tbody>
                                         </table>
                                         <br></br>
-                                        <button className='fechar_btn' onClick={fecharPopup}>Fechar</button>
+                                        <button className='btn' onClick={fecharPopup}>Fechar</button>
                                     </div>
                                 </div>
                             )}

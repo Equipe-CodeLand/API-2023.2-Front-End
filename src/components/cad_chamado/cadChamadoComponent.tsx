@@ -3,6 +3,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 import './cadChamado.css';
 import axios from "axios";
 import cadChamados from "./cadChamado.interface";
+import { jwtDecode } from "jwt-decode";
 
 export default function ChamadosForm(props:cadChamados){
     const [tema, setTema] = useState(props.tema || '');
@@ -54,7 +55,8 @@ export default function ChamadosForm(props:cadChamados){
             showSuccess();
             const token = localStorage.getItem('token');
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-            axios.post('http://localhost:5000/criarChamados',{'idTema':tema,'desc':mensagem})
+            axios.post('http://localhost:5000/criarChamados',{'idTema':tema,'desc':mensagem,'userId': jwtDecode(localStorage.getItem('token') || '')['userId'],
+        })
             console.log(tema);
         } else {
             showWarning('Por favor, corrija os campos indicados.');

@@ -2,8 +2,8 @@ import Home from "../components/homes/homeCliente";
 import Header from "../components/header/headerComponent";
 
 export default function HomePageCliente() {
-    const link = ["/home/cliente", "/home/atendente", "/home/administrador"] // Link para as páginas
-    const link_title = ["cliente", "atendente", "administrador"] // titulo para as paginas
+    const link = ["/home/cliente", "/cadastroChamados", "/chamadosCli"] // Link para as páginas
+    const link_title = ["Home", "Criar novo chamado", "Visualizar meus chamados"] // titulo para as paginas
     return (
         <div>
             <Header 

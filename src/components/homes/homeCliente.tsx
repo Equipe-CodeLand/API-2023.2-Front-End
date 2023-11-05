@@ -11,7 +11,7 @@ export default function Home() {
                     </div>
                     <div className="chamados">
                         <div className="acessar"><a href="/chamadosCli">Acessar meus chamados</a></div>
-                        <div className="criar"><a href="/criarChamados">Criar um novo chamado</a></div>
+                        <div className="criar"><a href="/cadastroChamados">Criar um novo chamado</a></div>
                     </div>
                 </div>
             </section>

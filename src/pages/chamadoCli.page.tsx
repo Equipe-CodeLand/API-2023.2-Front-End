@@ -7,14 +7,15 @@ import { ChamadoCli, ChamadoCliDetalhes } from "../components/chamadoCli/chamado
 import Header from "../components/header/headerComponent"
 import ChamadoComponent from "../components/chamado/chamadoComponent"
 import Chamado from "../components/chamado/chamado.interface"
+import { jwtDecode } from "jwt-decode";
+import Token from "../components/login/token.interface"
 
 export default function ChamadosCli() {
     const [chamados, setChamados] = useState<Chamado[]>([])
-
+    const token = jwtDecode<Token>(localStorage.getItem('token') || '')
     function buscarChamados() {
-      const token = localStorage.getItem('token');
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      axios.get(`http://localhost:5000/chamadosCli`)
+      axios.defaults.headers.common["Authorization"] = `${localStorage.getItem('token') || ' '}`;
+      axios.get(`http://localhost:5000/chamadosCli/${token.userId}`)
       .then(res => {
         console.log(res);
         let chamados = res.data.map((c: any) => {
