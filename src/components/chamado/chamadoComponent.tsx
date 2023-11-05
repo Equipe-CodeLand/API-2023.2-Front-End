@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import Chamado from './chamado.interface'
 import './style.css'
 import { BsChevronDown } from 'react-icons/bs';
 import ChamadoDropdown from './chamadoDropdown';
+import { jwtDecode } from 'jwt-decode';
 
-function ChamadoComponent(props: Chamado) {
+function ChamadoComponent(props: any) {
     let [open, setOpen] = useState(false)
     function toggleDropdown () {
         setOpen(!open)        
@@ -13,11 +13,15 @@ function ChamadoComponent(props: Chamado) {
         <div>
             <div className="chamado">
                 <div className='left'>
+                    <div>{'ID da chamada: '}{props.id}</div>
                     <div>{props.nome}</div>
-                    <div>{props.tema}</div>
+                    <div>{props.tema.texto}</div>
                 </div>
                 <div className='right'>
                     <div className={`status status-${props.status.id}`}>{props.status.texto}</div>
+                    {jwtDecode(localStorage.getItem('token') || '')['cargo'] !== 'Cliente'&&
+                        <div className={'status prioridade-cor' + props.prioridade.id}>{props.prioridade.value}</div>
+                    }
                     <div>{props.hora}</div>
                     <BsChevronDown className='icon' onClick={toggleDropdown}
                     ></BsChevronDown>
@@ -25,11 +29,13 @@ function ChamadoComponent(props: Chamado) {
             </div>
             <ChamadoDropdown 
             open={open}
+            id={props.id}
             nome={props.nome}
-            conversa={props.conversa}
+            status={props.status}
             descricao={props.descricao}
-            email={props.email}
-            ></ChamadoDropdown>
+            tipoUsuario={props.tipoUsuario}
+            >
+            </ChamadoDropdown>
         </div>
     )
 }

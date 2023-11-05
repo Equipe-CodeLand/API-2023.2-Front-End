@@ -5,8 +5,8 @@ import '../components/adm_form/caduser.css'
 
 const CadastroAdmin: React.FC = () => {
 
-    const link = ["/", "/chamados/abertos", "/cadastroUser"] // Link para as páginas
-    const link_title = ["Home", "Chamados em aberto", "Cadastrar Usuário"] // titulo para as paginas
+    const link = ["/home/administrador", "/chamadosAdm", "/cadastroUser"] // Link para as páginas
+    const link_title = ["Home", "Gerenciar chamados", "Cadastrar Usuário"] // titulo para as paginas
     return(
         <div>
             <Header 
@@ -26,6 +26,7 @@ const CadastroAdmin: React.FC = () => {
                 tipo="" 
                 telefone="" 
                 turno="" 
+                senha= ""
             />
         </div>
     );

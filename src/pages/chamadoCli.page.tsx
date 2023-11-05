@@ -1,45 +1,77 @@
+import React from "react"
+import axios from "axios"
+import { useState, useEffect } from "react"
+import ChamadoCliDropdown from "../components/chamadoCli/chamadoCliDropdown"
 import ChamadoCliComponent from "../components/chamadoCli/chamadoCliComponent"
-import { ChamadoCli } from "../components/chamadoCli/chamadosCli.interface"
+import { ChamadoCli, ChamadoCliDetalhes } from "../components/chamadoCli/chamadosCli.interface"
 import Header from "../components/header/headerComponent"
+import ChamadoComponent from "../components/chamado/chamadoComponent"
+import Chamado from "../components/chamado/chamado.interface"
+import { jwtDecode } from "jwt-decode";
+import Token from "../components/login/token.interface"
 
 export default function ChamadosCli() {
-    let chamados: Array<ChamadoCli> = [
-        {
-            nome: '-', tema: 'Velocidade da Internet', status: { id: '1', texto: 'Não iniciado' }, hora: '26/09/2023 00:59', conversa: [{remetente: 'Bruno Castilho',role: "Cliente", texto: 'Minha internet tem estado lenta no últimos três dias e não consigo arrumar. Estou bastante frustrado e gostaria de um atendimento com urgência pois está atrapalhando a realização do meu trabalho remoto mas ninguém me auxiliou ainda!!'}]
-        },
-        {
-            nome: 'Alice Nunes', tema: 'Problemas de Conexão', status: { id: '2', texto: 'Em andamento' }, hora: '26/09/2023 00:59', conversa: [{remetente: 'Bruno Castilho', role: 'Cliente', texto: 'Minha internet tem estado lenta no últimos três dias e não consigo arrumar. Estou bastante frustrado e gostaria de um atendimento com urgência pois está atrapalhando a realização do meu trabalho remoto.'}, {remetente: 'Alice Nunes',role: 'Atendente', texto: 'Olá, Bruno! Tente desativar o aparelho da tomada por um minuto e ligar novamente.'}]
-        },
-        {
-            nome: 'Luís Oliveira', tema: 'Problemas com fatura', status: { id: '3', texto: 'Encerrado' }, hora: '26/09/2023 00:59', conversa: [{remetente: 'Bruno Castilho', role: 'Cliente', texto: 'Minha internet tem estado lenta no últimos três dias e não consigo arrumar. Estou bastante frustrado e gostaria de um atendimento com urgência pois está atrapalhando a realização do meu trabalho remoto.'}, {remetente: 'Luís Oliveira', role: 'Atendente', texto: 'Olá, Bruno! Tente desativar o aparelho da tomada por um minuto e ligar novamente.'}, {remetente: "Bruno Castilho", role: "Cliente", texto: "Funcionou!!"}]
-        },
-    ]
+    const [chamados, setChamados] = useState<Chamado[]>([])
+    const token = jwtDecode<Token>(localStorage.getItem('token') || '')
+    function buscarChamados() {
+      axios.defaults.headers.common["Authorization"] = `${localStorage.getItem('token') || ' '}`;
+      axios.get(`http://localhost:5000/chamadosCli/${token.userId}`)
+      .then(res => {
+        console.log(res);
+        let chamados = res.data.map((c: any) => {
+          let nomeAtendente = c.atendente && c.atendente.usuario && c.atendente.usuario.nome;
+          let sobrenomeAtendente = c.atendente && c.atendente.usuario && c.atendente.usuario.sobrenome;
 
+          return {
+            id: c.id,
+            nome: (nomeAtendente && sobrenomeAtendente) ? nomeAtendente + ' ' + sobrenomeAtendente : '',
+            tema: {
+              id: c.tema.id,
+              texto: c.tema.nome
+            },
+            status: {
+              id: c.status.id,
+              texto: c.status.nome
+            },
+            hora: c.inicio,
+            fim: c.final
+          }        
+        })
+        console.log(chamados);
+        setChamados(chamados);
+      })
+    }
 
-    let list = chamados.map((chamado: any) => {
-        return <ChamadoCliComponent
-            nome={chamado.nome}
-            tema={chamado.tema}
-            status={chamado.status}
-            hora={chamado.hora}
-            conversa={chamado.conversa}
-        ></ChamadoCliComponent>
-    })
+    useEffect(() => {
+        buscarChamados();
+      }, [])
 
-    const link = ["/", "/", "/cadastroUser"] // Link para as páginas
-    const link_title = ["Relatórios", "Chamadas em Aberto", "Cadastrar Usuário"] // titulo para as paginas
+      const link = ["/home/cliente", "/cadastroChamados"]
+  const link_title = ["Home","Criar novo chamado"]
 
     return (
         <div>
             <Header
-                link_0 = {link[0]} // Link para as páginas
+                link_0 = {link[0]} 
                 link_1 = {link[1]}
-                link_2 = {link[2]}
-                link_title_0 = {link_title[0]} // titulo para as paginas
+                link_title_0 = {link_title[0]}
                 link_title_1 = {link_title[1]}
-                link_title_2 = {link_title[2]}
+
             />
-            {list}
+            {chamados.length > 0 && (
+                <div>
+                {chamados.map(chamado => (
+                    <ChamadoComponent
+                    id={chamado.id}
+                    nome={chamado.nome}
+                    tema={chamado.tema}
+                    status={chamado.status}
+                    hora={new Date(chamado.hora).toLocaleDateString() + " - " + new Date(chamado.hora).toLocaleTimeString()}
+                    descricao={chamado.descricao}
+                />
+                ))}
+                </div>
+            )}
         </div>
     )
 }

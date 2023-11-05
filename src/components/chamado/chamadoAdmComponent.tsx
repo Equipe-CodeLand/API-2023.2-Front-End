@@ -13,8 +13,9 @@ function ChamadoAdmComponent(props: ChamadoAdm) {
         <div>
             <div className="chamado">
                 <div className='left'>
+                    <div>{'ID da chamada: '}{props.id}</div>
                     <div>{props.nome}</div>
-                    <div>{props.tema}</div>
+                    <div>{props.tema.texto}</div>
                 </div>
                 <div className='right'>
                     <div className={'status status-cor' + props.status.id}>{props.status.texto}</div>

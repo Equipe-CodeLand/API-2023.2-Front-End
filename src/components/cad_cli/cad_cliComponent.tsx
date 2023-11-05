@@ -8,18 +8,16 @@ export default function CadCli(props:CadaCli){
     const [nome, setNome] = useState(props.nome || '');
     const [sobrenome, setSobrenome] = useState(props.sobrenome || '');
     const [cpf, setCpf] = useState(props.cpf || '');
-    const [tema, setTema] = useState(props.tema || '');
     const [telefone, setTelefone] = useState(props.telefone || '');
     const [email, setEmail] = useState('');
-    const [mensagem, setMensagem] = useState(props.mensagem || '');
+    const [senha, setSenha] = useState(props.senha || '')
     const [isValid, setIsValid] = useState(true);
     const [emailError, setEmailError] = useState('');
     const [nomeError, setNomeError] = useState('');
     const [sobrenomeError, setSobrenomeError] = useState('');
     const [cpfError, setCpfError] = useState('');
     const [telefoneError, setTelefoneError] = useState('');
-    const [temaError, setTemaError] = useState('');
-    const [mensagemError, setMensagemError] = useState('');
+    const [senhaError, setSenhaError] = useState('')
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = e.target.value;
@@ -30,6 +28,19 @@ export default function CadCli(props:CadaCli){
             setIsValid(false);
         } else {
             setEmailError(''); 
+            setIsValid(true);
+        }
+    };     
+
+    const handleSenhaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newSenha = e.target.value;
+        setSenha(newSenha);
+    
+        if (!validateEmail(newSenha) && newSenha.length > 8) {
+            setSenhaError('Por favor, preencha uma senha válida.');
+            setIsValid(false);
+        } else {
+            setSenhaError(''); 
             setIsValid(true);
         }
     };     
@@ -74,16 +85,6 @@ export default function CadCli(props:CadaCli){
             setIsValid(validateCpf(newCpf));
             setCpfError(''); 
         }
-    };  
-
-    const handleTemaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newTema = e.target.value;
-        setTema(newTema);
-    };
-
-    const handleMensagemChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newMensagem = e.target.value;
-        setMensagem(newMensagem);
     };    
 
     const handleTelefoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,6 +101,11 @@ export default function CadCli(props:CadaCli){
         const nomeRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s]*$/i;
         return nomeRegex.test(nome);
     }; 
+
+    const validateSenha = (senha: string): boolean => {
+        const senhaRegex = /^[a-zA-Z0-9]{1,8}$/i;
+        return senhaRegex.test(senha);
+    };    
     
     const validateSobrenome = (sobrenome: string): boolean => {
         const sobrenomeRegex = /^[a-zA-Z\s]*$/i;
@@ -129,10 +135,6 @@ export default function CadCli(props:CadaCli){
         return telefoneRegex.test(telefone); // Testa o formato do telefone
     }; 
     
-    const validateMensagem = (mensagem: string): boolean => {
-        const mensagemRegex = /^.*$/i;
-        return mensagemRegex.test(mensagem);
-    };    
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -159,13 +161,6 @@ export default function CadCli(props:CadaCli){
         } else {
             setCpfError('');
         }
-    
-        if (tema === "") {
-            setTemaError('Por favor, selecione o tipo de usuário.');
-            formIsValid = false;
-        } else {
-            setTemaError('');
-        }
 
         if (telefone === "" || !validateTelefone(telefone)) {
             setTelefoneError('Por favor, preencha um telefone válido.');
@@ -174,18 +169,18 @@ export default function CadCli(props:CadaCli){
             setTelefoneError('');
         }
 
+        if (senha === "" || !validateSenha(senha)) {
+            setSenhaError('Por favor, preencha uma senha válida.');
+            formIsValid = false;
+        } else {
+            setSenhaError('');
+        }
+
         if (email === "" || !validateEmail(email)) {
             setEmailError('Por favor, preencha um email válido.');
             formIsValid = false;
         } else {
             setEmailError('');
-        }
-
-        if (mensagem === "" || !validateMensagem(mensagem)) {
-            setMensagemError('Por favor, descreva o problema.');
-            formIsValid = false;
-        } else {
-            setMensagemError('');
         }
     
         if (formIsValid) {
@@ -194,7 +189,7 @@ export default function CadCli(props:CadaCli){
             showWarning('Por favor, corrija os campos indicados.');
         }
 
-        axios.post('http://localhost:5000/cadastro/cliente',{'nome': nome,'sobrenome':sobrenome,'email':email,'telefone':telefone,'cpf':cpf,'tema':tema,'mensagem':mensagem})
+        //axios.post('http://localhost:5000/cadastro/cliente',{'nome': nome,'sobrenome':sobrenome,'email':email,'telefone':telefone,'cpf':cpf, 'senha':senha})
     };
     
 
@@ -214,11 +209,22 @@ export default function CadCli(props:CadaCli){
             confirmButtonText: "OK",
             showCancelButton: true,
             cancelButtonText: "Cancelar",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post('http://localhost:5000/cadastro/cliente', {
+                    'nome': nome,
+                    'sobrenome': sobrenome,
+                    'email': email,
+                    'telefone': telefone,
+                    'cpf': cpf,
+                    'senha': senha
+                });
+            }
         });
     };
 
     return(
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="formCliente">
             <label>
                 Nome:
                 <input type="text" value={nome} onChange={handleNomeChange} />
@@ -248,33 +254,19 @@ export default function CadCli(props:CadaCli){
             <br />
 
             <label>
+                Senha:
+                <input type="password" value={senha} onChange={handleSenhaChange} maxLength={8} placeholder="Digite uma senha de 8 dígitos alfanumérica" />
+                <span style={{ color: 'red' }}>{senhaError}</span>
+            </label>
+
+            <label>
                 Telefone para contato:
                 <input type="text" value={telefone} onChange={handleTelefoneChange} />
                 <span style={{ color: 'red' }}>{telefoneError}</span>
             </label>
             <br />
 
-            <label id="tema">
-                Tema:
-                <select className="browser-default" value={tema} onChange={handleTemaChange}>
-                    <option value="">Selecione um tema</option>
-                    <option value="Velocidade da Internet">Velocidade da Internet</option>
-                    <option value="Modem">Modem</option>
-                    <option value="Problemas com conexão">Problemas com conexão</option>
-                    <option value="Outros">Outros</option>
-                </select>
-                <span style={{ color: 'red' }}>{temaError}</span>
-            </label>
-            <br />
-
-            <label>
-                Mensagem:
-                <input type="text" value={mensagem} onChange={handleMensagemChange} />
-                <span style={{ color: 'red' }}>{mensagemError}</span>
-            </label>
-            <br />
-
-            <input type="submit" value="Enviar" />
+            <button type="submit" value="Enviar">Enviar</button>
         </form>
     )
 

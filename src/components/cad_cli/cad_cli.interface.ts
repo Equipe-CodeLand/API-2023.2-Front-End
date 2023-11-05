@@ -3,7 +3,6 @@ export default interface CadaCli{
     sobrenome: string,
     email: string,
     cpf: string,
-    telefone: string
-    tema: string,
-    mensagem: string
+    telefone: string,
+    senha: string
 }

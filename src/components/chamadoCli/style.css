@@ -58,7 +58,8 @@
     border: 2px solid #F0AF09;
     background-color: #FFF4E0;    
 }
-.status-cor3 {
+.status-cor3,
+.status-cor4 {
     border: 2px solid #ED6B4F;
     background-color: #FBEDED;   
 }
@@ -112,3 +113,9 @@
     background-color: #a11919;
     transition: 0.5s;
 }
+
+input {
+    margin-bottom: 10px !important;
+}
+
+
