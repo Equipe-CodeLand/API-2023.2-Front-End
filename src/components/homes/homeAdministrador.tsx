@@ -4,7 +4,7 @@ import atendentes from "../homes/atendentes.png";
 
 export default function HomePageAdministrador() {
     return (
-        <div className="homeCli">
+        <div className="homeAdm">
             <section className="conteudo">
                 <div>
                     <div className="titulo">
@@ -19,22 +19,10 @@ export default function HomePageAdministrador() {
                 
             </section>
             
-            <section className="problemasComuns">
+            <section className="relatorios">
                 <h2 id="titulo">Relatórios</h2>
                 <hr />
-                <div className="problema 1">
-                    
-                    <h3>Problemas mais recorrentes:</h3>
-                    <p>
-                        <img src={problemas} alt="problemas recorrentes" />
-                    </p>
-                    <br></br>
-                    <h3>Atendente com mais atendimentos:</h3>
-                    <p>
-                        <img src={atendentes} alt="atendentes e seus atendimentos" />
-
-                    </p>
-                    
+                <div className="graficos">
                 </div>
             </section>
         </div>

@@ -15,11 +15,11 @@ div.homeAdm {
     min-width: 400px;
 }
 
-div.homeAdm h1 {
-    margin: 0px;
-    padding: 0px;
+footer {
+    background-color: var(--azul);
+    height: 40px;
+    margin-top: 40px;
 }
-
 
 div.homeAdm section.conteudo {
     width: 100%;
@@ -36,13 +36,12 @@ div.homeAdm section.conteudo .titulo {
     margin: auto;
 }
 
-div.homeAdm section.conteudo h1#tituloPrincipal, strong {
+div.homeAdm section.conteudo h1 {
     font-family: var(--Inter);
-    font-size: 0.9em;
+    font-size: 1.9em;
     font-weight: 400;
-    margin: 20px 0px !important;
+    margin: 20px 0px;
     padding: 0px;
-    margin-top: 20px;
 }
 
 div.homeAdm section.conteudo strong {
@@ -53,7 +52,7 @@ div.homeAdm section.conteudo strong {
 }
 
 div.homeAdm section.conteudo p {
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 div.homeAdm section.conteudo div.chamados {
@@ -74,6 +73,7 @@ div.homeAdm section.conteudo div.chamados div {
 div.homeAdm section.conteudo div.chamados div a {
     transition: all 0.1s;
     color: #5d7491;
+    text-decoration: none;
     font-family: var(--Inter);
     font-size: 1.05em;
     font-weight: 400;
@@ -84,4 +84,19 @@ div.homeAdm section.conteudo div.chamados div a {
 
 div.homeAdm section.conteudo div.chamados div a:hover {
     font-weight: 600;
+}
+
+div.homeAdm section.relatorios {
+    border: 1px solid #8b8b8b;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+div.homeAdm section.relatorios hr {
+    margin: 10px 0px;
+}
+
+div.homeAdm section.relatorios div.graficos {
+    min-height: 400px;
+    max-height: none;
 }

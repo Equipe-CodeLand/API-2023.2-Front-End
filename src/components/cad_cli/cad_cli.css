@@ -1,17 +1,4 @@
-*{
-    font-family: Arial;
-    box-sizing: border-box;
-}
-
-
-h1{
-    margin: 2%;
-    font-size: 35px !important;
-    text-align: center;
-    margin-bottom: 2% !important;
-}
-
-form{
+form.formCliente {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -19,13 +6,13 @@ form{
     margin: 3% auto;
 }
 
-label{
+form.formCliente label{
     font-weight: bold;
     margin-bottom: 10px;
     font-size: 1.0rem !important;
 }
 
-input, select, textarea {
+form.formCliente input, form.formCliente select, form.formCliente textarea {
     width: 100%;
     border: 2px solid #ddd !important;
     border-radius: 10px !important;
@@ -35,7 +22,7 @@ input, select, textarea {
 
 }
 
-#input-msg{
+form.formCliente #input-msg{
     height: 150px !important; 
 }
 
@@ -44,7 +31,7 @@ input, select, textarea {
     margin-top: 10px;
 }
 
-button{
+form.formCliente button{
     padding: 15px;
     border: none;
     border-radius: 10px;
@@ -55,7 +42,7 @@ button{
     margin-bottom: 2%;
 }
 
-button, html [type="button"], [type="reset"], [type="submit"] {
+form.formCliente button, form.formCliente html [type="button"], form.formCliente [type="reset"], form.formCliente [type="submit"] {
     height: 60px;
     width: 120px;
     align-self: center;

@@ -15,6 +15,7 @@ export default function HomePageAtendente() {
                 link_title_2 = {link_title[2]}
             />
             <Home />
+            <footer></footer>
         </div>
     )
 }

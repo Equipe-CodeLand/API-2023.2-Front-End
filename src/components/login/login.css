@@ -68,10 +68,11 @@ div#login form.login div.loginPassword {
 div#login form.login div.loginPassword input.inputLogin, 
 div#login form.login div.loginPassword input.inputPassword {
     transition: all 0.5s;
+    font-size: 1.1em;
     margin: 0px;
     padding: 4px 9px;
     width: 400px;
-    height: 40px;
+    height: 50px;
     border-radius: 15px;
     color: #202020;
     border: 2px solid var(--azul_claro) ;
@@ -86,7 +87,7 @@ div#login form.login div.loginPassword input.error::placeholder {
     color: var(--error_border);
 }
 
-div.errorText {
+div#login div.errorText {
     align-self: left;
     height: 10px;
     text-align: left;
@@ -98,7 +99,7 @@ div.errorText {
     text-align: center;
 }
 
-div.errorPassword {
+div#login div.errorPassword {
     margin-bottom: 25px;
 }
 
@@ -198,7 +199,7 @@ div#login form.login div.button input#inputButton:active {
 
 /* CSS DO ERROR */
 
-input.error, div.error {
+div#login input.error, div#login div.error {
     background-color: var(--error_background) !important;
     border: 2px solid var(--error_border) !important;
 }
