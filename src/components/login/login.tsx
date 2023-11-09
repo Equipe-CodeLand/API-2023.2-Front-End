@@ -66,26 +66,6 @@ export default function Login(props:LoginInterface){
                 
             }
         });
-        /*
-        axios.get (`http://localhost:5000/login/${user_email}/${user_senha}/${type}`,).then(res => {
-            if (!res.data.validUser) { // se o usuario não for valido
-                loginError("Usuário não encontrado")
-                return(false)
-            } else {
-                if (!res.data.validType) { // se o tipo não for valido
-                    loginError("Usuário não encontrado")
-                    return(false)
-                } else {
-                    if (!res.data.validPassword) { // se a senha não for valida
-                        passwordError("Senha incorreta")
-                        return(false)
-                    } else { // se tudo estiver certo
-                        allSucess()
-                        authentificarUser()
-                    }
-                }
-            }
-        })*/
     }
 
     function loginError(mensagem:string) { // função para mostrar o erro de login
@@ -106,23 +86,11 @@ export default function Login(props:LoginInterface){
         setTypeErrorText("")
     }
 
-    /*
-    function typeError(mensagem:string) { // função para mostrar erro de tipo
-        setErrorLogin(false)
-        setErrorPassword(false)
-        setErrorType(true)
-        setLoginErrorText("")
-        setPasswordErrorText("")
-        setTypeErrorText(mensagem)
-    }*/
-
     function allSucess() { // função para zerar os erros
         setErrorLogin(false)
         setErrorPassword(false)
-        //setErrorType(false)
         setLoginErrorText("")
         setPasswordErrorText("")
-        //setTypeErrorText("")
     }
 
     // Função que envia o formulario
@@ -134,10 +102,7 @@ export default function Login(props:LoginInterface){
             loginError("Insira um email")
         } else if (senha === "") {
             passwordError("Insira uma senha")
-        } 
-        /*else if (cargo === "") {
-            typeError("Selecione um cargo")
-        }*/
+        }
         else {
             allSucess()
             usuarioExistente(email, senha) // perguntar se o usuario existe
