@@ -140,7 +140,7 @@ header div.logotype {
 }
 
 
-header div.logotype a {
+header div.logotype p {
     font-family: var(--Kadwa);
     font-size: 1.3em;
     color: black;

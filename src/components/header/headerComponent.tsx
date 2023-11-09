@@ -1,8 +1,5 @@
-import { redirectUser } from "../login/login";
 import "./style.css"
-import jwt from 'jsonwebtoken';
 import { useState } from "react";
-
 
 export default function Header(props: any, navigate: any) {
     const [active, setMode] = useState(false);
