@@ -270,7 +270,7 @@ export default function CadUser(props: CadaUser) {
     };
 
     return (
-        <form onSubmit={handleSubmit} id="cadUserForm">
+        <form onSubmit={handleSubmit} className="cadUserForm">
             <label>
                 Nome:
                 <input type="text" value={nome} onChange={handleNomeChange} placeholder='Insira o nome do usuário'/>

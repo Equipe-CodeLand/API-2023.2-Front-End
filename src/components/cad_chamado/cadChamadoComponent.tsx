@@ -78,8 +78,7 @@ export default function ChamadosForm(props: cadChamados) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-
+        <form onSubmit={handleSubmit} className="cliUserForm">
             <label id="tema">
                 Tema:
                 <select className="browser-default" value={tema} onChange={handleTemaChange}
@@ -90,19 +89,17 @@ export default function ChamadosForm(props: cadChamados) {
                     <option value="4">Problemas com conexão</option>
                     <option value="3">Outros</option>
                 </select>
-                <span style={{ color: 'red' }}>{temaError}</span>
+                <div className="error">{temaError}</div>
             </label>
-            <br />
 
             <label>
                 Mensagem:
                 <textarea value={mensagem} onChange={handleMensagemChange}
                     style={{ height: 200, marginTop: 10, paddingTop: 10}} />
-                <span style={{ color: 'red' }}>{mensagemError}</span>
+                <div className="error">{mensagemError}</div>
             </label>
-            <br />
 
-            <input type="submit" value="Enviar" />
+            <input type="submit" value="Enviar" id="button"/>
         </form>
     )
 }

@@ -7,7 +7,7 @@ const CadastroChamada: React.FC = () => {
     const link = ["/home/cliente", "/chamadosCli"] // Link para as páginas
     const link_title = ["Home", "Visualizar meus chamados"] // titulo para as paginas
     return(
-        <div>
+        <div className='pageCadChamado'>
             <Header 
                 link_0 = {link[0]} // Link para as páginas
                 link_1 = {link[1]}

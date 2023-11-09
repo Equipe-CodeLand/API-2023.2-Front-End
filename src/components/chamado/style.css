@@ -1,5 +1,4 @@
 h2{
-    font-size: 30px !important;
     margin: 0 !important;
 }
 
@@ -34,6 +33,7 @@ h2{
     border-top: none;
     margin: -4em auto 2em;
     padding: 2em;
+    padding-top: 60px;
 }
 
 .desc {
@@ -153,6 +153,7 @@ h2{
 }
 
 .nome-cliente {
+    font-size: 1.4em;
     padding-top: 15px;
     padding-bottom: 15px;
 }
@@ -166,20 +167,36 @@ h2{
 
 .select-botao {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
 }
 
 .select-chamado, .btn-chamado {
-    width: 220px !important;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 220px;
     border: 2px solid #a0a0a0;
     border-radius: 10px;
     height: 50px !important;
     background-color: rgb(209, 209, 209);
     font-weight: bolder;
+    padding: 5px;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
-.btn-chamado:focus {
+.btn-chamado:hover {
     outline: none; 
     background-color: #d3d2d2; 
 }
 
+textarea {
+    margin-top: 20px;
+    padding: 10px;
+    min-width: 100%;
+}
+
+p.erro {
+    color: red;
+    text-align: center;
+}

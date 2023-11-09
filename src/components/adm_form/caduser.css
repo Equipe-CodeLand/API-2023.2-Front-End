@@ -22,7 +22,7 @@ div.pageCadUser h1{
     margin: 80px 0px 0px 0px;
 }
 
-form#cadUserForm {
+form.cadUserForm {
     display: flex;
     flex-direction: column;
     max-width: 650px;
@@ -32,7 +32,7 @@ form#cadUserForm {
     font-family: var(--Inter);
 }
 
-form#cadUserForm label {
+form.cadUserForm label {
     font-weight: bold;
     font-size: 1.0rem;
     font-family: var(--Inter);
@@ -40,9 +40,9 @@ form#cadUserForm label {
     height: 80px;
 }
 
-form#cadUserForm input, 
-form#cadUserForm select, 
-form#cadUserForm textarea {
+form.cadUserForm input, 
+form.cadUserForm select, 
+form.cadUserForm textarea {
     width: 100%;
     border: 2px solid var(--azul_claro);
     border-radius: 10px;
@@ -54,19 +54,19 @@ form#cadUserForm textarea {
     padding: 0px 9px;
 }
 
-form#cadUserForm input::placeholder {
+form.cadUserForm input::placeholder {
     color: #8b8b8b;
     font-family: var(--Inter);
 }
 
-form#cadUserForm button,
-form#cadUserForm html [type="button"], 
-form#cadUserForm [type="reset"], 
-form#cadUserForm [type="submit"] {
+form.cadUserForm button,
+form.cadUserForm html [type="button"], 
+form.cadUserForm [type="reset"], 
+form.cadUserForm [type="submit"] {
     height: 40px;
 }
 
-form#cadUserForm input#button {
+form.cadUserForm input#button {
     background-color: var(--azul_claro);
     border: 2px solid var(--azul);
     border-radius: 15px;
@@ -81,19 +81,19 @@ form#cadUserForm input#button {
     font-size: 1em;
 }
 
-form#cadUserForm input#button:hover {
+form.cadUserForm input#button:hover {
     background-color: var(--azul);
     color: #fff;
     cursor: pointer;
 }
 
-form#cadUserForm input#button:active {
+form.cadUserForm input#button:active {
     width: 142px;
     height: 38px;
     font-size: 0.90em;
 }
 
-form#cadUserForm div.error {
+form.cadUserForm div.error {
     text-align: center;
     color: red;
     margin: 10px;
