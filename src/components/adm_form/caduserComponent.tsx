@@ -237,7 +237,7 @@ export default function CadUser(props: CadaUser) {
                     'cpf': cpf,
                     'senha': senha
                 };
-                
+
                 const response = await axios.post(rotaCadastro, dadosUsuario);
 
                 if (tipo === 'Cliente') {
@@ -276,8 +276,24 @@ export default function CadUser(props: CadaUser) {
             } catch (error) {
                 // Algum outro erro ocorreu
                 console.error(error);
-                showWarning('Erro ao criar usuário');
-            }
+                
+                Swal.fire({
+                    title: 'Erro',
+                    text: 'Erro ao criar usuário',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    // Resetar os valores do formulário
+                    setNome('');
+                    setSobrenome('');
+                    setEmail('');
+                    setTipo(''); // Adicione um método setter para o tipo se necessário
+                    setTurno(''); // Adicione um método setter para o turno se necessário
+                    setTelefone('');
+                    setCpf('');
+                    setSenha('');
+                });
+            }            
         } else {
             showWarning('Por favor, corrija os campos indicados.');
         }
