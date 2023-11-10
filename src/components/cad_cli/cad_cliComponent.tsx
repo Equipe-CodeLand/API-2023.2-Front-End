@@ -136,7 +136,7 @@ export default function CadCli(props:CadaCli){
     }; 
     
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
     
         let formIsValid = true;
@@ -184,14 +184,46 @@ export default function CadCli(props:CadaCli){
         }
     
         if (formIsValid) {
-            showSuccess();
+            try {
+                // Verifique se o usuário já existe
+                const response = await axios.post('http://localhost:5000/cadastro/cliente', {
+                    'nome': nome,
+                    'sobrenome': sobrenome,
+                    'email': email,
+                    'telefone': telefone,
+                    'cpf': cpf,
+                    'senha': senha
+                });
+    
+                if (response.data.message === 'Usuário já existe') {
+                    // O usuário já existe, exibir um alerta para o usuário
+                    Swal.fire({
+                        title: 'Erro!',
+                        text: 'Usuário já existe, tente novamente',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        // Resetar os valores do formulário
+                        setNome('');
+                        setSobrenome('');
+                        setEmail('');
+                        setTelefone('');
+                        setCpf('');
+                        setSenha('');
+                    });
+                } else {
+                    // O usuário não existe, mostrar sucesso
+                    showSuccess();
+                }
+            } catch (error) {
+                // Algum outro erro ocorreu
+                console.log(error);
+                showWarning('Erro ao criar cliente');
+            }
         } else {
             showWarning('Por favor, corrija os campos indicados.');
         }
-
-        //axios.post('http://localhost:5000/cadastro/cliente',{'nome': nome,'sobrenome':sobrenome,'email':email,'telefone':telefone,'cpf':cpf, 'senha':senha})
     };
-    
 
     const showWarning = (message: string) => {
         Swal.fire({
@@ -207,21 +239,8 @@ export default function CadCli(props:CadaCli){
             text: "Suas informações foram enviadas com sucesso!",
             icon: "success",
             confirmButtonText: "OK",
-            showCancelButton: true,
-            cancelButtonText: "Cancelar",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.post('http://localhost:5000/cadastro/cliente', {
-                    'nome': nome,
-                    'sobrenome': sobrenome,
-                    'email': email,
-                    'telefone': telefone,
-                    'cpf': cpf,
-                    'senha': senha
-                });
-            }
-        });
-    };
+        })
+    };    
 
     return(
         <form onSubmit={handleSubmit} className="formCliente">
