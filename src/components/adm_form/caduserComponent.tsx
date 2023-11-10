@@ -160,7 +160,7 @@ export default function CadUser(props: CadaUser) {
         return telefoneRegex.test(telefone); // Testa o formato do telefone
     };    
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
         console.log(`nome: ${nome}`)
         console.log(`sobrenome: ${sobrenome}`)
@@ -224,18 +224,10 @@ export default function CadUser(props: CadaUser) {
         }
     
         if (formIsValid) {
-            showSuccess();
-            let rotaCadastro = '';
-    
-                if (tipo === 'Cliente') {
-                    rotaCadastro = 'http://localhost:5000/cadastro/cliente';
-                } else if (tipo === 'Atendente') {
-                    rotaCadastro = 'http://localhost:5000/cadastro/atendente';
-                } else if (tipo === 'Administrador') {
-                    rotaCadastro = 'http://localhost:5000/cadastro/administrador';
-                }
-        
-                axios.post(rotaCadastro, {
+            try {
+                let rotaCadastro = '';
+
+                const dadosUsuario = {
                     'nome': nome,
                     'sobrenome': sobrenome,
                     'email': email,
@@ -244,13 +236,53 @@ export default function CadUser(props: CadaUser) {
                     'telefone': telefone,
                     'cpf': cpf,
                     'senha': senha
-                });
+                };
+                
+                const response = await axios.post(rotaCadastro, dadosUsuario);
+
+                if (tipo === 'Cliente') {
+                    rotaCadastro = 'http://localhost:5000/cadastro/cliente';
+                } else if (tipo === 'Atendente') {
+                    rotaCadastro = 'http://localhost:5000/cadastro/atendente';
+                } else if (tipo === 'Administrador') {
+                    rotaCadastro = 'http://localhost:5000/cadastro/administrador';
+                }
+
+                if (response.data.message === 'Usuário já existe') {
+                    // O usuário já existe, exibir um alerta para o usuário
+                    Swal.fire({
+                        title: 'Erro',
+                        text: 'Usuário já existe',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        // Resetar os valores do formulário
+                        setNome('');
+                        setSobrenome('');
+                        setEmail('');
+                        setTipo(''); // Adicione um método setter para o tipo se necessário
+                        setTurno(''); // Adicione um método setter para o turno se necessário
+                        setTelefone('');
+                        setCpf('');
+                        setSenha('');
+                    });
+                } else {
+                    // O usuário não existe, realizar o cadastro
+                    // ...
+    
+                    // Mostrar sucesso
+                    showSuccess();
+                }
+            } catch (error) {
+                // Algum outro erro ocorreu
+                console.error(error);
+                showWarning('Erro ao criar usuário');
+            }
         } else {
             showWarning('Por favor, corrija os campos indicados.');
         }
     };
     
-
     const showWarning = (message: string) => {
         Swal.fire({
             title: 'Aviso',
