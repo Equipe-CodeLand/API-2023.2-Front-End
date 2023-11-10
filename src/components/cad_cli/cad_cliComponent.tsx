@@ -228,45 +228,45 @@ export default function CadCli(props:CadaCli){
             <label>
                 Nome:
                 <input type="text" value={nome} onChange={handleNomeChange} />
-                <span style={{ color: 'red' }}>{nomeError}</span>
+                <div className="error">{nomeError}</div>
             </label>
             <br />
 
             <label>
                 Sobrenome:
                 <input type="text" value={sobrenome} onChange={handleSobrenomeChange} />
-                <span style={{ color: 'red' }}>{sobrenomeError}</span>
+                <div className="error">{sobrenomeError}</div>
             </label>
             <br />
 
             <label>
                 CPF:
                 <input type="text" value={cpf} onChange={handleCpfChange} />
-                <span style={{ color: 'red' }}>{cpfError}</span>
+                <div className="error">{cpfError}</div>
             </label>
             <br />
 
             <label>
                 Email:
                 <input type="text" value={email} onChange={handleEmailChange} />
-                <span style={{ color: 'red' }}>{emailError}</span>
+                <div className="error">{emailError}</div>
             </label>
             <br />
 
             <label>
                 Senha:
                 <input type="password" value={senha} onChange={handleSenhaChange} maxLength={8} placeholder="Digite uma senha de 8 dígitos alfanumérica" />
-                <span style={{ color: 'red' }}>{senhaError}</span>
+                <div className="error">{senhaError}</div>
             </label>
 
             <label>
                 Telefone para contato:
                 <input type="text" value={telefone} onChange={handleTelefoneChange} />
-                <span style={{ color: 'red' }}>{telefoneError}</span>
+                <div className="error">{telefoneError}</div>
             </label>
             <br />
 
-            <button type="submit" value="Enviar">Enviar</button>
+            <button type="submit" value="Enviar" id="button">Enviar</button>
         </form>
     )
 
