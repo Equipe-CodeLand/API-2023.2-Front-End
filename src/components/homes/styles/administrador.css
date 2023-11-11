@@ -87,6 +87,8 @@ div.homeAdm section.conteudo div.chamados div a:hover {
 }
 
 div.homeAdm section.relatorios {
+    margin: auto;
+    width: 1000px;
     border: 1px solid #8b8b8b;
     border-radius: 20px;
     padding: 40px;
@@ -99,4 +101,21 @@ div.homeAdm section.relatorios hr {
 div.homeAdm section.relatorios div.graficos {
     min-height: 400px;
     max-height: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
 }
+
+div.homeAdm section.relatorios div.graficos div.grafico {
+    width: 800px;
+    height: 400px;
+    margin-top: 30px;
+    padding: 40px;
+    text-align: center;
+    border-radius: 20px;
+
+}
+
+
