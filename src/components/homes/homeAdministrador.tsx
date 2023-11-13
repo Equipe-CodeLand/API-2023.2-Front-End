@@ -1,5 +1,6 @@
+import { useState } from "react";
 import "./styles/administrador.css";
-import { Chart } from "react-google-charts";
+import Grafico from "../graficos/graficos";
 
 const JsonPrioridade = {
     Dias: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"],
@@ -28,28 +29,44 @@ const JsonChamados = {
     Media: [1, 2, 3, 4, 5, 6, 7],
 }
 
-function JsonForData(variavel) {
-
-    var arrIndice = []
-    var arrValues = []
-
-    arrIndice = Object.keys(variavel);
-    arrValues = Object.values(variavel);
-
-    let dadoChamado = []
-
-    for (let i = 0; i < arrValues[0].length; i++) {
-        dadoChamado[i] = arrValues.map((item) => {
-            return item[i]
-        })
+export default function HomePageAdministrador() {
+    const [tema, setTema] = useState('prioridade');
+    const [data, setData] = useState(JsonPrioridade);
+    const [title, setTitle] = useState('Prioridade');
+    
+    const handleTemaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newTema = e.target.value;
+        setTema(newTema);
     }
 
-    dadoChamado.unshift(arrIndice)
+    const handleSubmit = () => {
+        let title:string = ""
+        let data:any = ""
+        switch (tema) {
+            case 'prioridade':
+                title = "Prioridade"
+                data = JsonPrioridade;
+                break;
+            case 'tema':
+                title = "Tema"
+                data = JsonTema;
+                break;
+            case 'turno':
+                title = "Turno"
+                data = JsonTurno;
+                break;
+            case 'media':
+                title = "Media"
+                data = JsonChamados;
+                break;
+            default:
+                break;
+        }
 
-    return dadoChamado
-}
+        setTitle(title);
+        setData(data);
+    }
 
-export default function HomePageAdministrador() {
     return (
         <div className="homeAdm">
             <section className="conteudo">
@@ -63,53 +80,34 @@ export default function HomePageAdministrador() {
                         <div className="acessar"><a href="/cadastroUser">Cadastrar novo usuario</a></div>
                     </div>
                 </div>
-                
             </section>
             
             <section className="relatorios">
                 <h2 id="titulo">Relatórios</h2>
+                <div className="filtro">
+                    <div className="inicio">
+                        <label htmlFor="">Data de início</label>
+                        <input type="date" id="inicio" />
+                    </div>
+                    <div className="final">
+                        <label htmlFor="">Data final</label>
+                        <input type="date" id="final" />
+                    </div>
+                    <div className="temas">
+                        <select name="tema" id="tema" value={tema} onChange={handleTemaChange}>
+                            <option value="prioridade">Prioridade</option>
+                            <option value="tema">Tema da chamada</option>
+                            <option value="turno">Turnos</option>
+                            <option value="media">Media do tempo de chamada</option>
+                        </select>
+                    </div>
+                    <div className="gerar">
+                        <button onClick={handleSubmit}>Gerar</button>
+                    </div>
+                </div>
                 <hr />
                 <div className="graficos">
-                    <div className="grafico prioridade">
-                        <h3>Prioridade</h3>
-                        <Chart
-                            chartType="ColumnChart"
-                            data={JsonForData(JsonPrioridade)}
-                            width="100%"
-                            height="100%"
-                            legendToggle
-                        />
-                    </div>
-                    <div className="grafico tema">
-                        <h3>Tema</h3>
-                        <Chart
-                            chartType="ColumnChart"
-                            data={JsonForData(JsonTema)}
-                            width="100%"
-                            height="100%"
-                            legendToggle
-                        />
-                    </div>
-                    <div className="grafico turno">
-                        <h3>Turno</h3>
-                        <Chart
-                            chartType="ColumnChart"
-                            data={JsonForData(JsonTurno)}
-                            width="100%"
-                            height="100%"
-                            legendToggle
-                        />
-                    </div>
-                    <div className="grafico media">
-                        <h3>Media do tempo de chamada</h3>
-                        <Chart
-                            chartType="ColumnChart"
-                            data={JsonForData(JsonChamados)}
-                            width="100%"
-                            height="100%"
-                            legendToggle
-                        />
-                    </div>
+                    <Grafico title={title} data={data}/>
                 </div>
             </section>
         </div>
