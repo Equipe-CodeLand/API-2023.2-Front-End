@@ -6,14 +6,30 @@ import { ChamadoAdm } from "../components/chamado/chamadoAdm.interface";
 import ChamadoAdmDropdown from "../components/chamado/chamadoAdmDropdown";
 import ChamadoComponent from "../components/chamado/chamadoComponent";
 import Chamado from "../components/chamado/chamado.interface";
+import FiltroChamadosAteAdm from "../components/filtros/filtroAteAdm";
+import { BsFilter } from "react-icons/bs";
 
 export default function ChamadosAdm() {
   const [chamados, setChamados] = useState<Chamado[]>([]);
 
-  function buscarChamados() {
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+
+  const toggleFilter = () => {
+    setIsFilterVisible(!isFilterVisible);
+  };
+  
+  const handleFilter = (params) => {
+    let tema = params.tema
+    let status = params.status
+    let prioridade = params.prioridade
+    buscarChamados(tema, status, prioridade);
+  };
+
+  function buscarChamados(tema: number[], status: number[], prioridade: number[]) {
     const token = localStorage.getItem('token');
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    axios.get(`http://localhost:5000/chamados`)
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;    
+
+    axios.get(`http://localhost:5000/chamados/tema=${tema}/status=${status}/prioridade=${prioridade}`)
       .then(res => {
         console.log(res);
         let chamados = res.data.map((c: any) => {
@@ -45,7 +61,10 @@ export default function ChamadosAdm() {
   }
 
   useEffect(() => {
-    buscarChamados();
+    let tema = [1,2,3,4]
+    let status = [1,2,3,4]
+    let prioridade =  [1,2,3]
+    buscarChamados(tema, status, prioridade);
   }, []);
 
   const link = ["/home/administrador", "/chamadosAdm", "/cadastroUser"]; // Link para as páginas
@@ -63,6 +82,17 @@ export default function ChamadosAdm() {
       />
       {chamados.length > 0 && (
         <div>
+          <div className="cabecalho"> 
+            <div> ID: </div>
+            <div> Nome do Cliente: </div>
+            <div> Tema da chamada: </div>
+            <div> Status da chamada: </div>
+            <div> Prioridade da chamada: </div>
+            <div> Prazo de resposta: </div>
+
+            <BsFilter onClick={toggleFilter}/>
+          </div>
+          {isFilterVisible && <FiltroChamadosAteAdm onFiltroSubmit={handleFilter}/>}
           {chamados.map(chamado => {
           return (
             <div key={'chamado' + chamado.id}>
