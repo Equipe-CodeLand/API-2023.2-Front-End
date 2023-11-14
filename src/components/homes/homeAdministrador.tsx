@@ -33,13 +33,34 @@ export default function HomePageAdministrador() {
     const [tema, setTema] = useState('prioridade');
     const [data, setData] = useState(JsonPrioridade);
     const [title, setTitle] = useState('Prioridade');
+    const [dateInicio, setDateInicio] = useState("");
+    const [dateFinal, setDateFinal] = useState("");
+
+    let dataAtual = new Date()
     
     const handleTemaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const newTema = e.target.value;
         setTema(newTema);
     }
 
+    const handleDateInicioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newTema = e.target.value
+        setDateInicio(newTema)
+    }
+
+    const handleDateFinalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newTema = e.target.value
+        setDateFinal(newTema)
+    }
+
+    /* QUANDO EU CLICO NO BOTAO DE ENVIAR */
+
     const handleSubmit = () => {
+        console.log(dateInicio)
+        console.log(dateFinal)
+
+        /* filtro dos temas */
+
         let title:string = ""
         let data:any = ""
         switch (tema) {
@@ -62,7 +83,6 @@ export default function HomePageAdministrador() {
             default:
                 break;
         }
-
         setTitle(title);
         setData(data);
     }
@@ -87,11 +107,11 @@ export default function HomePageAdministrador() {
                 <div className="filtro">
                     <div className="inicio">
                         <label htmlFor="">Data de início</label>
-                        <input type="date" id="inicio" />
+                        <input type="date" id="inicio" value={dateInicio} onChange={handleDateInicioChange}/>
                     </div>
                     <div className="final">
                         <label htmlFor="">Data final</label>
-                        <input type="date" id="final" />
+                        <input type="date" id="final" value={dateFinal} onChange={handleDateFinalChange}/>
                     </div>
                     <div className="temas">
                         <select name="tema" id="tema" value={tema} onChange={handleTemaChange}>
