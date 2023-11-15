@@ -1,38 +1,37 @@
 import { useState } from "react";
 import "./styles/administrador.css";
 import Grafico from "../graficos/graficos";
+import axios from "axios"
 
-const JsonPrioridade = {
-    Dias: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"],
-    Baixa: [1, 1, 1, 1, 1, 1, 1],
-    Media: [2, 2, 2, 2, 2, 2, 2],
-    Alta: [3, 3, 3, 3, 3 ,3 ,3]
+let JsonPadrao = {
+    Dias: [""],
+    Chamadas: [0]
 }
 
-const JsonTema = {
-    Dias: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"],
-    Tema1: [1, 1, 1, 1, 1, 1, 1],
-    Tema2: [2, 2, 2, 2, 2, 2, 2],
-    Tema3: [3, 3, 3, 3, 3 ,3 ,3],
-    Tema4: [4, 4, 4, 4, 4 ,4 ,4]
+let JsonPrioridade = {
+    Dias: ["Baixa", "Média", "Alta"],
+    Chamadas: [0, 0, 0]
 }
 
-const JsonTurno = {
-    Dias: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"],
-    Diurno: [3, 3, 3, 3, 3, 3, 3],
-    Vespertino: [2, 2, 2, 2, 2, 2, 2],
-    Noturno: [1, 1, 1, 1, 1 ,1 ,1]
+let JsonTema = {
+    Dias: ["Acesso a Internet", "Moldem", "Velocidade da Internet", "Outros"],
+    Chamadas: [0, 0, 0, 0]
 }
 
-const JsonChamados = {
-    Dias: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"],
-    Media: [1, 2, 3, 4, 5, 6, 7],
+let JsonTurno = {
+    Dias: ["Manhã", "Tarde", "Noite", "Madrugada"],
+    Chamadas: [0, 0, 0, 0],
+}
+
+let JsonChamados = {
+    Dias: ["Tempo Medio para realizar os chamados"],
+    Media: [0],
 }
 
 export default function HomePageAdministrador() {
     const [tema, setTema] = useState('prioridade');
-    const [data, setData] = useState(JsonPrioridade);
-    const [title, setTitle] = useState('Prioridade');
+    const [data, setData] = useState(JsonPadrao);
+    const [title, setTitle] = useState('');
     const [dateInicio, setDateInicio] = useState("");
     const [dateFinal, setDateFinal] = useState("");
 
@@ -59,30 +58,80 @@ export default function HomePageAdministrador() {
         console.log(dateInicio)
         console.log(dateFinal)
 
+        if (dateInicio == "" || dateFinal == "") {
+            alert("Insira as datas")
+            return
+        } else {
+            let partesDataInicio = dateInicio.split("-")
+            var diaInicio = partesDataInicio[2]
+            var mesInicio = partesDataInicio[1]
+            var anoInicio = partesDataInicio[0]
+            let partesDataFinal = dateFinal.split("-")
+            var diaFinal = partesDataFinal[2]
+            var mesFinal = partesDataFinal[1]
+            var anoFinal = partesDataFinal[0]
+        }
+
         /* filtro dos temas */
 
         let title:string = ""
-        let data:any = ""
+        let data:any = JsonChamados
+
         switch (tema) {
             case 'prioridade':
                 title = "Prioridade"
+                axios.get('http://localhost:5000/relatorios/chamadosPorPrioridade', {
+                    params: {diaInicio: diaInicio, mesInicio: mesInicio, anoInicio: anoInicio, diaFinal: diaFinal, mesFinal: mesFinal, anoFinal: anoFinal}
+                }).then(res => {
+                    var prioridade = res.data
+                    console.log(prioridade[0].numeroChamados)
+                    JsonPrioridade = {
+                        Dias: ["Baixa", "Média", "Alta"],
+                        Chamadas: [prioridade[0].numeroChamados, prioridade[1].numeroChamados, prioridade[2].numeroChamados]
+                    }
+                })
                 data = JsonPrioridade;
                 break;
             case 'tema':
                 title = "Tema"
+                axios.get('http://localhost:5000/relatorios/chamadosPorTema', {
+                    params: {diaInicio: diaInicio, mesInicio: mesInicio, anoInicio: anoInicio, diaFinal: diaFinal, mesFinal: mesFinal, anoFinal: anoFinal}
+                }).then(res => {
+                    let temas = res.data
+                    JsonTema = {
+                        Dias: ["Acesso a Internet", "Moldem", "Velocidade da Internet", "Outros"],
+                        Chamadas: [temas[0].numeroChamados, temas[1].numeroChamados, temas[3].numeroChamados, temas[2].numeroChamados]
+                    }
+                })
                 data = JsonTema;
                 break;
             case 'turno':
                 title = "Turno"
+                axios.get('http://localhost:5000/relatorios/chamadosPorTurno', {
+                    params: {diaInicio: diaInicio, mesInicio: mesInicio, anoInicio: anoInicio, diaFinal: diaFinal, mesFinal: mesFinal, anoFinal: anoFinal}
+                }).then(res => {
+                    let turnos = res.data
+                    JsonTurno = {
+                        Dias: ["Manhã", "Tarde", "Noite", "Madrugada"],
+                        Chamadas: [turnos[0].numeroChamados, turnos[1].numeroChamados, turnos[2].numeroChamados, turnos[3].numeroChamados],
+                    }
+                })
                 data = JsonTurno;
                 break;
             case 'media':
                 title = "Media"
+                axios.get('http://localhost:5000/relatorios/tempoMedioTotal', {
+                    params: {diaInicio: diaInicio, mesInicio: mesInicio, anoInicio: anoInicio, diaFinal: diaFinal, mesFinal: mesFinal, anoFinal: anoFinal}
+                }).then(res => {
+                    let medias = res.data
+                    console.log(medias)
+                })
                 data = JsonChamados;
                 break;
             default:
                 break;
         }
+
         setTitle(title);
         setData(data);
     }
@@ -107,11 +156,11 @@ export default function HomePageAdministrador() {
                 <div className="filtro">
                     <div className="inicio">
                         <label htmlFor="">Data de início</label>
-                        <input type="date" id="inicio" value={dateInicio} onChange={handleDateInicioChange}/>
+                        <input type="date" id="inicio" value={dateInicio} max={dateFinal} onChange={handleDateInicioChange}/>
                     </div>
                     <div className="final">
                         <label htmlFor="">Data final</label>
-                        <input type="date" id="final" value={dateFinal} onChange={handleDateFinalChange}/>
+                        <input type="date" id="final" value={dateFinal} min={dateInicio} onChange={handleDateFinalChange}/>
                     </div>
                     <div className="temas">
                         <select name="tema" id="tema" value={tema} onChange={handleTemaChange}>

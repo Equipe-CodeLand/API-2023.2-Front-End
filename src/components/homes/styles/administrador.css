@@ -156,10 +156,6 @@ div.homeAdm section.relatorios div.filtro button {
     color: white;
 }
 
-div.homeAdm section.relatorios div.filtro button:hover {
-    
-}
-
 div.homeAdm section.relatorios div.graficos {
     min-height: 400px;
     max-height: none;
