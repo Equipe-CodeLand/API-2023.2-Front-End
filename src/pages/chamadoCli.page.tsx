@@ -1,9 +1,6 @@
 import React from "react"
 import axios from "axios"
 import { useState, useEffect } from "react"
-import ChamadoCliDropdown from "../components/chamadoCli/chamadoCliDropdown"
-import ChamadoCliComponent from "../components/chamadoCli/chamadoCliComponent"
-import { ChamadoCli, ChamadoCliDetalhes } from "../components/chamadoCli/chamadosCli.interface"
 import Header from "../components/header/headerComponent"
 import ChamadoComponent from "../components/chamado/chamadoComponent"
 import Chamado from "../components/chamado/chamado.interface"
@@ -89,7 +86,7 @@ export default function ChamadosCli() {
                   <div> Status da chamada: </div>
                   <div> Prazo de resposta: </div>
 
-                  <BsFilter onClick={toggleFilter}/>
+                  <BsFilter size={30} onClick={toggleFilter}/>
                 </div>
                 {isFilterVisible && <FiltroChamadosCli onFiltroSubmit={handleFilter}/>}
                 {chamados.map(chamado => (

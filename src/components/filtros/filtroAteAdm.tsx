@@ -27,20 +27,20 @@ const FiltroChamadosAteAdm = ({ onFiltroSubmit }) => {
         <fieldset>
         <legend>Temas </legend>
         <div>
-          <label htmlFor="Velocidade da internet"> Velocidade da internet </label>
-          <input id='Velocidade da internet' type="checkbox" value="1" onChange={() => handleCheckboxChange(1, tema, setTema)} /> 
+          <label htmlFor="Sem acesso a internet"> Sem acesso a internet </label>
+          <input id='Sem acesso a internet' type="checkbox" value="1" onChange={() => handleCheckboxChange(1, tema, setTema)} /> 
         </div>
         <div>
         <label htmlFor="Modem"> Modem </label>
           <input id='Modem' type="checkbox" value="2" onChange={() => handleCheckboxChange(2, tema, setTema)} />
         </div>
         <div>
-          <label htmlFor="Problemas com conexão"> Problemas com conexão </label>
-          <input id='Problemas com conexão' type="checkbox" value="4" onChange={() => handleCheckboxChange(4, tema, setTema)} />
-        </div>
-        <div>
           <label htmlFor="Outros"> Outros </label>
           <input id='Outros' type="checkbox" value="3" onChange={() => handleCheckboxChange(3, tema, setTema)} />
+        </div>
+        <div>
+          <label htmlFor="Velocidade da internet"> Velocidade da internet </label>
+          <input id='Velocidade da internet' type="checkbox" value="4" onChange={() => handleCheckboxChange(4, tema, setTema)} />
         </div>
         </fieldset>
         <fieldset className='prioridades'>
@@ -59,22 +59,22 @@ const FiltroChamadosAteAdm = ({ onFiltroSubmit }) => {
           </div>
         </fieldset>
         <fieldset>
-          <legend>Status </legend>
+        <legend>Status </legend>
           <div>
-          <label htmlFor="Não iniciada"> Não iniciada </label>
-          <input id='Concluída' type="checkbox" value="1" onChange={() => handleCheckboxChange(1, status, setStatus)} />
+          <label htmlFor="Em aberto"> Em aberto </label>
+          <input id='Em aberto' type="checkbox" value="1" onChange={() => handleCheckboxChange(1, status, setStatus)} />
           </div>
           <div>
-          <label htmlFor="Em Andamento"> Em Andamento </label>
-          <input id='Em Andamento' type="checkbox" value="2" onChange={() => handleCheckboxChange(2, status, setStatus)} />
+          <label htmlFor="Em andamento"> Em andamento </label>
+          <input id='Em andamento' type="checkbox" value="2" onChange={() => handleCheckboxChange(2, status, setStatus)} />
           </div>
           <div>
-          <label htmlFor="Cancelada"> Cancelada </label>
+          <label htmlFor="Cancelada"> Cancelado </label>
           <input id='Cancelada' type="checkbox" value="3" onChange={() => handleCheckboxChange(3, status, setStatus)} />
           </div>
           <div>
-          <label htmlFor="Concluída"> Concluída </label>
-          <input id='Concluída' type="checkbox" value="4" onChange={() => handleCheckboxChange(4, status, setStatus)} />
+          <label htmlFor="Concluido"> Concluído </label>
+          <input id='Concluido' type="checkbox" value="4" onChange={() => handleCheckboxChange(4, status, setStatus)} />
           </div>
         </fieldset>
         </section>

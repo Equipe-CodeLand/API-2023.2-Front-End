@@ -87,7 +87,7 @@ export default function ChamadosAdm() {
             <div> Prioridade da chamada: </div>
             <div> Prazo de resposta: </div>
 
-            <BsFilter onClick={toggleFilter}/>
+            <BsFilter size={30} onClick={toggleFilter}/>
           </div>
           {isFilterVisible && <FiltroChamadosAteAdm onFiltroSubmit={handleFilter}/>}
           {chamados.map(chamado => {
