@@ -76,8 +76,7 @@ function MeusChamados() {
                 link_title_0 = {link_title[0]} // titulo para as paginas
                 link_title_1 = {link_title[1]}
             />
-            {chamados.length > 0 && (
-                <div>
+            
                 <div className="cabecalho"> 
                     <div> ID: </div>
                     <div> Nome do Cliente: </div>
@@ -89,6 +88,8 @@ function MeusChamados() {
                     <BsFilter onClick={toggleFilter}/>
                 </div>
                     {isFilterVisible && <FiltroChamadosAteAdm onFiltroSubmit={handleFilter}/>}
+            {chamados.length > 0 && (
+                <div>
                     {   chamados.filter(chamado => chamado.status.texto !== 'Concluída')
                         .map(chamado => {
                             console.log(chamado)

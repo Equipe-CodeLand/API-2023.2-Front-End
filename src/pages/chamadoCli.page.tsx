@@ -77,9 +77,8 @@ export default function ChamadosCli() {
                 link_title_1 = {link_title[1]}
 
             />
-            {chamados.length > 0 && (
-                <div>
-                <div className="cabecalho"> 
+            
+            <div className="cabecalho"> 
                   <div> ID: </div>
                   <div> Nome do Atendente: </div>
                   <div> Tema da chamada: </div>
@@ -89,6 +88,8 @@ export default function ChamadosCli() {
                   <BsFilter size={30} onClick={toggleFilter}/>
                 </div>
                 {isFilterVisible && <FiltroChamadosCli onFiltroSubmit={handleFilter}/>}
+            {chamados.length > 0 && (
+                <div>
                 {chamados.map(chamado => (
                     <ChamadoComponent
                     id={chamado.id}

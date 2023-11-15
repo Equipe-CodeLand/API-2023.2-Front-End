@@ -80,9 +80,8 @@ export default function ChamadosAdm() {
         link_title_1={link_title[1]}
         link_title_2={link_title[2]}
       />
-      {chamados.length > 0 && (
-        <div>
-          <div className="cabecalho"> 
+      
+      <div className="cabecalho"> 
             <div> ID: </div>
             <div> Nome do Cliente: </div>
             <div> Tema da chamada: </div>
@@ -93,6 +92,8 @@ export default function ChamadosAdm() {
             <BsFilter size={30} onClick={toggleFilter}/>
           </div>
           {isFilterVisible && <FiltroChamadosAteAdm onFiltroSubmit={handleFilter}/>}
+      {chamados.length > 0 && (
+        <div>
           {chamados.map(chamado => {
           return (
             <div key={'chamado' + chamado.id}>
