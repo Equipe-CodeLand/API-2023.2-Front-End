@@ -22,6 +22,7 @@ export default function Grafico(props) {
                 loader={<div className="loading">Carregando Grafico...</div>}
                 data={JsonForData(props.data)}
                 legendToggle
+                style={{ color: "white" }}
             />
         </div>
     );

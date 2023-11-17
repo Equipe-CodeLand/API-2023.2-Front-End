@@ -9,23 +9,38 @@ let JsonPadrao = {
 }
 
 let JsonPrioridade = {
-    Dias: ["Baixa", "Média", "Alta"],
+    Prioridades: ["Baixa", "Média", "Alta"],
     Chamadas: [0, 0, 0]
 }
 
+let JsonPrioridadeMedia = {
+    Prioridades: ["Baixa", "Média", "Alta"],
+    Minutos: [0, 0, 0]
+}
+
 let JsonTema = {
-    Dias: ["Acesso a Internet", "Moldem", "Velocidade da Internet", "Outros"],
+    Temas: ["Acesso a Internet", "Moldem", "Velocidade da Internet", "Outros"],
     Chamadas: [0, 0, 0, 0]
 }
 
+let JsonTemaMedia = {
+    Temas: ["Acesso a Internet", "Moldem", "Velocidade da Internet", "Outros"],
+    Minutos: [0, 0, 0, 0]
+}
+
 let JsonTurno = {
-    Dias: ["Manhã", "Tarde", "Noite", "Madrugada"],
+    Turnos: ["Manhã", "Tarde", "Noite", "Madrugada"],
     Chamadas: [0, 0, 0, 0],
 }
 
-let JsonChamados = {
-    Dias: ["Tempo Medio para realizar os chamados"],
-    Media: [0],
+let JsonTurnoMedia = {
+    Turnos: ["Manhã", "Tarde", "Noite", "Madrugada"],
+    Minutos: [0, 0, 0, 0],
+}
+
+let JsonMediasTotal = {
+    Media: ["Tempo médio de chamadas"],
+    Minutos: [1]
 }
 
 export default function HomePageAdministrador() {
@@ -75,65 +90,111 @@ export default function HomePageAdministrador() {
         /* filtro dos temas */
 
         let title:string = ""
-        let data:any = JsonChamados
+        let data:any = JsonPadrao
 
-        switch (tema) {
-            case 'prioridade':
-                title = "Prioridade"
-                axios.get('http://localhost:5000/relatorios/chamadosPorPrioridade', {
-                    params: {diaInicio: diaInicio, mesInicio: mesInicio, anoInicio: anoInicio, diaFinal: diaFinal, mesFinal: mesFinal, anoFinal: anoFinal}
-                }).then(res => {
-                    var prioridade = res.data
-                    console.log(prioridade[0].numeroChamados)
-                    JsonPrioridade = {
-                        Dias: ["Baixa", "Média", "Alta"],
-                        Chamadas: [prioridade[0].numeroChamados, prioridade[1].numeroChamados, prioridade[2].numeroChamados]
-                    }
-                })
-                data = JsonPrioridade;
-                break;
-            case 'tema':
-                title = "Tema"
-                axios.get('http://localhost:5000/relatorios/chamadosPorTema', {
-                    params: {diaInicio: diaInicio, mesInicio: mesInicio, anoInicio: anoInicio, diaFinal: diaFinal, mesFinal: mesFinal, anoFinal: anoFinal}
-                }).then(res => {
-                    let temas = res.data
-                    JsonTema = {
-                        Dias: ["Acesso a Internet", "Moldem", "Velocidade da Internet", "Outros"],
-                        Chamadas: [temas[0].numeroChamados, temas[1].numeroChamados, temas[3].numeroChamados, temas[2].numeroChamados]
-                    }
-                })
-                data = JsonTema;
-                break;
-            case 'turno':
-                title = "Turno"
-                axios.get('http://localhost:5000/relatorios/chamadosPorTurno', {
-                    params: {diaInicio: diaInicio, mesInicio: mesInicio, anoInicio: anoInicio, diaFinal: diaFinal, mesFinal: mesFinal, anoFinal: anoFinal}
-                }).then(res => {
-                    let turnos = res.data
-                    JsonTurno = {
-                        Dias: ["Manhã", "Tarde", "Noite", "Madrugada"],
-                        Chamadas: [turnos[0].numeroChamados, turnos[1].numeroChamados, turnos[2].numeroChamados, turnos[3].numeroChamados],
-                    }
-                })
-                data = JsonTurno;
-                break;
-            case 'media':
-                title = "Media"
-                axios.get('http://localhost:5000/relatorios/tempoMedioTotal', {
-                    params: {diaInicio: diaInicio, mesInicio: mesInicio, anoInicio: anoInicio, diaFinal: diaFinal, mesFinal: mesFinal, anoFinal: anoFinal}
-                }).then(res => {
-                    let medias = res.data
-                    console.log(medias)
-                })
-                data = JsonChamados;
-                break;
-            default:
-                break;
-        }
+        axios.get('http://localhost:5000/relatorios/chamadosPorPrioridade', {
+            params: {diaInicio: diaInicio, mesInicio: mesInicio, anoInicio: anoInicio, diaFinal: diaFinal, mesFinal: mesFinal, anoFinal: anoFinal}
+        }).then(res => {
+            var prioridade = res.data
+            console.log()
+            JsonPrioridade = {
+                Prioridades: ["Baixa", "Média", "Alta"],
+                Chamadas: [prioridade[0].numeroChamados, prioridade[1].numeroChamados, prioridade[2].numeroChamados]
+            }
+            JsonPrioridadeMedia = {
+                Prioridades: ["Baixa", "Média", "Alta"],
+                Minutos: [
+                    prioridade[0].tempoMedio.minutos + prioridade[0].tempoMedio.horas*60, 
+                    prioridade[1].tempoMedio.minutos + prioridade[1].tempoMedio.horas*60, 
+                    prioridade[2].tempoMedio.minutos + prioridade[2].tempoMedio.horas*60
+                ]
+            }
+        })
 
-        setTitle(title);
-        setData(data);
+        axios.get('http://localhost:5000/relatorios/chamadosPorTema', {
+            params: {diaInicio: diaInicio, mesInicio: mesInicio, anoInicio: anoInicio, diaFinal: diaFinal, mesFinal: mesFinal, anoFinal: anoFinal}
+        }).then(res => {
+            let temas = res.data
+            JsonTema = {
+                Temas: ["Acesso a Internet", "Moldem", "Velocidade da Internet", "Outros"],
+                Chamadas: [temas[0].numeroChamados, temas[1].numeroChamados, temas[3].numeroChamados, temas[2].numeroChamados]
+            }
+            JsonTemaMedia = {
+                Temas: ["Acesso a Internet", "Moldem", "Velocidade da Internet", "Outros"],
+                Minutos: [
+                    temas[0].tempoMedio.minutos + temas[0].tempoMedio.horas*60, 
+                    temas[1].tempoMedio.minutos + temas[1].tempoMedio.horas*60, 
+                    temas[3].tempoMedio.minutos + temas[3].tempoMedio.horas*60, 
+                    temas[2].tempoMedio.minutos + temas[2].tempoMedio.horas*60
+                ]
+            }
+        })
+
+        axios.get('http://localhost:5000/relatorios/chamadosPorTurno', {
+            params: {diaInicio: diaInicio, mesInicio: mesInicio, anoInicio: anoInicio, diaFinal: diaFinal, mesFinal: mesFinal, anoFinal: anoFinal}
+        }).then(res => {
+            let turnos = res.data
+            JsonTurno = {
+                Turnos: ["Manhã", "Tarde", "Noite", "Madrugada"],
+                Chamadas: [turnos[0].numeroChamados, turnos[1].numeroChamados, turnos[2].numeroChamados, turnos[3].numeroChamados],
+            }
+            JsonTurnoMedia = {
+                Turnos: ["Manhã", "Tarde", "Noite", "Madrugada"],
+                Minutos: [
+                    turnos[0].tempoMedio.minutos + turnos[0].tempoMedio.horas*60, 
+                    turnos[1].tempoMedio.minutos + turnos[1].tempoMedio.horas*60, 
+                    turnos[2].tempoMedio.minutos + turnos[2].tempoMedio.horas*60, 
+                    turnos[3].tempoMedio.minutos + turnos[3].tempoMedio.horas*60
+                ],
+            }
+        })
+
+        axios.get('http://localhost:5000/relatorios/tempoMedioTotal', {
+            params: {diaInicio: diaInicio, mesInicio: mesInicio, anoInicio: anoInicio, diaFinal: diaFinal, mesFinal: mesFinal, anoFinal: anoFinal}
+        }).then(res => {
+            let medias = res.data
+            JsonMediasTotal = {
+                Media: ["Tempo Medio para realizar os chamados"],
+                Minutos: [medias.minutos + medias.horas*60],
+            }
+        })
+
+        setTimeout(function() {
+            switch (tema) {
+                case 'prioridade':
+                    title = "Prioridade"
+                    data = JsonPrioridade;
+                    break;
+                case 'prioridadeMedia':
+                    title = "Prioridade"
+                    data = JsonPrioridadeMedia;
+                    break;
+                case 'temaMedia':
+                    title = "Tema"
+                    data = JsonTemaMedia;
+                    break;
+                case 'tema':
+                    title = "Tema"
+                    data = JsonTema;
+                    break;
+                case 'turno':
+                    title = "Turno"
+                    data = JsonTurno;
+                    break;
+                case 'turnoMedia':
+                    title = "Turno"
+                    data = JsonTurnoMedia;
+                    break;
+                case 'media':
+                    title = "Media"
+                    data = JsonMediasTotal;
+                    break;
+                default:
+                    break;
+            }
+            setTitle(title);
+            setData(data);
+        }, 200)
     }
 
     return (
@@ -164,10 +225,13 @@ export default function HomePageAdministrador() {
                     </div>
                     <div className="temas">
                         <select name="tema" id="tema" value={tema} onChange={handleTemaChange}>
-                            <option value="prioridade">Prioridade</option>
-                            <option value="tema">Tema da chamada</option>
-                            <option value="turno">Turnos</option>
-                            <option value="media">Media do tempo de chamada</option>
+                            <option value="prioridade">Numero de chamadas por prioridade</option>
+                            <option value="tema">Numero de chamadas por tema</option>
+                            <option value="turno">Numero de chamadas por turno</option>
+                            <option value="prioridadeMedia">Media de tempo por prioridade</option>
+                            <option value="temaMedia">Media de tempo por tema</option>
+                            <option value="turnoMedia">Media de tempo por turno</option>
+                            <option value="media">Media de tempo total de conclusão de chamada</option>
                         </select>
                     </div>
                     <div className="gerar">
