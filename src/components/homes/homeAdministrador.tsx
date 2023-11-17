@@ -33,11 +33,6 @@ let JsonTurno = {
     Chamadas: [0, 0, 0, 0],
 }
 
-let JsonTurnoMedia = {
-    Turnos: ["Manhã", "Tarde", "Noite", "Madrugada"],
-    Minutos: [0, 0, 0, 0],
-}
-
 let JsonMediasTotal = {
     Media: ["Tempo médio de chamadas"],
     Minutos: [1]
@@ -138,15 +133,6 @@ export default function HomePageAdministrador() {
                 Turnos: ["Manhã", "Tarde", "Noite", "Madrugada"],
                 Chamadas: [turnos[0].numeroChamados, turnos[1].numeroChamados, turnos[2].numeroChamados, turnos[3].numeroChamados],
             }
-            JsonTurnoMedia = {
-                Turnos: ["Manhã", "Tarde", "Noite", "Madrugada"],
-                Minutos: [
-                    turnos[0].tempoMedio.minutos + turnos[0].tempoMedio.horas*60, 
-                    turnos[1].tempoMedio.minutos + turnos[1].tempoMedio.horas*60, 
-                    turnos[2].tempoMedio.minutos + turnos[2].tempoMedio.horas*60, 
-                    turnos[3].tempoMedio.minutos + turnos[3].tempoMedio.horas*60
-                ],
-            }
         })
 
         axios.get('http://localhost:5000/relatorios/tempoMedioTotal', {
@@ -180,10 +166,6 @@ export default function HomePageAdministrador() {
                 case 'turno':
                     title = "Turno"
                     data = JsonTurno;
-                    break;
-                case 'turnoMedia':
-                    title = "Turno"
-                    data = JsonTurnoMedia;
                     break;
                 case 'media':
                     title = "Media"
@@ -227,7 +209,6 @@ export default function HomePageAdministrador() {
                         <select name="tema" id="tema" value={tema} onChange={handleTemaChange}>
                             <option value="prioridade">Numero de chamadas por prioridade</option>
                             <option value="tema">Numero de chamadas por tema</option>
-                            <option value="turno">Numero de chamadas por turno</option>
                             <option value="prioridadeMedia">Media de tempo por prioridade</option>
                             <option value="temaMedia">Media de tempo por tema</option>
                             <option value="turnoMedia">Media de tempo por turno</option>
