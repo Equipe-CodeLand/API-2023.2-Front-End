@@ -114,6 +114,7 @@ export default function HomePageAdministrador() {
                 Temas: ["Acesso a Internet", "Moldem", "Velocidade da Internet", "Outros"],
                 Chamadas: [temas[0].numeroChamados, temas[1].numeroChamados, temas[3].numeroChamados, temas[2].numeroChamados]
             }
+            console.log(temas)
             JsonTemaMedia = {
                 Temas: ["Acesso a Internet", "Moldem", "Velocidade da Internet", "Outros"],
                 Minutos: [
@@ -155,13 +156,13 @@ export default function HomePageAdministrador() {
                     title = "Prioridade"
                     data = JsonPrioridadeMedia;
                     break;
-                case 'temaMedia':
-                    title = "Tema"
-                    data = JsonTemaMedia;
-                    break;
                 case 'tema':
                     title = "Tema"
                     data = JsonTema;
+                    break;
+                case 'temaMedia':
+                    title = "Tema"
+                    data = JsonTemaMedia;
                     break;
                 case 'turno':
                     title = "Turno"
@@ -209,9 +210,9 @@ export default function HomePageAdministrador() {
                         <select name="tema" id="tema" value={tema} onChange={handleTemaChange}>
                             <option value="prioridade">Numero de chamadas por prioridade</option>
                             <option value="tema">Numero de chamadas por tema</option>
+                            <option value="turno">Numero de chamadas por turno</option>
                             <option value="prioridadeMedia">Media de tempo por prioridade</option>
                             <option value="temaMedia">Media de tempo por tema</option>
-                            <option value="turnoMedia">Media de tempo por turno</option>
                             <option value="media">Media de tempo total de conclusão de chamada</option>
                         </select>
                     </div>
