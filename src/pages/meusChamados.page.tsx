@@ -23,12 +23,13 @@ function MeusChamados() {
         let tema = params.tema
         let status = params.status
         let prioridade = params.prioridade
-        //toggleFilter()
         buscarChamados(tema, status, prioridade);
+        toggleFilter()
       };    
   
     function buscarChamados(tema: number[], status: number[], prioridade: number[]) {
         console.log(token.userId);
+        axios.defaults.headers.common["Authorization"] = `${localStorage.getItem('token') || ' '}`;
         axios.get(`http://localhost:5000/atendenteChamados/${token.userId}/tema=${tema}/status=${status}/prioridade=${prioridade}`)
             .then(res => {
                 let chamados = res.data.map((c: any) => {

@@ -23,6 +23,7 @@ export default function ChamadosAdm() {
     let status = params.status
     let prioridade = params.prioridade
     buscarChamados(tema, status, prioridade);
+    toggleFilter()
   };
 
   function buscarChamados(tema: number[], status: number[], prioridade: number[]) {

@@ -24,9 +24,8 @@ export default function ChamadosCli() {
       let tema = params.tema
       let status = params.status
       let prioridade = params.prioridade
-      //toggleFilter()
-      
       buscarChamados(tema, status,prioridade);
+      toggleFilter()
     };
 
     function buscarChamados(tema: number[], status: number[],prioridade: number[]) {
