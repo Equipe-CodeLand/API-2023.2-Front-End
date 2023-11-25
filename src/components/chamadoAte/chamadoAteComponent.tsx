@@ -15,7 +15,7 @@ function ChamadoAteComponent(props: ChamadoAte) {
         <div>
             <div className='chamado'>
                 <div className='left'>
-                    <div>{'ID da chamada:'}{props.id}</div>
+                    <div>{props.id}</div>
                     <div>{props.nome}</div>
                     <div>{props.tema.texto}</div>
                 </div>

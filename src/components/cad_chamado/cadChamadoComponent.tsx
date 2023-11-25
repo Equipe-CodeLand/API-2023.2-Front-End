@@ -84,10 +84,10 @@ export default function ChamadosForm(props: cadChamados) {
                 <select className="browser-default" value={tema} onChange={handleTemaChange}
                     style={{ height: 50, marginTop: 10 }}>
                     <option value="">Selecione um tema</option>
-                    <option value="1">Velocidade da Internet</option>
+                    <option value="1">Sem acesso a Internet</option>
                     <option value="2">Modem</option>
-                    <option value="4">Problemas com conexão</option>
                     <option value="3">Outros</option>
+                    <option value="4">Velocidade da internet</option>
                 </select>
                 <div className="error">{temaError}</div>
             </label>

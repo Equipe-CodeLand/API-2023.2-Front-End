@@ -5,15 +5,32 @@ import { ChamadoAte } from "../components/chamadoAte/chamadoAte.interface";
 import ChamadoComponent from "../components/chamado/chamadoComponent";
 import ChamadoDropdown from "../components/chamado/chamadoDropdown";
 import Chamado from "../components/chamado/chamado.interface";
+import { BsChevronDown, BsFillFilterSquareFill, BsFilter, BsFilterRight } from "react-icons/bs";
+import './styles.css'
+import FiltroChamadosAteAdm from "../components/filtros/filtroAteAdm";
 
 export default function ChamadosAdm() {
   const [chamados, setChamados] = useState<Chamado[]>([]);
 
-  function buscarChamados() {
-    const inicio = new Date();
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+
+  const toggleFilter = () => {
+    setIsFilterVisible(!isFilterVisible);
+  };
+
+  const handleFilter = (params) => {
+    let tema = params.tema
+    let status = params.status
+    let prioridade = params.prioridade
+    buscarChamados(tema, status, prioridade);
+    toggleFilter()
+  };
+
+  function buscarChamados(tema: number[], status: number[], prioridade: number[]) {
     const token = localStorage.getItem('token');
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    axios.get(`http://localhost:5000/chamadosAte`)
+    
+    axios.get(`http://localhost:5000/chamadosAte/tema=${tema}/status=${status}/prioridade=${prioridade}`)
       .then(res => {
         let chamados = res.data.map((c: any) => {
           let nomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.nome;
@@ -34,7 +51,7 @@ export default function ChamadosAdm() {
               id: c.prioridade.id,
               value: c.prioridade.nome
             },
-            hora: inicio,
+            hora: c.inicio,
             fim: c.final
           }                
         })
@@ -43,7 +60,10 @@ export default function ChamadosAdm() {
   }
 
   useEffect(() => {
-    buscarChamados();
+    let tema = [1,2,3,4]
+    let status = [1,2,3,4]
+    let prioridade =  [1,2,3]
+    buscarChamados(tema, status, prioridade);
   }, []);
 
   const link = ["/home/atendente", "/meusChamados/atendente"]; // Link para as páginas
@@ -57,6 +77,18 @@ export default function ChamadosAdm() {
         link_title_0={link_title[0]} 
         link_title_1={link_title[1]}
       />
+      
+      <div className="cabecalho"> 
+            <div> ID: </div>
+            <div> Nome do Cliente: </div>
+            <div> Tema da chamada: </div>
+            <div> Status da chamada: </div>
+            <div> Prioridade da chamada: </div>
+            <div> Prazo de resposta: </div>
+
+            <BsFilter size={30} onClick={toggleFilter}/>
+          </div>
+          {isFilterVisible && <FiltroChamadosAteAdm onFiltroSubmit={handleFilter}/>}
       {chamados.length > 0 && (
         <div>
           {chamados.map(chamado => {
