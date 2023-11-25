@@ -7,6 +7,7 @@
     --branco_azulado: #e3efff;
     --azul_claro: #AFC8E9;
     --azul: #93B6E4;
+    --roxo: #6750A4;
 }
 
 div.homeAdm {
@@ -87,6 +88,8 @@ div.homeAdm section.conteudo div.chamados div a:hover {
 }
 
 div.homeAdm section.relatorios {
+    margin: auto;
+    width: 1000px;
     border: 1px solid #8b8b8b;
     border-radius: 20px;
     padding: 40px;
@@ -96,7 +99,89 @@ div.homeAdm section.relatorios hr {
     margin: 10px 0px;
 }
 
+div.homeAdm section.relatorios div.filtro {
+    margin-top: 20px;
+    padding: 5px 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+div.homeAdm section.relatorios div.filtro div {
+    padding: 10px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+div.homeAdm section.relatorios div.filtro div label {
+    position: absolute;
+    padding: 2px 3px;
+    top: 2px;
+    left: 20px;
+    background-color: white;
+    color: var(--roxo);
+    font-size: 0.7em;
+}
+
+div.homeAdm section.relatorios div.filtro input, select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #202020;
+    font-family: var(--Inter);
+    font-weight: 600;
+}
+
+div.homeAdm section.relatorios div.filtro input[type="date"]{
+    border: 2px solid var(--roxo);
+}
+
+div.homeAdm section.relatorios div.filtro input[type="date"]:focus{
+    border: 2px solid var(--roxo);
+    outline: none;
+}
+
+div.homeAdm section.relatorios div.filtro button {
+    transition: all 0.5s;
+    background-color: var(--roxo);
+    border: 3px solid var(--roxo);
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+}
+
 div.homeAdm section.relatorios div.graficos {
     min-height: 400px;
     max-height: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.homeAdm section.relatorios div.graficos div.grafico {
+    width: 800px;
+    height: 400px;
+    margin-top: 30px;
+    padding: 40px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+div.homeAdm section.relatorios div.graficos div.grafico div.loading{
+    color: #8b8b8b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9em;
+    font-weight: 400;
+    font-family: var(--Inter);
+    height: 200px;
 }
