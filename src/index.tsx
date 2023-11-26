@@ -1,39 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
-//import Chamados from './pages/chamados.page';
 import App from './App';
 import ChamadosAdm from './pages/chamadosAdm.page';
 import CadastroUser from './pages/cad_user.page';
 import CadastroCli from './pages/cad_cli.page';
-// import Home from './pages/home.page';
 import ChamadoCli from './pages/chamadoCli.page';
 import ChamadosAte from './pages/chamadoAte.page';
 import MeusChamados from './pages/meusChamados.page';
 import LoginPage from './pages/login.page';
 import CadastroChamada from './pages/cad_chamados.page';
-import ChamadosForm from './components/cad_chamado/cadChamadoComponent';
-
-// Homes temporarias
 
 import HomePageCliente from './pages/home.page.cliente';
 import HomePageAtendente from './pages/home.page.atendente';
 import HomePageAdministrador from './pages/home.page.administrador';
+import CadSolucaoPage from './pages/cad_solucao.page';
+import Problemas from './pages/problemas.page';
+import EditarProblema from './pages/editarProblema.page';
+import ProblemasSolucoesCli from './components/problemasConhecidos/problemasCli';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
   },
-  /*{
-    path: "/chamados",
-    element: <Chamados></Chamados>,
-  },*/
   {
     path: "/meusChamados/atendente",
     element: <MeusChamados></MeusChamados>,
@@ -77,8 +71,23 @@ const router = createBrowserRouter([
   {
     path:'/cadastroChamados',
     element:<CadastroChamada />
+  },
+  {
+    path: '/cadastroSolucao',
+    element: <CadSolucaoPage  />
+  },
+  {
+    path: '/solucoesCli',
+    element: <ProblemasSolucoesCli />
+  },
+  {
+    path: '/problemas',
+    element: <Problemas  />
+  },
+  {
+    path: '/editarProblemas/:id',
+    element: <EditarProblema  />
   }
-
 ]);
 
 const root = ReactDOM.createRoot(

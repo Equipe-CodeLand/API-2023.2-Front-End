@@ -160,7 +160,7 @@ export default function CadUser(props: CadaUser) {
         return telefoneRegex.test(telefone); // Testa o formato do telefone
     };    
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
         console.log(`nome: ${nome}`)
         console.log(`sobrenome: ${sobrenome}`)
@@ -224,18 +224,10 @@ export default function CadUser(props: CadaUser) {
         }
     
         if (formIsValid) {
-            showSuccess();
-            let rotaCadastro = '';
-    
-                if (tipo === 'Cliente') {
-                    rotaCadastro = 'http://localhost:5000/cadastro/cliente';
-                } else if (tipo === 'Atendente') {
-                    rotaCadastro = 'http://localhost:5000/cadastro/atendente';
-                } else if (tipo === 'Administrador') {
-                    rotaCadastro = 'http://localhost:5000/cadastro/administrador';
-                }
-        
-                axios.post(rotaCadastro, {
+            try {
+                let rotaCadastro = '';
+
+                const dadosUsuario = {
                     'nome': nome,
                     'sobrenome': sobrenome,
                     'email': email,
@@ -244,13 +236,69 @@ export default function CadUser(props: CadaUser) {
                     'telefone': telefone,
                     'cpf': cpf,
                     'senha': senha
+                };
+
+                const response = await axios.post(rotaCadastro, dadosUsuario);
+
+                if (tipo === 'Cliente') {
+                    rotaCadastro = 'http://localhost:5000/cadastro/cliente';
+                } else if (tipo === 'Atendente') {
+                    rotaCadastro = 'http://localhost:5000/cadastro/atendente';
+                } else if (tipo === 'Administrador') {
+                    rotaCadastro = 'http://localhost:5000/cadastro/administrador';
+                }
+
+                if (response.data.message === 'Usuário já existe') {
+                    // O usuário já existe, exibir um alerta para o usuário
+                    Swal.fire({
+                        title: 'Erro',
+                        text: 'Usuário já existe',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        // Resetar os valores do formulário
+                        setNome('');
+                        setSobrenome('');
+                        setEmail('');
+                        setTipo(''); // Adicione um método setter para o tipo se necessário
+                        setTurno(''); // Adicione um método setter para o turno se necessário
+                        setTelefone('');
+                        setCpf('');
+                        setSenha('');
+                    });
+                } else {
+                    // O usuário não existe, realizar o cadastro
+                    // ...
+    
+                    // Mostrar sucesso
+                    showSuccess();
+                }
+            } catch (error) {
+                // Algum outro erro ocorreu
+                console.error(error);
+                
+                Swal.fire({
+                    title: 'Erro',
+                    text: 'Erro ao criar usuário',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    // Resetar os valores do formulário
+                    setNome('');
+                    setSobrenome('');
+                    setEmail('');
+                    setTipo(''); // Adicione um método setter para o tipo se necessário
+                    setTurno(''); // Adicione um método setter para o turno se necessário
+                    setTelefone('');
+                    setCpf('');
+                    setSenha('');
                 });
+            }            
         } else {
             showWarning('Por favor, corrija os campos indicados.');
         }
     };
     
-
     const showWarning = (message: string) => {
         Swal.fire({
             title: 'Aviso',
@@ -270,48 +318,42 @@ export default function CadUser(props: CadaUser) {
     };
 
     return (
-        <form onSubmit={handleSubmit} id="cadUserForm">
+        <form onSubmit={handleSubmit} className="cadUserForm">
             <label>
                 Nome:
-                <input type="text" value={nome} onChange={handleNomeChange} />
-                <span style={{ color: 'red' }}>{nomeError}</span>
+                <input type="text" value={nome} onChange={handleNomeChange} placeholder='Insira o nome do usuário'/>
+                <div className="error">{nomeError}</div>
             </label>
-            <br/>
             <label>
                 Sobrenome:
                 <input type="text" value={sobrenome} onChange={handleSobrenomeChange} />
-                <span style={{ color: 'red' }}>{sobrenomeError}</span>
+                <div className="error">{sobrenomeError}</div>
             </label>
-            <br />
             <label>
                 CPF:
                 <input type="text" value={cpf} onChange={handleCpfChange} />
-                <span style={{ color: 'red' }}>{cpfError}</span>
+                <div className="error">{cpfError}</div>
             </label>
-            <br />
             <label>
                 E-mail:
                 <input type="text" value={email} onChange={handleEmailChange} />
-                <span style={{ color: 'red' }}>{emailError}</span>
+                <div className="error">{emailError}</div>
             </label>
-            <br />
             <label>
                 Senha:
                 <input type="password" value={senha} onChange={handleSenhaChange} maxLength={8} placeholder="Digite uma senha de 8 dígitos alfanumérica" />
-                <span style={{ color: 'red' }}>{senhaError}</span>
+                <div className="error">{senhaError}</div>
             </label>
-            <br />
             <label>
-            Selecione o tipo de usuário a ser cadastrado:
-            <select className="browser-default" value={tipo} onChange={handleTipoChange}>
-                <option value="">Tipo</option>
-                <option value="Cliente">Cliente</option>
-                <option value="Atendente">Atendente</option>
-                <option value="Administrador">Administrador</option>
-            </select>
-            <span style={{ color: 'red' }}>{tipoError}</span>
-        </label>
-            <br />
+                Selecione o tipo de usuário a ser cadastrado:
+                <select className="browser-default" value={tipo} onChange={handleTipoChange}>
+                    <option value="">Tipo</option>
+                    <option value="Cliente">Cliente</option>
+                    <option value="Atendente">Atendente</option>
+                    <option value="Administrador">Administrador</option>
+                </select>
+                <div className="error">{tipoError}</div>
+            </label>
             {tipo === 'Atendente' && (
                 <label>
                     Selecione o turno do atendente:
@@ -323,15 +365,12 @@ export default function CadUser(props: CadaUser) {
                     </select>
                 </label>
             )}
-            <br />
             <label>
                 Telefone:
                 <input type="text" value={telefone} onChange={handleTelefoneChange} />
-                <span style={{ color: 'red' }}>{telefoneError}</span>
+                <div className="error">{telefoneError}</div>
             </label>
-            <br />
-            
-            <input type="submit" value="Enviar" />
+            <input type="submit" value="Enviar" id='button'/>
         </form>
     );
 };

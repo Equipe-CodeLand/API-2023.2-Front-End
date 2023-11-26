@@ -5,19 +5,17 @@ import '../components/adm_form/caduser.css'
 
 const CadastroAdmin: React.FC = () => {
 
-    const link = ["/home/administrador", "/chamadosAdm", "/cadastroUser"] // Link para as páginas
-    const link_title = ["Home", "Gerenciar chamados", "Cadastrar Usuário"] // titulo para as paginas
+    const link = ["/home/administrador", "/chamadosAdm"] // Link para as páginas
+    const link_title = ["Home", "Gerenciar chamados"] // titulo para as paginas
     return(
-        <div>
+        <div className='pageCadUser'>
             <Header 
                 link_0 = {link[0]} // Link para as páginas
                 link_1 = {link[1]}
-                link_2 = {link[2]}
                 link_title_0 = {link_title[0]} // titulo para as paginas
                 link_title_1 = {link_title[1]}
-                link_title_2 = {link_title[2]}
             />
-            <h1>Página para Cadastro de novos usuários</h1> <br />
+            <h1>Cadastro de novos usuários</h1> <br />
             <CadUser 
                 nome="" 
                 sobrenome=""
@@ -28,6 +26,7 @@ const CadastroAdmin: React.FC = () => {
                 turno="" 
                 senha= ""
             />
+            <footer></footer>
         </div>
     );
 }

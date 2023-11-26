@@ -5,14 +5,32 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { jwtDecode } from "jwt-decode";
 import Token from "../components/login/token.interface"
+import { BsFilter } from "react-icons/bs"
+import FiltroChamadosAteAdm from "../components/filtros/filtroAteAdm"
 
 function MeusChamados() {
 
     const [chamados, setChamados] = useState<Chamado[]>([])
     let token = jwtDecode<Token>(localStorage.getItem('token'))
 
-    function buscarChamados() {
-        axios.get(`http://localhost:5000/atendenteChamados/${token.userId}`)
+    const [isFilterVisible, setIsFilterVisible] = useState(false);
+
+    const toggleFilter = () => {
+      setIsFilterVisible(!isFilterVisible);
+    };
+
+    const handleFilter = (params) => {
+        let tema = params.tema
+        let status = params.status
+        let prioridade = params.prioridade
+        buscarChamados(tema, status, prioridade);
+        toggleFilter()
+      };    
+  
+    function buscarChamados(tema: number[], status: number[], prioridade: number[]) {
+        console.log(token.userId);
+        axios.defaults.headers.common["Authorization"] = `${localStorage.getItem('token') || ' '}`;
+        axios.get(`http://localhost:5000/atendenteChamados/${token.userId}/tema=${tema}/status=${status}/prioridade=${prioridade}`)
             .then(res => {
                 let chamados = res.data.map((c: any) => {
                     let nomeCliente = c.cliente && c.cliente.usuario && c.cliente.usuario.nome;
@@ -42,7 +60,10 @@ function MeusChamados() {
     }
 
     useEffect(() => {
-        buscarChamados()
+        let tema = [1,2,3,4]
+        let status = [1,2]
+        let prioridade =  [1,2,3]
+        buscarChamados(tema, status, prioridade);
     }, [])
 
     const link = ["/home/atendente", "/chamadosAte"] // Link para as páginas
@@ -56,9 +77,21 @@ function MeusChamados() {
                 link_title_0 = {link_title[0]} // titulo para as paginas
                 link_title_1 = {link_title[1]}
             />
+            
+                <div className="cabecalho"> 
+                    <div> ID: </div>
+                    <div> Nome do Cliente: </div>
+                    <div> Tema da chamada: </div>
+                    <div> Status da chamada: </div>
+                    <div> Prioridade da chamada: </div>
+                    <div> Prazo de resposta: </div>
+
+                    <BsFilter onClick={toggleFilter}/>
+                </div>
+                    {isFilterVisible && <FiltroChamadosAteAdm onFiltroSubmit={handleFilter}/>}
             {chamados.length > 0 && (
                 <div>
-                    {   chamados.filter(chamado => chamado.status.texto !== 'Encerrado')
+                    {   chamados.filter(chamado => chamado.status.texto !== 'Concluída')
                         .map(chamado => {
                             console.log(chamado)
                             return <ChamadoComponent

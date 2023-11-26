@@ -9,6 +9,12 @@
     --azul: #93B6E4;
 }
 
+footer {
+    background-color: var(--azul);
+    height: 40px;
+    margin-top: 40px;
+}
+
 div.homeAte {
     /*background-color: blue;*/
     margin: auto;

@@ -1,8 +1,3 @@
-*{
-    font-family: Arial;
-    box-sizing: border-box;
-}
-
 :root {
     --Inter: 'Inter', sans-serif;
     --Kadwa: 'Kadwa', serif;
@@ -14,7 +9,7 @@
     --error_placeholder: #a9444286;
 }
 
-div.pageCadUser h1{
+div.pageCadChamado h1 {
     font-size: 1.7em;
     text-align: center;
     font-weight: 500;
@@ -22,7 +17,7 @@ div.pageCadUser h1{
     margin: 80px 0px 0px 0px;
 }
 
-form.cadUserForm {
+form.cliUserForm {
     display: flex;
     flex-direction: column;
     max-width: 650px;
@@ -32,21 +27,20 @@ form.cadUserForm {
     font-family: var(--Inter);
 }
 
-form.cadUserForm label {
+form.cliUserForm label {
     font-weight: bold;
+    margin-bottom: 40px;
     font-size: 1.0rem;
     font-family: var(--Inter);
-    margin-bottom: 50px;
-    height: 80px;
 }
 
-form.cadUserForm input, 
-form.cadUserForm select, 
-form.cadUserForm textarea {
+form.cliUserForm input,
+form.cliUserForm select,
+form.cliUserForm textarea {
     width: 100%;
-    border: 2px solid var(--azul_claro);
+    border: 1px solid #202020;
     border-radius: 10px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     padding-left: 10px;
     height: 40px;
     margin-top: 10px;
@@ -59,15 +53,7 @@ form.cadUserForm input::placeholder {
     font-family: var(--Inter);
 }
 
-form.cadUserForm button,
-form.cadUserForm html [type="button"], 
-form.cadUserForm [type="reset"], 
-form.cadUserForm [type="submit"] {
-    height: 40px;
-}
-
-form.cadUserForm input#button {
-    background-color: var(--azul_claro);
+form.cliUserForm input#button {
     border: 2px solid var(--azul);
     border-radius: 15px;
     margin: auto;
@@ -76,25 +62,55 @@ form.cadUserForm input#button {
     height: 40px;
     font-weight: 600;
     color: #202020;
-    padding: 10px 20px;
+    padding: 10px;
+    padding-bottom: 20px;
     transition: all 0.2s;
     font-size: 1em;
 }
 
-form.cadUserForm input#button:hover {
+form.cliUserForm input#button:hover {
     background-color: var(--azul);
     color: #fff;
     cursor: pointer;
 }
 
-form.cadUserForm input#button:active {
+form.cliUserForm input#button:active {
     width: 142px;
     height: 38px;
     font-size: 0.90em;
 }
 
-form.cadUserForm div.error {
+form.cliUserForm div.error {
     text-align: center;
     color: red;
     margin: 10px;
+}
+
+.botao-adicionar {
+    border: 2px solid var(--azul);
+    border-radius: 15px;
+    margin-top: 40px;
+    margin-left: 0;
+    width: 200px;
+    height: 40px;
+    font-weight: 600;
+    color: #202020;
+    transition: all 0.2s;
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: flex-start !important;
+}
+
+.botao-adicionar:hover {
+    background-color: var(--azul);
+    color: #fff;
+    cursor: pointer;
+}
+
+.botao-adicionar:active {
+    width: 172px;
+    height: 38px;
+    font-size: 0.90em;
 }

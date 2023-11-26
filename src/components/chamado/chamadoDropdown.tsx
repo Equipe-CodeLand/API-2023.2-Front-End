@@ -40,7 +40,7 @@ function ChamadoDropdown(props: any) {
 
     useEffect(() => {
         buscarMensagens()
-    }, [])
+    }, [props.id])
 
     function buscarAtendentes() {
         axios.get(`http://localhost:5000/atendentes`,)

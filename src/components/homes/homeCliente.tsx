@@ -1,5 +1,6 @@
+import ProblemasSolucoesCli from "../problemasConhecidos/problemasCli"
 import "./styles/cliente.css"
-
+import { GoArrowDown } from "react-icons/go";
 export default function Home() {
     return (
         <div className="homeCli">
@@ -15,8 +16,12 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+            {/*<div className="vejaProblemas">
+                <h4>Ou, visualize logo abaixo algumas soluções de problemas já conhecidos <GoArrowDown /></h4>
+            </div>*/}
             <section className="problemasComuns">
-                <h2 id="titulo">Problemas Comuns</h2>
+                {ProblemasSolucoesCli()}
+                {/*<h2 id="titulo">Problemas Comuns</h2>
                 <hr />
                 <div className="problema 1">
                     <h3>Velocidade da Internet</h3>
@@ -118,7 +123,7 @@ export default function Home() {
                             </details>
                         </li>
                     </ul>
-                </div>
+                </div>*/}
             </section>
         </div>
     )

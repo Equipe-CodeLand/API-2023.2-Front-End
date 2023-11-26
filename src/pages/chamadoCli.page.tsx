@@ -1,21 +1,36 @@
 import React from "react"
 import axios from "axios"
 import { useState, useEffect } from "react"
-import ChamadoCliDropdown from "../components/chamadoCli/chamadoCliDropdown"
-import ChamadoCliComponent from "../components/chamadoCli/chamadoCliComponent"
-import { ChamadoCli, ChamadoCliDetalhes } from "../components/chamadoCli/chamadosCli.interface"
 import Header from "../components/header/headerComponent"
 import ChamadoComponent from "../components/chamado/chamadoComponent"
 import Chamado from "../components/chamado/chamado.interface"
 import { jwtDecode } from "jwt-decode";
 import Token from "../components/login/token.interface"
+import { BsFilter } from "react-icons/bs"
+import FiltroChamadosCli from "../components/filtros/filtroCli"
+
 
 export default function ChamadosCli() {
     const [chamados, setChamados] = useState<Chamado[]>([])
     const token = jwtDecode<Token>(localStorage.getItem('token') || '')
-    function buscarChamados() {
+
+    const [isFilterVisible, setIsFilterVisible] = useState(false);
+
+    const toggleFilter = () => {
+      setIsFilterVisible(!isFilterVisible);
+    };
+  
+    const handleFilter = (params) => {
+      let tema = params.tema
+      let status = params.status
+      let prioridade = params.prioridade
+      buscarChamados(tema, status,prioridade);
+      toggleFilter()
+    };
+
+    function buscarChamados(tema: number[], status: number[],prioridade: number[]) {
       axios.defaults.headers.common["Authorization"] = `${localStorage.getItem('token') || ' '}`;
-      axios.get(`http://localhost:5000/chamadosCli/${token.userId}`)
+      axios.get(`http://localhost:5000/chamadosCli/${token.userId}/tema=${tema}/status=${status}/prioridade=${prioridade}`)
       .then(res => {
         console.log(res);
         let chamados = res.data.map((c: any) => {
@@ -43,8 +58,11 @@ export default function ChamadosCli() {
     }
 
     useEffect(() => {
-        buscarChamados();
-      }, [])
+      let tema = [1,2,3,4]
+      let status = [1,2,3,4]
+      let prioridade = [1,2,3]
+    buscarChamados(tema, status,prioridade);
+}, [])
 
       const link = ["/home/cliente", "/cadastroChamados"]
   const link_title = ["Home","Criar novo chamado"]
@@ -58,6 +76,17 @@ export default function ChamadosCli() {
                 link_title_1 = {link_title[1]}
 
             />
+            
+            <div className="cabecalho"> 
+                  <div> ID: </div>
+                  <div> Nome do Atendente: </div>
+                  <div> Tema da chamada: </div>
+                  <div> Status da chamada: </div>
+                  <div> Prazo de resposta: </div>
+
+                  <BsFilter size={30} onClick={toggleFilter}/>
+                </div>
+                {isFilterVisible && <FiltroChamadosCli onFiltroSubmit={handleFilter}/>}
             {chamados.length > 0 && (
                 <div>
                 {chamados.map(chamado => (

@@ -21,13 +21,6 @@ div.homeCli {
     min-width: none;
 }
 
-div.vejaProblemas{
-    color: var(--azul);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 div.homeCli section.conteudo {
     width: 100%;
     height: calc(80vh);
@@ -169,4 +162,86 @@ div.homeCli section.problemasComuns .problema details ul li {
 div.homeCli section.problemasComuns .problema details ul li::before {
     margin-right: 5px;
     content: "•";
+}
+
+.problemSummary {
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+    margin-top: -15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.solucao-problema {
+    margin-top: -20px;
+}
+
+.problema-container {
+    margin-bottom: 20px;
+}
+
+.solucao-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.solucao-container p {
+    margin-right: 10px;
+}
+
+.botao-container {
+    display: flex;
+    align-items: center;
+}
+
+.botao-container button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-left: 5px;
+    margin-top: 15px;
+}
+
+.botao-adicionar {
+    border: 2px solid var(--azul);
+    border-radius: 15px;
+    margin-top: 40px;
+    margin-left: 0;
+    width: 200px;
+    height: 40px;
+    font-weight: 600;
+    color: #202020;
+    transition: all 0.2s;
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: flex-start !important;
+}
+
+.botao-adicionar:hover {
+    background-color: var(--azul);
+    color: #fff;
+    cursor: pointer;
+}
+
+.botao-adicionar:active {
+    width: 172px;
+    height: 38px;
+    font-size: 0.90em;
+}
+
+input {
+    border: 1px solid #8b8b8b83;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 10px;
+    font-family: var(--Inter);
+    font-weight: 400;
+    font-size: 1em;
+    width: 90%
 }
