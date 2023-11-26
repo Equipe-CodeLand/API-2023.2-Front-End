@@ -9,12 +9,12 @@ let JsonPadrao = {
 }
 
 let JsonPrioridade = {
-    Prioridades: ["Baixa", "Média", "Alta"],
+    Prioridades: ["Alta", "Média", "Baixa"],
     Chamadas: [0, 0, 0]
 }
 
 let JsonPrioridadeMedia = {
-    Prioridades: ["Baixa", "Média", "Alta"],
+    Prioridades: ["Alta", "Média", "Baixa"],
     Minutos: [0, 0, 0]
 }
 
@@ -93,11 +93,11 @@ export default function HomePageAdministrador() {
             var prioridade = res.data
             console.log()
             JsonPrioridade = {
-                Prioridades: ["Baixa", "Média", "Alta"],
+                Prioridades: ["Alta", "Média", "Baixa"],
                 Chamadas: [prioridade[0].numeroChamados, prioridade[1].numeroChamados, prioridade[2].numeroChamados]
             }
             JsonPrioridadeMedia = {
-                Prioridades: ["Baixa", "Média", "Alta"],
+                Prioridades: ["Alta", "Média", "Baixa"],
                 Minutos: [
                     prioridade[0].tempoMedio.minutos + prioridade[0].tempoMedio.horas*60, 
                     prioridade[1].tempoMedio.minutos + prioridade[1].tempoMedio.horas*60, 
