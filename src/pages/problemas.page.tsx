@@ -1,9 +1,9 @@
-import Home from "../components/homes/homeAdministrador";
 import Header from "../components/header/headerComponent";
+import ProblemasSolucoes from "../components/problemasConhecidos/problemas";
 
-export default function HomePageAdministrador() {
-    const link = ["/chamadosAdm", "/cadastroUser", "/cadastroSolucao", "/problemas"] // Link para as páginas
-    const link_title = ["Gerenciar chamados", "Cadastrar usuários", "Cadastrar Problemas e Soluções", "Visualizar problemas conhecidos"] // titulo para as paginas
+export default function Problemas() {
+    const link = ["/home/administrador", "/chamadosAdm", "/cadastroUser", "/cadastroSolucao"] // Link para as páginas
+    const link_title = ["Home", "Gerenciar chamados", "Cadastrar usuário", "Cadastrar Problemas e Soluções"] // titulo para as paginas
     return (
         <div>
             <Header 
@@ -16,7 +16,7 @@ export default function HomePageAdministrador() {
                 link_title_2 = {link_title[2]}
                 link_title_3 = {link_title[3]}
             />
-            <Home />
+            <ProblemasSolucoes />
             <footer></footer>
         </div>
     )

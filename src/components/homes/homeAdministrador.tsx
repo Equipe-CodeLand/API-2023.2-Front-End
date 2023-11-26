@@ -191,6 +191,8 @@ export default function HomePageAdministrador() {
                     <div className="chamados">
                         <div className="acessar"><a href="/chamadosAdm">Gerenciar chamados</a></div>
                         <div className="acessar"><a href="/cadastroUser">Cadastrar novo usuario</a></div>
+                        <div className="acessar"><a href="/cadastroSolucao">Cadastrar soluções</a></div>
+                        <div className="acessar"><a href="/problemas">Visualizar soluções</a></div>
                     </div>
                 </div>
             </section>
