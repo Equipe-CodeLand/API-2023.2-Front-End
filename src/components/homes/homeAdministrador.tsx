@@ -3,25 +3,32 @@ import axios from 'axios';
 import './styles/administrador.css';
 import problemas from '../homes/chamadosfrequentes.png';
 import atendentes from '../homes/atendentes.png';
+import HomeAdministradorComponent from './homeAdmComponent';
 
-export default function HomePageAdministrador() {
+export default function HomeAdministrador(props) {
     const [desc, setDesc] = useState('');
     const [tema_id, setTemaId] = useState('');
     const [solucao, setSolucao] = useState('');
     const [problemas, setProblemas] = useState([]);
+    
 
-    useEffect(() => {
-        // Buscar problemas existentes quando a página carrega
-        axios.get('/buscarProblemas').then(response => setProblemas(response.data));
-    }, []);
-
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const problema = { desc, tema_id, solucao };
-        const response = await axios.post('/criarProblemas', problema);
+        console.log(problema)
+        const response = await axios.put('http://localhost:5000/criarProblemas', problema);
         // Adicionar o novo problema à lista
-        setProblemas([...problemas, response.data]);
+        //props.setProblemas([...props.todosProblemas, response.data]);
+        console.log(response)
+        props.buscarProblemas()
     };
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/buscarProblemas')
+            .then(response => {console.log(response.data);
+                 setProblemas(response.data)})
+            .catch(error => console.error('Erro ao buscar problemas:', error));
+    }, []);
 
     async function atualizarProblemas(id, desc, tema_id, solucao) {
         const response = await axios.put(`/atualizarProblemas/${id}`, { desc, tema_id, solucao });
@@ -44,6 +51,7 @@ export default function HomePageAdministrador() {
         const response = await axios.get('/buscarProblemas');
         setProblemas(response.data);
     }
+   
 
     return (
         <div className="homeAdm">
@@ -68,25 +76,7 @@ export default function HomePageAdministrador() {
                 </div>
             </section>
 
-            <section className="problemas">
-                <h2 id="titulo">Problemas Comuns</h2>
-                <hr />
-                {problemas.map((problema) => (
-                    <div key={problema.id}>
-                        <h3>{problema.tema}</h3>
-                        <ul>
-                            <li>
-                                <details>
-                                    <summary>{problema.desc}</summary>
-                                    <p>{problema.solucao}</p>
-                                    <button onClick={() => editarProblema(problema.id)}>Editar</button>
-                                    <button onClick={() => deletarProblema(problema.id)}>Deletar</button>
-                                </details>
-                            </li>
-                        </ul>
-                    </div>
-                ))}
-
+            <section>
                 <form onSubmit={handleSubmit}>
                     <label>
                         Descrição:
@@ -95,9 +85,10 @@ export default function HomePageAdministrador() {
                     <label>
                         Tema:
                         <select value={tema_id} onChange={(e) => setTemaId(e.target.value)}>
-                            <option value="1">Modem</option>
-                            <option value="2">Velocidade da Internet</option>
-                            <option value="3">Sem conexão com a Internet</option>
+                            <option value="">Selecione o tema</option>
+                            <option value="1">Sem acesso a Internet</option>
+                            <option value="2">Modem</option>
+                            <option value="4">Velocidade da Internet</option>
                         </select>
                     </label>
                     <label>
@@ -107,6 +98,26 @@ export default function HomePageAdministrador() {
                     <button type="submit">Enviar</button>
                 </form>
             </section>
+
+            <h2 id="titulo">Problemas Comuns</h2>
+            <hr />
+
+            {/*<HomeAdministradorComponent>
+            {problemas.map(problema =>(
+                    <HomeAdministradorComponent
+                    key={problema.id}
+                    id = {problema.id}
+                    tema = {problema.tema}
+                    descricao = {problema.descricao}
+                    problemas = {problema.solucao}
+                    setProblemas = {setProblemas}
+                    todosProblemas = {problemas}
+                    editarProblema={editarProblema}
+                    deletarProblema={deletarProblema}
+                    />
+                ))}
+            </HomeAdministradorComponent>*/}
+
         </div>
     );
 }

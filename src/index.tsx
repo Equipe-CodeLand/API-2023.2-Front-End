@@ -18,6 +18,7 @@ import CadastroChamada from './pages/cad_chamados.page';
 import HomePageCliente from './pages/home.page.cliente';
 import HomePageAtendente from './pages/home.page.atendente';
 import HomePageAdministrador from './pages/home.page.administrador';
+import HomeAdministradorPage from './pages/home.page.administrador';
 
 const router = createBrowserRouter([
   {
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
   },
   {
     path:"/home/administrador",
-    element:<HomePageAdministrador />
+    element:<HomeAdministradorPage />
   },
   {
     path:'/cadastroChamados',

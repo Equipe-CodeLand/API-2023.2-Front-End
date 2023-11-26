@@ -7,7 +7,7 @@ export default function Home() {
 
     useEffect(() => {
         // Buscar problemas existentes quando a página carrega
-        axios.get('/buscarProblemas').then(response => setProblemas(response.data));
+        axios.get('http://localhost:5000/buscarProblemas').then(response => setProblemas(response.data));
     }, []);
 
     return (
