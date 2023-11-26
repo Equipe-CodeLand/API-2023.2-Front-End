@@ -67,8 +67,8 @@ export default function ChamadosAdm() {
     buscarChamados(tema, status, prioridade);
   }, []);
 
-  const link = ["/home/administrador", "/chamadosAdm", "/cadastroUser"]; // Link para as páginas
-  const link_title = ["Home", "Gerenciar chamados", "Cadastrar Usuário"]; // titulo para as paginas
+  const link = ["/home/administrador", "/cadastroUser", "/cadastroSolucao", "/problemas"]; // Link para as páginas
+  const link_title = ["Home", "Cadastrar Usuário", "Cadastrar problemas e soluções", "Visualizar problemas conhecidos"]; // titulo para as paginas
 
   return (
     <div>
@@ -76,9 +76,11 @@ export default function ChamadosAdm() {
         link_0={link[0]} 
         link_1={link[1]}
         link_2={link[2]}
+        link_3={link[3]}
         link_title_0={link_title[0]} 
         link_title_1={link_title[1]}
         link_title_2={link_title[2]}
+        link_title_3={link_title[3]}
       />
       
       <div className="cabecalho"> 

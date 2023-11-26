@@ -1,0 +1,116 @@
+:root {
+    --Inter: 'Inter', sans-serif;
+    --Kadwa: 'Kadwa', serif;
+    --branco_azulado: #e3efff;
+    --azul_claro: #AFC8E9;
+    --azul: #93B6E4;
+    --error_border: #A94442;
+    --error_background: #F2DEDE;
+    --error_placeholder: #a9444286;
+}
+
+div.pageCadChamado h1 {
+    font-size: 1.7em;
+    text-align: center;
+    font-weight: 500;
+    font-family: var(--Inter);
+    margin: 80px 0px 0px 0px;
+}
+
+form.cliUserForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 650px;
+    min-width: none;
+    padding: 40px;
+    margin: 20px auto;
+    font-family: var(--Inter);
+}
+
+form.cliUserForm label {
+    font-weight: bold;
+    margin-bottom: 40px;
+    font-size: 1.0rem;
+    font-family: var(--Inter);
+}
+
+form.cliUserForm input,
+form.cliUserForm select,
+form.cliUserForm textarea {
+    width: 100%;
+    border: 1px solid #202020;
+    border-radius: 10px;
+    font-size: 1rem;
+    padding-left: 10px;
+    height: 40px;
+    margin-top: 10px;
+    font-family: var(--Inter);
+    padding: 0px 9px;
+}
+
+form.cadUserForm input::placeholder {
+    color: #8b8b8b;
+    font-family: var(--Inter);
+}
+
+form.cliUserForm input#button {
+    border: 2px solid var(--azul);
+    border-radius: 15px;
+    margin: auto;
+    margin-top: 40px;
+    width: 150px;
+    height: 40px;
+    font-weight: 600;
+    color: #202020;
+    padding: 10px;
+    padding-bottom: 20px;
+    transition: all 0.2s;
+    font-size: 1em;
+}
+
+form.cliUserForm input#button:hover {
+    background-color: var(--azul);
+    color: #fff;
+    cursor: pointer;
+}
+
+form.cliUserForm input#button:active {
+    width: 142px;
+    height: 38px;
+    font-size: 0.90em;
+}
+
+form.cliUserForm div.error {
+    text-align: center;
+    color: red;
+    margin: 10px;
+}
+
+.botao-adicionar {
+    border: 2px solid var(--azul);
+    border-radius: 15px;
+    margin-top: 40px;
+    margin-left: 0;
+    width: 200px;
+    height: 40px;
+    font-weight: 600;
+    color: #202020;
+    transition: all 0.2s;
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: flex-start !important;
+}
+
+.botao-adicionar:hover {
+    background-color: var(--azul);
+    color: #fff;
+    cursor: pointer;
+}
+
+.botao-adicionar:active {
+    width: 172px;
+    height: 38px;
+    font-size: 0.90em;
+}

@@ -18,6 +18,9 @@ import CadastroChamada from './pages/cad_chamados.page';
 import HomePageCliente from './pages/home.page.cliente';
 import HomePageAtendente from './pages/home.page.atendente';
 import HomePageAdministrador from './pages/home.page.administrador';
+import CadSolucaoPage from './pages/cad_solucao.page';
+import Problemas from './pages/problemas.page';
+import EditarProblema from './pages/editarProblema.page';
 
 const router = createBrowserRouter([
   {
@@ -67,8 +70,19 @@ const router = createBrowserRouter([
   {
     path:'/cadastroChamados',
     element:<CadastroChamada />
+  },
+  {
+    path: '/cadastroSolucao',
+    element: <CadSolucaoPage  />
+  },
+  {
+    path: '/problemas',
+    element: <Problemas  />
+  },
+  {
+    path: '/editarProblemas/:id',
+    element: <EditarProblema  />
   }
-
 ]);
 
 const root = ReactDOM.createRoot(
