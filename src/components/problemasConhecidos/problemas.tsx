@@ -633,7 +633,7 @@ export default function ProblemasSolucoes() {
                     </ul>
                 </div>
 
-                <div className="problema">
+                {/*<div className="problema">
                     <h3>Outros</h3>
                     <ul>
                         {problemas && problemas.problemas ? (
@@ -811,7 +811,7 @@ export default function ProblemasSolucoes() {
                             <></>
                         )}
                     </ul>
-                </div>
+                        </div> */}
             </section>
         </div >
     )

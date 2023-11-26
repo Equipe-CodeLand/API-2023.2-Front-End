@@ -98,7 +98,6 @@ export default function EditarProblema() {
                     <option value="">Selecione um tema</option>
                     <option value="1">Sem acesso a Internet</option>
                     <option value="2">Modem</option>
-                    <option value="3">Outros</option>
                     <option value="4">Velocidade da internet</option>
                 </select>
                 <div className="error">{temaError}</div>

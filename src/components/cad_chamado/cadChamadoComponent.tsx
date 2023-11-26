@@ -52,7 +52,12 @@ export default function ChamadosForm(props: cadChamados) {
             const token = localStorage.getItem('token');
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             axios.post('http://localhost:5000/criarChamados', { 'idTema': tema, 'desc': mensagem, 'userId': jwtDecode(localStorage.getItem('token') || '')['userId'], })
-            console.log(tema);
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         } else {
             showWarning('Por favor, corrija os campos indicados.');
         }

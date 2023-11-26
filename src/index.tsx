@@ -21,6 +21,7 @@ import HomePageAdministrador from './pages/home.page.administrador';
 import CadSolucaoPage from './pages/cad_solucao.page';
 import Problemas from './pages/problemas.page';
 import EditarProblema from './pages/editarProblema.page';
+import ProblemasSolucoesCli from './components/problemasConhecidos/problemasCli';
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
   {
     path: '/cadastroSolucao',
     element: <CadSolucaoPage  />
+  },
+  {
+    path: '/solucoesCli',
+    element: <ProblemasSolucoesCli />
   },
   {
     path: '/problemas',

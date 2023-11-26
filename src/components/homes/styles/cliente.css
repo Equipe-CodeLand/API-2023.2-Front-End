@@ -21,6 +21,13 @@ div.homeCli {
     min-width: none;
 }
 
+div.vejaProblemas{
+    color: var(--azul);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 div.homeCli section.conteudo {
     width: 100%;
     height: calc(80vh);
