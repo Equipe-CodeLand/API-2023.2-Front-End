@@ -84,7 +84,7 @@ export default function ChamadosAdm() {
             <div> Tema da chamada: </div>
             <div> Status da chamada: </div>
             <div> Prioridade da chamada: </div>
-            <div> Prazo de resposta: </div>
+            <div> Horário de início: </div>
 
             <BsFilter size={30} onClick={toggleFilter}/>
           </div>
